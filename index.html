@@ -38,20 +38,20 @@
         A collection of lightning-fast, lightweight, and free web utilities to automate your global business, finance, and productivity.
       </p>
       
-      <!-- SEARCH BAR -->
-      <div class="relative max-w-xl mx-auto pt-4">
-        <i class="fa-solid fa-magnifying-glass absolute left-5 top-8 text-slate-400"></i>
+      <!-- SEARCH BAR (Dibungkus Form agar tombol Enter berfungsi aman) -->
+      <form id="searchForm" class="relative max-w-xl mx-auto pt-4" onsubmit="return false;">
+        <i class="fa-solid fa-magnifying-glass absolute left-5 top-12 text-slate-400"></i>
         <input type="text" id="searchInput" placeholder="Search tools (e.g., ROI, margin, tax)..." 
                class="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 focus:outline-none transition-all shadow-sm text-sm font-medium">
-      </div>
+      </form>
 
       <!-- FILTER PILLS -->
       <div id="filterContainer" class="flex flex-wrap items-center justify-center gap-2.5 pt-4 text-xs font-semibold">
-        <button data-filter="all" class="filter-btn px-4 py-2 bg-slate-900 text-white rounded-full shadow-sm hover:bg-slate-800 transition">All Tools</button>
-        <button data-filter="E-Commerce" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">🛒 E-Commerce</button>
-        <button data-filter="Finance" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">💰 Finance</button>
-        <button data-filter="Utilities" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">⚡ Utilities</button>
-        <button data-filter="Productivity" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">🚀 Productivity</button>
+        <button type="button" data-filter="all" class="filter-btn px-4 py-2 bg-slate-900 text-white rounded-full shadow-sm hover:bg-slate-800 transition">All Tools</button>
+        <button type="button" data-filter="E-Commerce" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">🛒 E-Commerce</button>
+        <button type="button" data-filter="Finance" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">💰 Finance</button>
+        <button type="button" data-filter="Utilities" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">⚡ Utilities</button>
+        <button type="button" data-filter="Productivity" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">🚀 Productivity</button>
       </div>
     </div>
   </section>
@@ -159,49 +159,60 @@
     </div>
   </footer>
 
-  <!-- SCRIPT INTERAKTIF PENCARIAN & FILTER -->
+  <!-- SCRIPT INTERAKTIF AMAN TANPA ERROR -->
   <script>
-    const searchInput = document.getElementById('searchInput');
-    const toolCards = document.querySelectorAll('.tool-card');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    let currentCategory = 'all';
+    document.addEventListener("DOMContentLoaded", function() {
+      const searchInput = document.getElementById('searchInput');
+      const toolCards = document.querySelectorAll('.tool-card');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      
+      let currentCategory = 'all';
 
-    function filterTools() {
-      const query = searchInput.value.toLowerCase().trim();
+      function filterTools() {
+        const query = searchInput.value.toLowerCase().trim();
 
-      toolCards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        const desc = card.querySelector('p').innerText.toLowerCase();
-        const category = card.getAttribute('data-category');
+        toolCards.forEach(card => {
+          const title = card.querySelector('h3').innerText.toLowerCase();
+          const desc = card.querySelector('p').innerText.toLowerCase();
+          const category = card.getAttribute('data-category');
 
-        const matchesQuery = title.includes(query) || desc.includes(query);
-        const matchesCategory = currentCategory === 'all' || category === currentCategory;
+          const matchesQuery = title.includes(query) || desc.includes(query);
+          const matchesCategory = currentCategory === 'all' || category === currentCategory;
 
-        if (matchesQuery && matchesCategory) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+          if (matchesQuery && matchesCategory) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // Jalankan pencarian real-time saat mengetik
+      searchInput.addEventListener('input', filterTools);
+
+      // Tangani tombol Enter agar tidak error atau reload halaman
+      searchInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          filterTools();
+          searchInput.blur(); // Menutup keyboard/fokus setelah Enter
         }
       });
-    }
 
-    // Event listener untuk kotak pencarian (Real-time search)
-    searchInput.addEventListener('input', filterTools);
+      // Event listener untuk tombol filter kategori
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => {
+            btn.classList.remove('bg-slate-900', 'text-white');
+            btn.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-600');
+          });
+          
+          button.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-600');
+          button.classList.add('bg-slate-900', 'text-white');
 
-    // Event listener untuk tombol filter kategori
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-slate-900', 'text-white');
-          btn.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-600');
+          currentCategory = button.getAttribute('data-filter');
+          filterTools();
         });
-        
-        button.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-600');
-        button.classList.add('bg-slate-900', 'text-white');
-
-        currentCategory = button.getAttribute('data-filter');
-        filterTools();
       });
     });
   </script>
