@@ -38,9 +38,11 @@
         A collection of lightning-fast, lightweight, and free web utilities to automate your global business, finance, and productivity.
       </p>
       
-      <!-- SEARCH BAR -->
-      <form id="searchForm" class="relative max-w-xl mx-auto pt-4" onsubmit="return false;">
-        <i class="fa-solid fa-magnifying-glass absolute left-5 top-12 text-slate-400"></i>
+      <!-- SEARCH BAR (Perbaikan posisi ikon & penanganan Enter yang aman) -->
+      <form id="searchForm" class="relative max-w-xl mx-auto pt-4 flex items-center" onsubmit="return false;">
+        <div class="absolute left-5 flex items-center pointer-events-none text-slate-400">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
         <input type="text" id="searchInput" placeholder="Search tools (e.g., ROI, margin, tax)..." 
                class="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 focus:outline-none transition-all shadow-sm text-sm font-medium">
       </form>
@@ -69,7 +71,7 @@
 
       <!-- DINAMIS GRID CONTAINER -->
       <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <!-- Data tools akan dimuat secara otomatis dari tools.json di sini -->
+        <!-- Data tools dimuat dinamis dari tools.json -->
       </div>
     </div>
 
@@ -116,12 +118,12 @@
     document.addEventListener("DOMContentLoaded", async function() {
       const toolsGrid = document.getElementById('toolsGrid');
       const searchInput = document.getElementById('searchInput');
+      const searchForm = document.getElementById('searchForm');
       const filterButtons = document.querySelectorAll('.filter-btn');
       
       let allTools = [];
       let currentCategory = 'all';
 
-      // Ambil data dari tools.json secara dinamis
       try {
         const response = await fetch('tools.json');
         const data = await response.json();
@@ -171,7 +173,15 @@
         renderTools(filtered);
       }
 
+      // Pencarian otomatis merespons ketikan secara real-time
       searchInput.addEventListener('input', filterTools);
+
+      // Tangani tombol Enter pada form maupun input secara presisi
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        filterTools();
+        searchInput.blur();
+      });
 
       searchInput.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
