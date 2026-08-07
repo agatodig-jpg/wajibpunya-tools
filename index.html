@@ -3,76 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WajibPunya - Micro-Software & Web Tools</title>
+  <title>WajibPunya - Global Micro-Software & Web Utilities</title>
+  <meta name="description" content="Free online micro-software, business calculators, and instant developer tools for global users.">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .ad-slot { background-color: #f8fafc; border: 1px dashed #cbd5e1; text-align: center; }
   </style>
 </head>
-<body class="bg-white text-gray-900 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
 
-  <!-- Header Section -->
-  <header class="flex justify-end p-4 text-sm text-gray-600 gap-4">
-    <a href="#about" class="hover:underline">About</a>
-    <a href="#api" class="hover:underline">API & Webhooks</a>
+  <!-- 1. Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <a href="/" class="text-2xl font-black tracking-tight text-gray-900">
+          WajibPunya<span class="text-blue-600">.</span>
+        </a>
+        <span class="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded font-semibold border border-blue-100">GLOBAL ENGINE</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
+        <a href="#popular" class="hover:text-blue-600 transition">Popular Tools</a>
+        <a href="#categories" class="hover:text-blue-600 transition">Categories</a>
+        <a href="#about" class="hover:text-blue-600 transition">About</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Main Engine Area -->
-  <main class="flex-grow flex flex-col items-center justify-center px-4 -mt-16">
-    <!-- Brand Logo / Name -->
-    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">
-      WajibPunya<span class="text-blue-600">.</span>
-    </h1>
+  <!-- 2. Hero & Instant Search Area (Google-Style) -->
+  <section class="bg-white border-b border-gray-100 py-12 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
+        Instant Micro-Software Directory
+      </h1>
+      <p class="text-gray-500 text-sm md:text-base mb-6">
+        Fast, lightweight, and free web utilities for business, finance, and productivity.
+      </p>
 
-    <!-- Google-Style Search Box -->
-    <div class="w-full max-w-xl relative">
-      <div class="flex items-center border border-gray-300 rounded-full px-4 py-3 shadow-sm hover:shadow-md focus-within:shadow-md focus-within:border-gray-400 transition">
-        <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-        <input 
-          type="text" 
-          id="searchInput"
-          onkeyup="filterTools()"
-          placeholder="Search micro-software, calculators, utilities..." 
-          class="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-        />
-      </div>
+      <!-- Search Input -->
+      <div class="relative max-w-xl mx-auto">
+        <div class="flex items-center border-2 border-gray-200 rounded-full px-4 py-3 shadow-sm hover:border-blue-500 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition bg-white">
+          <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input 
+            type="text" 
+            id="searchInput"
+            onkeyup="filterTools()"
+            placeholder="Search tools (e.g. ROI calculator, zakat, margin)..." 
+            class="w-full outline-none bg-transparent text-gray-800 text-sm md:text-base placeholder-gray-400"
+          />
+        </div>
 
-      <!-- Live Search Results Dropdown -->
-      <div id="searchResults" class="hidden absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-10">
-        <!-- Results rendered dynamically via JS -->
+        <!-- Live Dropdown Search Results -->
+        <div id="searchResults" class="hidden absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden z-20 text-left"></div>
       </div>
     </div>
+  </section>
 
-    <!-- Quick Action / Direct Tags -->
-    <div class="flex flex-wrap justify-center gap-2 mt-6">
-      <a href="/tools/kalkulator-roi-margin-dropship/" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-600 transition">
-        E-Commerce ROI Calculator
-      </a>
-      <a href="/tools/kalkulator-zakat-mal/" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-600 transition">
-        Asset & Wealth Calculator
-      </a>
+  <!-- 3. Top Banner Ad Slot (Leaderboard 728x90) -->
+  <div class="max-w-5xl mx-auto my-6 px-4 w-full">
+    <div class="ad-slot py-4 rounded-lg text-xs text-gray-400 flex items-center justify-center min-h-[90px]">
+      <!-- Insert Google AdSense / Ad Code Here -->
+      <span>[ Ad Space - Top Leaderboard 728x90 ]</span>
     </div>
+  </div>
+
+  <!-- 4. Main Content: Tools Catalog & Side Ad -->
+  <main class="max-w-7xl mx-auto px-4 py-4 flex-grow w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Left: Catalog Content (3 Columns) -->
+    <div class="lg:col-span-3 space-y-8">
+      
+      <!-- Section: Popular Micro-Software -->
+      <div>
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span>🔥</span> Featured Utilities
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Card 1 -->
+          <a href="/tools/kalkulator-roi-margin-dropship/" class="block p-5 bg-white rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-md transition">
+            <div class="flex items-start justify-between mb-2">
+              <span class="text-xl">📊</span>
+              <span class="text-[10px] bg-green-50 text-green-600 px-2 py-0.5 rounded font-semibold border border-green-100">E-Commerce</span>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-1 hover:text-blue-600">ROI & Margin Calculator</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Calculate sales margins, net profits, and break-even points for global dropshipping operations.</p>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="/tools/kalkulator-zakat-mal/" class="block p-5 bg-white rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-md transition">
+            <div class="flex items-start justify-between mb-2">
+              <span class="text-xl">🌙</span>
+              <span class="text-[10px] bg-purple-50 text-purple-600 px-2 py-0.5 rounded font-semibold border border-purple-100">Finance</span>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-1 hover:text-blue-600">Global Asset & Wealth Calculator</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Calculate asset holdings, threshold limits, and distributions quickly and accurately.</p>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Sidebar Ad Slot (1 Column) -->
+    <aside class="space-y-6">
+      <div class="bg-white p-4 rounded-xl border border-gray-200">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Sponsored</h3>
+        <div class="ad-slot py-12 rounded text-xs text-gray-400 min-h-[250px] flex items-center justify-center">
+          <!-- Insert Sidebar Ad Code Here (300x250 Medium Rectangle) -->
+          <span>[ Ad Space - Sidebar 300x250 ]</span>
+        </div>
+      </div>
+    </aside>
+
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-gray-50 border-t border-gray-100 p-4 text-center text-xs text-gray-500">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-      <div>&copy; 2026 WajibPunya Network. Global Micro-Software Infrastructure.</div>
-      <div class="flex gap-4">
-        <a href="#" class="hover:underline">Privacy</a>
-        <a href="#" class="hover:underline">Terms</a>
-        <a href="#" class="hover:underline">Status</a>
+  <!-- 5. Footer -->
+  <footer class="bg-white border-t border-gray-200 mt-12 py-8 px-4 text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <span class="font-bold text-gray-700">WajibPunya Network</span> &copy; 2026. All rights reserved.
+      </div>
+      <div class="flex space-x-6">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Terms of Service</a>
+        <a href="#" class="hover:underline">Contact API</a>
       </div>
     </div>
   </footer>
 
-  <!-- Instant Client-Side Search Logic -->
+  <!-- Search Script -->
   <script>
     const tools = [
-      { name: "E-Commerce ROI & Margin Calculator", url: "/tools/kalkulator-roi-margin-dropship/", desc: "Calculate profit margins and BEP for online sales." },
-      { name: "Global Wealth & Asset Calculator", url: "/tools/kalkulator-zakat-mal/", desc: "Calculate asset distributions and threshold limits." }
+      { name: "ROI & Margin Calculator", url: "/tools/kalkulator-roi-margin-dropship/", desc: "Calculate sales margins and profit." },
+      { name: "Global Wealth Calculator", url: "/tools/kalkulator-zakat-mal/", desc: "Calculate assets and distribution thresholds." }
     ];
 
     function filterTools() {
@@ -91,14 +157,14 @@
 
       if (filtered.length > 0) {
         resultsContainer.innerHTML = filtered.map(tool => `
-          <a href="${tool.url}" class="block px-4 py-3 hover:bg-gray-50 border-b last:border-0 transition">
-            <div class="font-medium text-sm text-blue-600">${tool.name}</div>
+          <a href="${tool.url}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 transition">
+            <div class="font-bold text-sm text-blue-600">${tool.name}</div>
             <div class="text-xs text-gray-500">${tool.desc}</div>
           </a>
         `).join('');
         resultsContainer.classList.remove('hidden');
       } else {
-        resultsContainer.innerHTML = `<div class="px-4 py-3 text-xs text-gray-400">No micro-software found matching "${input}"</div>`;
+        resultsContainer.innerHTML = `<div class="px-4 py-3 text-xs text-gray-400">No tools found matching "${input}"</div>`;
         resultsContainer.classList.remove('hidden');
       }
     }
