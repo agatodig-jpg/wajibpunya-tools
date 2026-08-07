@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/tools/kalkulator-roi-margin-dropship/index.html"
+    },
+    {
+      "source": "/tools/kalkulator-roi-margin-dropship",
+      "destination": "/tools/kalkulator-roi-margin-dropship/index.html"
+    }
+  ]
+}
