@@ -1,44 +1,34 @@
 {
   "tools": [
     {
-      "id": "roi-calculator",
+      "id": "kalkulator-zakat-mal",
       "category": "Finance",
-      "title": "Global ROI Calculator",
-      "description": "Calculate return on investment, profit margins, and yield instantly with zero server latency.",
-      "url": "/tools/roi-calculator",
-      "icon": "fa-solid fa-calculator",
+      "title": "Kalkulator Zakat Mal",
+      "description": "Hitung kewajiban zakat harta (mal) Anda secara otomatis dan akurat sesuai ketentuan nisab.",
+      "url": "/tools/kalkulator-zakat-mal",
+      "icon": "fa-solid fa-hand-holding-dollar",
       "iconColor": "bg-emerald-50 text-emerald-600",
       "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200"
     },
     {
-      "id": "json-formatter",
-      "category": "Utilities",
-      "title": "Instant JSON Formatter",
-      "description": "Validate, parse, and format messy JSON code locally in your browser with complete data privacy.",
-      "url": "/tools/json-formatter",
-      "icon": "fa-solid fa-code",
-      "iconColor": "bg-indigo-50 text-indigo-600",
-      "badgeColor": "bg-indigo-50 text-indigo-700 border-indigo-200"
-    },
-    {
-      "id": "tax-duty-estimator",
+      "id": "kalkulator-roi-margin-dropship",
       "category": "E-Commerce",
-      "title": "Cross-Border Tax Estimator",
-      "description": "Estimate international shipping duties, import taxes, and VAT rates for global e-commerce orders.",
-      "url": "/tools/tax-duty-estimator",
-      "icon": "fa-solid fa-globe",
+      "title": "Kalkulator ROI & Margin Dropship",
+      "description": "Hitung estimasi keuntungan, profit margin, dan return on investment usaha dropship Anda.",
+      "url": "/tools/kalkulator-roi-margin-dropship",
+      "icon": "fa-solid fa-calculator",
       "iconColor": "bg-amber-50 text-amber-600",
       "badgeColor": "bg-amber-50 text-amber-700 border-amber-200"
     },
     {
-      "id": "base64-converter",
-      "category": "Productivity",
-      "title": "Base64 Encoder / Decoder",
-      "description": "Encode text and images to Base64 format or decode them instantly right inside your browser.",
-      "url": "/tools/base64-converter",
-      "icon": "fa-solid fa-file-arrow-down",
-      "iconColor": "bg-sky-50 text-sky-600",
-      "badgeColor": "bg-sky-50 text-sky-700 border-sky-200"
+      "id": "andromeld",
+      "category": "Utilities",
+      "title": "Andromeld Utility",
+      "description": "Utilitas pemrosesan dan automasi data serbaguna berbasis browser.",
+      "url": "/tools/andromeld",
+      "icon": "fa-solid fa-microchip",
+      "iconColor": "bg-indigo-50 text-indigo-600",
+      "badgeColor": "bg-indigo-50 text-indigo-700 border-indigo-200"
     }
   ]
 }
