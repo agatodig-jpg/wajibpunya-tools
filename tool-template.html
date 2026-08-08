@@ -1,46 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Nama Tool] - WajibPunya Engine</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tool | WajibPunya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
-    <!-- Header (Sama dengan Homepage) -->
-    <header class="bg-slate-900 text-white border-b border-slate-800">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                <span>WajibPunya.</span>
-            </a>
-            <a href="/" class="text-sm font-medium text-slate-300 hover:text-white transition">
-                <i class="fa-solid fa-arrow-left mr-1"></i> Back to Directory
-            </a>
-        </div>
-    </header>
+  <!-- Header -->
+  <header class="p-4 border-b bg-white flex justify-between items-center max-w-4xl w-full mx-auto">
+    <a href="/" class="text-sm font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-2">
+      <i class="fa-solid fa-arrow-left"></i> Kembali ke Katalog
+    </a>
+    <span id="tool-category" class="text-xs px-2.5 py-1 rounded-full bg-slate-100 font-medium text-slate-600">Loading...</span>
+  </header>
 
-    <!-- Main Content (Area Kerja Tool) -->
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-            <!-- Header Tool -->
-            <div class="mb-6">
-                <h1 class="text-2xl font-bold text-slate-900 mb-1">[Nama Tool]</h1>
-                <p class="text-sm text-slate-500">[Deskripsi singkat fungsi alat ini]</p>
+  <!-- Container Tool Dinamis -->
+  <main class="max-w-2xl w-full mx-auto p-4 flex-1 flex flex-col justify-center">
+    <div id="tool-container" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <h1 id="tool-title" class="text-2xl font-bold mb-2 text-slate-900">Memuat Tool...</h1>
+      <p id="tool-desc" class="text-slate-500 text-sm mb-6"></p>
+      
+      <!-- Area Form / Interaksi Tool -->
+      <div id="tool-app"></div>
+    </div>
+  </main>
+
+  <!-- Script Penanganan Routing Dinamis -->
+  <script>
+    async function initTool() {
+      const params = new URLSearchParams(window.location.search);
+      const toolId = params.get('id');
+
+      if (!toolId) {
+        window.location.href = '/';
+        return;
+      }
+
+      try {
+        const response = await fetch('/tools.json');
+        const data = await response.json();
+        const toolConfig = data.tools.find(t => t.id === toolId);
+
+        if (!toolConfig) {
+          document.getElementById('tool-title').innerText = 'Tool Tidak Ditemukan';
+          return;
+        }
+
+        // Render Metadata
+        document.title = `${toolConfig.title} | WajibPunya`;
+        document.getElementById('tool-title').innerText = toolConfig.title;
+        document.getElementById('tool-desc').innerText = toolConfig.description;
+        document.getElementById('tool-category').innerText = toolConfig.category;
+
+        // Muat modul UI / Logika spesifik
+        loadToolLogic(toolId);
+      } catch (err) {
+        console.error('Gagal memuat konfigurasi tool:', err);
+      }
+    }
+
+    function loadToolLogic(id) {
+      const appArea = document.getElementById('tool-app');
+      
+      // Contoh Switch Case untuk rendering UI setiap tool
+      if (id === 'kalkulator-zakat-mal') {
+        appArea.innerHTML = `
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Total Nilai Aset (Rp)</label>
+              <input type="number" id="asset-val" placeholder="Masukkan total harta..." class="w-full border p-2.5 rounded-lg text-sm">
             </div>
+            <button onclick="calculateZakat()" class="w-full bg-emerald-600 text-white font-medium py-2.5 rounded-lg hover:bg-emerald-700">Hitung Zakat</button>
+            <div id="result" class="hidden p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold"></div>
+          </div>
+        `;
+      } else {
+        appArea.innerHTML = `<p class="text-slate-400 italic">Antarmuka untuk tool ini sedang disiapkan.</p>`;
+      }
+    }
 
-            <!-- Widget / Interaktif Form Tool -->
-            <div class="space-y-4">
-                <!-- Masukkan Input & Output Tool di sini -->
-            </div>
-        </div>
-    </main>
+    function calculateZakat() {
+      const val = parseFloat(document.getElementById('asset-val').value) || 0;
+      const resDiv = document.getElementById('tool-app').querySelector('#result');
+      const zakat = val * 0.025;
+      resDiv.classList.remove('hidden');
+      resDiv.innerText = `Kewajiban Zakat (2.5%): Rp ${zakat.toLocaleString('id-ID')}`;
+    }
 
-    <!-- Footer (Sama dengan Homepage) -->
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        <p>&copy; 2026 WajibPunya Engine. All rights reserved.</p>
-    </footer>
-
+    window.addEventListener('DOMContentLoaded', initTool);
+  </script>
 </body>
 </html>
