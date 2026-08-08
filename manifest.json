@@ -1,12 +1,11 @@
 [
   {
-    "id": "kalkulator-roi",
-    "title": "Kalkulator ROI E-Commerce",
-    "category": "E-Commerce",
-    "description": "Hitung tingkat pengembalian modal iklan dan investasi bisnis secara instan.",
-    "url": "/tools/kalkulator-roi.html",
-    "icon": "fa-solid fa-calculator",
-    "badgeColor": "bg-indigo-50 text-indigo-700 border-indigo-200",
-    "iconColor": "bg-indigo-50 text-indigo-600"
+    "id": "tool-1786205309442",
+    "category": "Utility",
+    "scriptUrl": "/assets/js/tools/undefined.js",
+    "externalLibs": [],
+    "i18n": {},
+    "schema": {},
+    "guide": {}
   }
 ]
