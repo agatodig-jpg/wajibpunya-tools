@@ -1,4 +1,34 @@
-<!-- Script Penanganan Routing Dinamis -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tool | WajibPunya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="p-4 border-b bg-white flex justify-between items-center max-w-4xl w-full mx-auto">
+    <a href="/" class="text-sm font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-2">
+      <i class="fa-solid fa-arrow-left"></i> Kembali ke Katalog
+    </a>
+    <span id="tool-category" class="text-xs px-2.5 py-1 rounded-full bg-slate-100 font-medium text-slate-600">Loading...</span>
+  </header>
+
+  <!-- Container Tool Dinamis -->
+  <main class="max-w-2xl w-full mx-auto p-4 flex-1 flex flex-col justify-center">
+    <div id="tool-container" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <h1 id="tool-title" class="text-2xl font-bold mb-2 text-slate-900">Memuat Tool...</h1>
+      <p id="tool-desc" class="text-slate-500 text-sm mb-6"></p>
+      
+      <!-- Area Form / Interaksi Tool -->
+      <div id="tool-app"></div>
+    </div>
+  </main>
+
+  <!-- Script Penanganan Routing & Render Aman -->
   <script>
     async function initTool() {
       const params = new URLSearchParams(window.location.search);
@@ -12,8 +42,6 @@
       try {
         const response = await fetch('/tools.json');
         const data = await response.json();
-        
-        // Perbaikan: Mendukung struktur array langsung maupun objek berkey 'tools'
         const toolsArray = Array.isArray(data) ? data : (data.tools || []);
         const toolConfig = toolsArray.find(t => t.id === toolId);
 
@@ -27,42 +55,41 @@
         // Render Metadata
         document.title = `${toolConfig.title} | WajibPunya`;
         document.getElementById('tool-title').innerText = toolConfig.title;
-        document.getElementById('tool-desc').innerText = toolConfig.description || '';
+        document.getElementById('tool-desc').innerText = toolConfig.description || 'Utility tool for automation and productivity.';
         document.getElementById('tool-category').innerText = toolConfig.category || 'Utility';
 
-        // Muat modul UI / Logika spesifik
+        // Muat Antarmuka Tool
         loadToolLogic(toolId);
       } catch (err) {
         console.error('Gagal memuat konfigurasi tool:', err);
         document.getElementById('tool-title').innerText = 'Gagal Memuat Konfigurasi';
+        document.getElementById('tool-desc').innerText = err.message;
       }
     }
 
     function loadToolLogic(id) {
-      const appArea = document.getElementById('tool-app');
+      const appArea = id === 'ai-observability-tracker' ? document.getElementById('tool-app') : null;
       
-      if (id === 'ai-observability-tracker') {
-        appArea.innerHTML = `
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium mb-1">Metric Name</label>
-              <input type="text" id="metric-name" placeholder="e.g. Latency, Accuracy..." class="w-full border p-2.5 rounded-lg text-sm">
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Current Value</label>
-              <input type="number" id="current-val" placeholder="0" class="w-full border p-2.5 rounded-lg text-sm">
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Previous Value</label>
-              <input type="number" id="previous-val" placeholder="0" class="w-full border p-2.5 rounded-lg text-sm">
-            </div>
-            <button onclick="runTracker()" class="w-full bg-blue-600 text-white font-medium py-2.5 rounded-lg hover:bg-blue-700">Track Metric</button>
-            <div id="result" class="hidden p-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-900 text-sm"></div>
+      if (!appArea) return;
+
+      appArea.innerHTML = `
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-1 text-slate-700">Metric Name</label>
+            <input type="text" id="metric-name" placeholder="e.g. Latency, Accuracy..." class="w-full border border-slate-300 p-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
-        `;
-      } else {
-        appArea.innerHTML = `<p class="text-slate-400 italic">Antarmuka untuk tool ini sedang disiapkan.</p>`;
-      }
+          <div>
+            <label class="block text-sm font-medium mb-1 text-slate-700">Current Value</label>
+            <input type="number" id="current-val" placeholder="0" class="w-full border border-slate-300 p-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 text-slate-700">Previous Value</label>
+            <input type="number" id="previous-val" placeholder="0" class="w-full border border-slate-300 p-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <button onclick="runTracker()" class="w-full bg-blue-600 text-white font-medium py-2.5 rounded-lg hover:bg-blue-700 transition">Track Metric</button>
+          <div id="result" class="hidden p-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-900 text-sm"></div>
+        </div>
+      `;
     }
 
     function runTracker() {
@@ -82,3 +109,5 @@
 
     window.addEventListener('DOMContentLoaded', initTool);
   </script>
+</body>
+</html>
