@@ -13,7 +13,7 @@
     html[dir="rtl"] #searchInput { padding-left: 1rem; padding-right: 3rem; }
   </style>
 </head>
-<body class="bg-[#F8FAFC] text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="bg-[#F8FAFC] text-slate-800 antialiased min-h-screen flex flex-col" data-category="general">
 
   <!-- HEADER -->
   <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <!-- SIDEBAR WITH HYBRID TRUST FORMULA -->
+    <!-- SIDEBAR WITH DUAL AD SLOTS (AFFILIATE & ADSENSE) -->
     <aside class="w-full lg:w-[340px] flex-shrink-0 space-y-6">
       <div class="bg-indigo-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
         <div class="absolute top-0 right-0 -mr-4 -mt-4 opacity-20">
@@ -107,9 +107,14 @@
         <p class="text-sm text-indigo-100 relative z-10" data-i18n="sidebar_ai_desc">This directory leverages autonomous AI agents to discover tools, continuously tested for speed, accuracy, and client-side privacy.</p>
       </div>
 
-      <!-- KOTAK SPONSOR OTOMATIS TERHUBUNG KE ad-banner.js -->
+      <!-- SLOT 1: IKLAN AFFILIATE (Kontekstual per Kategori) -->
       <div class="bg-white p-5 border border-slate-200 rounded-2xl shadow-sm">
-        <div id="global-ad-slot"></div>
+        <div id="affiliate-ad-slot"></div>
+      </div>
+
+      <!-- SLOT 2: IKLAN ADSENSE (Google Ads) -->
+      <div class="bg-white p-5 border border-slate-200 rounded-2xl shadow-sm flex justify-center">
+        <div id="adsense-ad-slot"></div>
       </div>
     </aside>
 
@@ -147,7 +152,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Popular Utilities',
         sidebar_ai_title: "AI-Engineered. Human-Verified.",
         sidebar_ai_desc: "This directory leverages autonomous AI agents to discover tools, continuously tested for speed, accuracy, and client-side privacy.",
-        sidebar_sponsor: "Sponsor",
         footer_privacy: "Privacy Policy",
         footer_terms: "Terms of Service",
         footer_status: "API Status",
@@ -168,7 +172,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilidades Populares',
         sidebar_ai_title: "Diseñado por IA. Verificado por Humanos.",
         sidebar_ai_desc: "Este directorio utiliza agentes de IA para descubrir herramientas, verificadas en velocidad, precisión y privacidad.",
-        sidebar_sponsor: "Patrocinador",
         footer_privacy: "Política de privacidad",
         footer_terms: "Términos de servicio",
         footer_status: "Estado de API",
@@ -189,7 +192,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Beliebte Dienstprogramme',
         sidebar_ai_title: "KI-Entwickelt. Menschlich Geprüft.",
         sidebar_ai_desc: "Dieses Verzeichnis nutzt KI-Agenten zum Entdecken von Tools, kontinuierlich auf Geschwindigkeit und Datenschutz getestet.",
-        sidebar_sponsor: "Sponsor",
         footer_privacy: "Datenschutz",
         footer_terms: "Nutzungsbedingungen",
         footer_status: "API-Status",
@@ -210,7 +212,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilitaires Populaires',
         sidebar_ai_title: "Conçu par IA. Vérifié par l'Homme.",
         sidebar_ai_desc: "Cet annuaire utilise des agents IA pour découvrir des outils, testés en continu pour leur rapidité et confidentialité.",
-        sidebar_sponsor: "Sponsor",
         footer_privacy: "Politique de confidentialité",
         footer_terms: "Conditions d'utilisation",
         footer_status: "État de l'API",
@@ -231,7 +232,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilitários Populares',
         sidebar_ai_title: "Criado por IA. Verificado por Humanos.",
         sidebar_ai_desc: "Este diretório usa agentes de IA para descobrir ferramentas, testadas continuamente em velocidade e privacidade.",
-        sidebar_sponsor: "Patrocinador",
         footer_privacy: "Política de Privacidade",
         footer_terms: "Termos de Serviço",
         footer_status: "Status da API",
@@ -252,7 +252,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> 人気のユーティリティ',
         sidebar_ai_title: "AI開発・人間の目による検証済み",
         sidebar_ai_desc: "AIエージェントが収集したツールを、速度、精度、プライバシーの観点から継続的にテストしています。",
-        sidebar_sponsor: "スポンサー",
         footer_privacy: "プライバシーポリシー",
         footer_terms: "利用規約",
         footer_status: "APIステータス",
@@ -273,7 +272,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> أدوات شائعة',
         sidebar_ai_title: "مطورة بالذكاء الاصطناعي. مراجعة بشرياً.",
         sidebar_ai_desc: "يعتمد هذا الدليل على وكلاء الذكاء الاصطناعي واختبارها باستمرار للسرعة والدقة والخصوصية.",
-        sidebar_sponsor: "برعاية",
         footer_privacy: "سياسة الخصوصية",
         footer_terms: "شروط الخدمة",
         footer_status: "حالة الواجهة",
@@ -294,7 +292,6 @@
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilitas Populer',
         sidebar_ai_title: "AI-Engineered. Human-Verified.",
         sidebar_ai_desc: "Direktori ini memanfaatkan AI Agent untuk menemukan tools, yang terus diuji kecepatan, akurasi, dan privasinya.",
-        sidebar_sponsor: "Sponsor",
         footer_privacy: "Kebijakan Privasi",
         footer_terms: "Syarat & Ketentuan",
         footer_status: "Status API",
@@ -446,6 +443,10 @@
           button.classList.add('bg-slate-900', 'text-white');
 
           currentCategory = button.getAttribute('data-filter');
+          
+          // Update data-category di body agar ad-banner.js bisa mendeteksi kategori aktif secara real-time
+          document.body.setAttribute('data-category', currentCategory.toLowerCase());
+
           window.filterToolsFn();
         });
       });
