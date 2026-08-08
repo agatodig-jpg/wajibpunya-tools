@@ -1,9 +1,11 @@
 [
   {
-    "id": "ai-observability-tracker",
-    "title": "AI Observability Tracker",
-    "description": "Utility untuk melacak metrik AI.",
-    "category": "Security Utility",
-    "templateHTML": "<div class='space-y-4'><div><label class='block text-sm font-medium mb-1 text-slate-700'>Metric Name</label><input type='text' id='metric-name' placeholder='e.g. Latency, Accuracy...' class='w-full border border-slate-300 p-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'></div><div><label class='block text-sm font-medium mb-1 text-slate-700'>Current Value</label><input type='number' id='current-val' placeholder='0' class='w-full border border-slate-300 p-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'></div><div><label class='block text-sm font-medium mb-1 text-slate-700'>Previous Value</label><input type='number' id='previous-val' placeholder='0' class='w-full border border-slate-300 p-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'></div><button onclick='runTracker()' class='w-full bg-blue-600 text-white font-medium py-2.5 rounded-lg hover:bg-blue-700 transition'>Track Metric</button><div id='result' class='hidden p-4 mt-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-900 text-sm'></div></div>"
+    "id": "tool-1786195702383",
+    "category": "Utility",
+    "scriptUrl": "/assets/js/tools/tool-1786195702383.js",
+    "externalLibs": [],
+    "i18n": {},
+    "schema": {},
+    "guide": {}
   }
 ]
