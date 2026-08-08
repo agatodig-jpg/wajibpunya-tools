@@ -1,0 +1,10 @@
+[
+  {
+    "id": "welcome-tool",
+    "title": "Sistem Direktori Aktif",
+    "category": "Utilities",
+    "description": "Contoh tool awal direktori micro-software otomatis.",
+    "url": "/tools/welcome-tool.html",
+    "badgeColor": "indigo"
+  }
+]
