@@ -5,7 +5,7 @@
       "category": "Finance",
       "title": "Global ROI Calculator",
       "description": "Calculate return on investment, profit margins, and yield instantly with zero server latency.",
-      "url": "tools/roi-calculator.html",
+      "url": "/tools/roi-calculator",
       "icon": "fa-solid fa-calculator",
       "iconColor": "bg-emerald-50 text-emerald-600",
       "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200"
@@ -15,7 +15,7 @@
       "category": "Utilities",
       "title": "Instant JSON Formatter",
       "description": "Validate, parse, and format messy JSON code locally in your browser with complete data privacy.",
-      "url": "tools/json-formatter.html",
+      "url": "/tools/json-formatter",
       "icon": "fa-solid fa-code",
       "iconColor": "bg-indigo-50 text-indigo-600",
       "badgeColor": "bg-indigo-50 text-indigo-700 border-indigo-200"
@@ -25,7 +25,7 @@
       "category": "E-Commerce",
       "title": "Cross-Border Tax Estimator",
       "description": "Estimate international shipping duties, import taxes, and VAT rates for global e-commerce orders.",
-      "url": "tools/tax-estimator.html",
+      "url": "/tools/tax-duty-estimator",
       "icon": "fa-solid fa-globe",
       "iconColor": "bg-amber-50 text-amber-600",
       "badgeColor": "bg-amber-50 text-amber-700 border-amber-200"
@@ -35,7 +35,7 @@
       "category": "Productivity",
       "title": "Base64 Encoder / Decoder",
       "description": "Encode text and images to Base64 format or decode them instantly right inside your browser.",
-      "url": "tools/base64-converter.html",
+      "url": "/tools/base64-converter",
       "icon": "fa-solid fa-file-arrow-down",
       "iconColor": "bg-sky-50 text-sky-600",
       "badgeColor": "bg-sky-50 text-sky-700 border-sky-200"
