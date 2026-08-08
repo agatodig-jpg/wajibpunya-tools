@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
+    /* Penyesuaian ikon untuk mode RTL (Arab) */
+    html[dir="rtl"] .fa-magnifying-glass { left: auto; right: 1.25rem; }
+    html[dir="rtl"] #searchInput { padding-left: 1rem; padding-right: 3rem; }
   </style>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 antialiased min-h-screen flex flex-col">
@@ -15,23 +18,27 @@
   <!-- HEADER -->
   <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <span class="text-2xl font-black tracking-tight">WajibPunya<span class="text-indigo-500">.</span></span>
         <span class="hidden sm:inline-block bg-slate-800 text-slate-300 text-[10px] font-bold px-2.5 py-1 rounded-md tracking-widest uppercase border border-slate-700">Live Engine</span>
       </div>
       
-      <div class="flex items-center space-x-4">
-        <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+        <nav class="hidden md:flex space-x-6 rtl:space-x-reverse text-sm font-medium text-slate-300">
           <a href="#" class="hover:text-white transition-colors duration-200" data-i18n="nav_dashboard">Dashboard</a>
           <a href="#" class="hover:text-white transition-colors duration-200" data-i18n="nav_api">API</a>
         </nav>
 
-        <!-- LANGUAGE SWITCHER DROPDOWN -->
+        <!-- LANGUAGE SWITCHER DROPDOWN (8 GLOBAL LANGUAGES) -->
         <div class="relative">
           <select id="langSelect" onchange="switchLanguage(this.value)" class="bg-slate-800 text-slate-200 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
             <option value="en" selected>🌐 English</option>
             <option value="es">Español</option>
             <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="pt">Português</option>
+            <option value="ja">日本語</option>
+            <option value="ar">العربية</option>
             <option value="id">Bahasa Indonesia</option>
           </select>
         </div>
@@ -88,14 +95,14 @@
       </div>
     </div>
 
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR WITH HYBRID TRUST FORMULA -->
     <aside class="w-full lg:w-[340px] flex-shrink-0 space-y-6">
       <div class="bg-indigo-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
         <div class="absolute top-0 right-0 -mr-4 -mt-4 opacity-20">
-          <i class="fa-solid fa-robot text-8xl"></i>
+          <i class="fa-solid fa-shield-halved text-8xl"></i>
         </div>
-        <h4 class="font-bold text-lg mb-2 relative z-10" data-i18n="sidebar_ai_title">AI-Powered Updates</h4>
-        <p class="text-sm text-indigo-100 relative z-10" data-i18n="sidebar_ai_desc">This directory is autonomously managed and updated 24/7 by AI Agent systems.</p>
+        <h4 class="font-bold text-lg mb-2 relative z-10" data-i18n="sidebar_ai_title">AI-Engineered. Human-Verified.</h4>
+        <p class="text-sm text-indigo-100 relative z-10" data-i18n="sidebar_ai_desc">This directory leverages autonomous AI agents to discover tools, continuously tested for speed, accuracy, and client-side privacy.</p>
       </div>
 
       <div class="bg-white p-5 border border-slate-200 rounded-2xl shadow-sm">
@@ -118,7 +125,7 @@
         <i class="fa-solid fa-layer-group text-indigo-500"></i>
         <p>© 2026 WajibPunya Engine. All Rights Reserved.</p>
       </div>
-      <div class="flex space-x-6 font-medium">
+      <div class="flex space-x-6 rtl:space-x-reverse font-medium">
         <a href="#" class="hover:text-slate-900 transition-colors" data-i18n="footer_privacy">Privacy Policy</a>
         <a href="#" class="hover:text-slate-900 transition-colors" data-i18n="footer_terms">Terms of Service</a>
         <a href="#" class="hover:text-slate-900 transition-colors" data-i18n="footer_status">API Status</a>
@@ -126,9 +133,8 @@
     </div>
   </footer>
 
-  <!-- SCRIPT MULTI-LANGUAGE (i18n) & RENDER DINAMIS -->
+  <!-- SCRIPT MULTI-LANGUAGE (i18n 8 LANGUAGES) & RENDER DINAMIS -->
   <script>
-    // DICTIONARY MULTI-BAHASA
     const translations = {
       en: {
         nav_dashboard: "Dashboard",
@@ -142,8 +148,8 @@
         tab_utilities: "⚡ Utilities",
         tab_productivity: "🚀 Productivity",
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Popular Utilities',
-        sidebar_ai_title: "AI-Powered Updates",
-        sidebar_ai_desc: "This directory is autonomously managed and updated 24/7 by AI Agent systems.",
+        sidebar_ai_title: "AI-Engineered. Human-Verified.",
+        sidebar_ai_desc: "This directory leverages autonomous AI agents to discover tools, continuously tested for speed, accuracy, and client-side privacy.",
         sidebar_sponsor: "Sponsor",
         footer_privacy: "Privacy Policy",
         footer_terms: "Terms of Service",
@@ -163,20 +169,20 @@
         tab_utilities: "⚡ Utilidades",
         tab_productivity: "🚀 Productividad",
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilidades Populares',
-        sidebar_ai_title: "Actualizaciones por IA",
-        sidebar_ai_desc: "Este directorio es gestionado y actualizado de forma autónoma las 24/7 por sistemas de agentes de IA.",
+        sidebar_ai_title: "Diseñado por IA. Verificado por Humanos.",
+        sidebar_ai_desc: "Este directorio utiliza agentes de IA para descubrir herramientas, verificadas en velocidad, precisión y privacidad.",
         sidebar_sponsor: "Patrocinador",
         footer_privacy: "Política de privacidad",
         footer_terms: "Términos de servicio",
         footer_status: "Estado de API",
-        no_tools: "No se encontraron herramientas yang coincidan con su búsqueda.",
+        no_tools: "No se encontraron herramientas que coincidan con su búsqueda.",
         error_load: "Error al cargar los datos del catálogo de herramientas."
       },
       de: {
         nav_dashboard: "Dashboard",
         nav_api: "API",
         hero_title: "Sofortiges Mikro-Software-Verzeichnis",
-        hero_desc: "Eine Sammlung von blitzschnellen, leichten und kostenlosen Web-Tools zur Automatisierung Ihres globalen Geschäfts, Finanzen und Produktivität.",
+        hero_desc: "Eine Sammlung von blitzschnellen, leichten und kostenlosen Web-Tools zur Automatisierung Ihres globalen Geschäfts.",
         search_placeholder: "Werkzeuge suchen (z.B. ROI, Marge, Steuer)...",
         tab_all: "Alle Werkzeuge",
         tab_ecom: "🛒 E-Commerce",
@@ -184,14 +190,98 @@
         tab_utilities: "⚡ Dienstprogramme",
         tab_productivity: "🚀 Produktivität",
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Beliebte Dienstprogramme',
-        sidebar_ai_title: "KI-gestützte Updates",
-        sidebar_ai_desc: "Dieses Verzeichnis wird rund um die Uhr autonom von KI-Agentensystemen verwaltet und aktualisiert.",
+        sidebar_ai_title: "KI-Entwickelt. Menschlich Geprüft.",
+        sidebar_ai_desc: "Dieses Verzeichnis nutzt KI-Agenten zum Entdecken von Tools, kontinuierlich auf Geschwindigkeit und Datenschutz getestet.",
         sidebar_sponsor: "Sponsor",
-        footer_privacy: "Datenschutz-Bestimmungen",
+        footer_privacy: "Datenschutz",
         footer_terms: "Nutzungsbedingungen",
         footer_status: "API-Status",
         no_tools: "Keine Werkzeuge gefunden, die Ihrer Suche entsprechen.",
         error_load: "Fehler beim Laden der Werkzeugkatalogdaten."
+      },
+      fr: {
+        nav_dashboard: "Tableau de bord",
+        nav_api: "API",
+        hero_title: "Annuaire de Micro-Logiciels Instantanés",
+        hero_desc: "Une collection d'utilitaires web ultra-rapides et gratuits pour automatiser vos finances et votre productivité globale.",
+        search_placeholder: "Rechercher des outils (ex: ROI, marge, taxe)...",
+        tab_all: "Tous les outils",
+        tab_ecom: "🛒 E-Commerce",
+        tab_finance: "💰 Finance",
+        tab_utilities: "⚡ Utilitaires",
+        tab_productivity: "🚀 Productivité",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilitaires Populaires',
+        sidebar_ai_title: "Conçu par IA. Vérifié par l'Homme.",
+        sidebar_ai_desc: "Cet annuaire utilise des agents IA pour découvrir des outils, testés en continu pour leur rapidité et confidentialité.",
+        sidebar_sponsor: "Sponsor",
+        footer_privacy: "Politique de confidentialité",
+        footer_terms: "Conditions d'utilisation",
+        footer_status: "État de l'API",
+        no_tools: "Aucun outil ne correspond à votre recherche.",
+        error_load: "Échec du chargement du catalogue."
+      },
+      pt: {
+        nav_dashboard: "Painel",
+        nav_api: "API",
+        hero_title: "Diretório de Micro-Software Instantâneo",
+        hero_desc: "Uma coleção de utilitários web ultrarrápidos e gratuitos para automatizar seus negócios globais e produtividade.",
+        search_placeholder: "Buscar ferramentas (ex: ROI, margem, imposto)...",
+        tab_all: "Todas as ferramentas",
+        tab_ecom: "🛒 E-Commerce",
+        tab_finance: "💰 Finanças",
+        tab_utilities: "⚡ Utilitários",
+        tab_productivity: "🚀 Produtividade",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilitários Populares',
+        sidebar_ai_title: "Criado por IA. Verificado por Humanos.",
+        sidebar_ai_desc: "Este diretório usa agentes de IA para descobrir ferramentas, testadas continuamente em velocidade e privacidade.",
+        sidebar_sponsor: "Patrocinador",
+        footer_privacy: "Política de Privacidade",
+        footer_terms: "Termos de Serviço",
+        footer_status: "Status da API",
+        no_tools: "Nenhuma ferramenta encontrada.",
+        error_load: "Falha ao carregar o catálogo de ferramentas."
+      },
+      ja: {
+        nav_dashboard: "ダッシュボード",
+        nav_api: "API",
+        hero_title: "インスタント・マイクロソフトウェア・ディレクトリ",
+        hero_desc: "世界中のビジネス、財務、生産性を自動化するための、高速で軽量な無料ウェブユーティリティ集。",
+        search_placeholder: "ツールを検索 (例: ROI、利益率、税金)...",
+        tab_all: "すべてのツール",
+        tab_ecom: "🛒 Eコマース",
+        tab_finance: "💰 財務",
+        tab_utilities: "⚡ ユーティリティ",
+        tab_productivity: "🚀 生産性",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> 人気のユーティリティ',
+        sidebar_ai_title: "AI開発・人間の目による検証済み",
+        sidebar_ai_desc: "AIエージェントが収集したツールを、速度、精度、プライバシーの観点から継続的にテストしています。",
+        sidebar_sponsor: "スポンサー",
+        footer_privacy: "プライバシーポリシー",
+        footer_terms: "利用規約",
+        footer_status: "APIステータス",
+        no_tools: "一致するツールが見つかりません。",
+        error_load: "カタログデータの読み込みに失敗しました。"
+      },
+      ar: {
+        nav_dashboard: "لوحة التحكم",
+        nav_api: "واجهة البرمجة",
+        hero_title: "دليل البرامج المصغرة الفوري",
+        hero_desc: "مجموعة من أدوات الويب السريعة والمجانية لأتمتة أعمالك العالمية والإنتاجية.",
+        search_placeholder: "ابحث عن أدوات (مثل: العائد، الهامش، الضريبة)...",
+        tab_all: "جميع الأدوات",
+        tab_ecom: "🛒 التجارة الإلكترونية",
+        tab_finance: "💰 المالية",
+        tab_utilities: "⚡ الأدوات العامة",
+        tab_productivity: "🚀 الإنتاجية",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> أدوات شائعة',
+        sidebar_ai_title: "مطورة بالذكاء الاصطناعي. مراجعة بشرياً.",
+        sidebar_ai_desc: "يعتمد هذا الدليل على وكلاء الذكاء الاصطناعي واختبارها باستمرار للسرعة والدقة والخصوصية.",
+        sidebar_sponsor: "برعاية",
+        footer_privacy: "سياسة الخصوصية",
+        footer_terms: "شروط الخدمة",
+        footer_status: "حالة الواجهة",
+        no_tools: "لم يتم العثور على أدوات تطابق بحثك.",
+        error_load: "فشل في تحميل بيانات أدوات الدليل."
       },
       id: {
         nav_dashboard: "Dashboard",
@@ -205,8 +295,8 @@
         tab_utilities: "⚡ Utilitas",
         tab_productivity: "🚀 Produktivitas",
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilitas Populer',
-        sidebar_ai_title: "Pembaruan Berbasis AI",
-        sidebar_ai_desc: "Direktori ini dikelola dan diperbarui secara otonom 24/7 oleh sistem AI Agent.",
+        sidebar_ai_title: "AI-Engineered. Human-Verified.",
+        sidebar_ai_desc: "Direktori ini memanfaatkan AI Agent untuk menemukan tools, yang terus diuji kecepatan, akurasi, dan privasinya.",
         sidebar_sponsor: "Sponsor",
         footer_privacy: "Kebijakan Privasi",
         footer_terms: "Syarat & Ketentuan",
@@ -221,6 +311,13 @@
     function switchLanguage(lang) {
       currentLang = lang;
       
+      // Penanganan Tampilan RTL untuk Bahasa Arab
+      if (lang === 'ar') {
+        document.documentElement.setAttribute('dir', 'rtl');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+      }
+
       // Update DOM Text
       document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
@@ -239,7 +336,6 @@
 
       localStorage.setItem('user_lang', lang);
       
-      // Re-render katalog tools jika data sudah dimuat
       if (window.filterToolsFn) {
         window.filterToolsFn();
       }
@@ -254,8 +350,12 @@
       let allTools = [];
       let currentCategory = 'all';
 
-      // Load saved language choice
-      const savedLang = localStorage.getItem('user_lang') || 'en';
+      // Auto-detect browser language or load saved choice
+      const browserLang = navigator.language.slice(0, 2);
+      const supportedLangs = ['en', 'es', 'de', 'fr', 'pt', 'ja', 'ar', 'id'];
+      const defaultLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
+      const savedLang = localStorage.getItem('user_lang') || defaultLang;
+
       document.getElementById('langSelect').value = savedLang;
       switchLanguage(savedLang);
 
@@ -283,7 +383,7 @@
           card.className = "tool-card group relative bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-100 transition-all duration-300 transform hover:-translate-y-1 block";
           
           card.innerHTML = `
-            <div class="absolute top-5 right-5">
+            <div class="absolute top-5 right-5 rtl:right-auto rtl:left-5">
               <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${tool.badgeColor} rounded-md border">${tool.category}</span>
             </div>
             <div class="w-14 h-14 ${tool.iconColor} rounded-xl flex items-center justify-center text-2xl mb-5 transition-colors duration-300">
