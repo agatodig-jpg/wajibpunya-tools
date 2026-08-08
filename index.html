@@ -107,14 +107,9 @@
         <p class="text-sm text-indigo-100 relative z-10" data-i18n="sidebar_ai_desc">This directory leverages autonomous AI agents to discover tools, continuously tested for speed, accuracy, and client-side privacy.</p>
       </div>
 
+      <!-- KOTAK SPONSOR OTOMATIS TERHUBUNG KE ad-banner.js -->
       <div class="bg-white p-5 border border-slate-200 rounded-2xl shadow-sm">
-        <div class="flex items-center justify-between mb-4">
-          <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase" data-i18n="sidebar_sponsor">Sponsor</span>
-          <i class="fa-solid fa-circle-info text-slate-300"></i>
-        </div>
-        <div class="w-full h-[250px] bg-slate-50 border border-dashed border-slate-300 rounded-xl flex items-center justify-center text-xs text-slate-400 hover:bg-slate-100 transition-colors cursor-pointer">
-          [ Ad Space 300x250 ]
-        </div>
+        <div id="global-ad-slot"></div>
       </div>
     </aside>
 
@@ -456,6 +451,9 @@
       });
     });
   </script>
+
+  <!-- PEMANGGIL GLOBAL AD-BANNER SCRIPT -->
+  <script src="/assets/js/ad-banner.js"></script>
 
 </body>
 </html>
