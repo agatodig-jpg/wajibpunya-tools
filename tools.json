@@ -1,9 +1,9 @@
 [
   {
-    "id": "tool-app",
-    "title": "tool-app",
+    "id": "tool-1786194089815",
+    "title": "tool-1786194089815",
     "description": "Utility tool for automated data security and client-side processing.",
     "category": "Security Utility",
-    "scriptUrl": "/assets/js/tools/tool-app.js"
+    "scriptUrl": "/assets/js/tools/tool-1786194089815.js"
   }
 ]
