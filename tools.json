@@ -1,11 +1,9 @@
 [
   {
-    "id": "data-secure-sanitizer",
-    "title": "Data Sanitizer Tool",
-    "description": "Utility tool for automated data security and client-side processing.",
-    "category": "Security Utility",
-    "scriptUrl": "/assets/js/tools/data-secure-sanitizer.js",
-    "externalLibs": [],
-    "schema": {}
+    "id": "ai-observability-tracker",
+    "title": "AI Observability Tracker",
+    "description": "Tracker for AI metrics and performance observation.",
+    "category": "Utility",
+    "scriptUrl": "/assets/js/tools/ai-observability-tracker.js"
   }
 ]
