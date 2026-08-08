@@ -1,4 +1,60 @@
-{
-  "id": "ai-observability-tracker",
-  "jsCode": "async function executeTool(inputs) {\n  try {\n    const { metric_name, current_value, previous_value, discussion_link } = inputs;\n\n    if (!metric_name || isNaN(current_value)) {\n      throw new Error('Invalid input metrics: metric_name and current_value are required');\n    }\n\n    let prevValue = typeof previous_value === 'number' ? Number(previous_value) : 0;\n    const curValue = Number(current_value);\n    const discussionUrl = String(discussion_link || '');\n\n    // Calculate percentage change\n    if (prevValue !== 0 && !isNaN(prevValue)) {\n      const pctChange = ((curValue - prevValue) / Math.abs(prevValue)) * 100;\n      return { success: true, result: { metricName: metric_name, currentVal: curValue, previousVal: prevValue, percentageChange: Number(pctChange).toFixed(2), discussionLink: discussionUrl }, error: null };\n    }\n\n    if (curValue !== 0) {\n      return { success: true, result: { metricName: metric_name, currentVal: curValue, previousVal: prevValue, percentageChange: '∞', isFirstObservation: true, discussionLink: discussionUrl }, error: null };\n    }\n\n    return { success: true, result: { metricName: metric_name, currentVal: curValue, previousVal: prevValue, percentageChange: 0, isFirstObservation: false, discussionLink: discussionUrl }, error: null };\n\n  } catch (err) {\n    throw err; // Throw to parent if needed in your app wrapper. We are returning success true normally.\n  }\n}\n"
+async function executeTool(inputs) {
+  try {
+    const { metric_name, current_value, previous_value, discussion_link } = inputs;
+
+    if (!metric_name || isNaN(current_value)) {
+      throw new Error('Invalid input metrics: metric_name and current_value are required');
+    }
+
+    let prevValue = typeof previous_value === 'number' ? Number(previous_value) : 0;
+    const curValue = Number(current_value);
+    const discussionUrl = String(discussion_link || '');
+
+    // Calculate percentage change
+    if (prevValue !== 0 && !isNaN(prevValue)) {
+      const pctChange = ((curValue - prevValue) / Math.abs(prevValue)) * 100;
+      return { 
+        success: true, 
+        result: { 
+          metricName: metric_name, 
+          currentVal: curValue, 
+          previousVal: prevValue, 
+          percentageChange: Number(pctChange).toFixed(2), 
+          discussionLink: discussionUrl 
+        }, 
+        error: null 
+      };
+    }
+
+    if (curValue !== 0) {
+      return { 
+        success: true, 
+        result: { 
+          metricName: metric_name, 
+          currentVal: curValue, 
+          previousVal: prevValue, 
+          percentageChange: '∞', 
+          isFirstObservation: true, 
+          discussionLink: discussionUrl 
+        }, 
+        error: null 
+      };
+    }
+
+    return { 
+      success: true, 
+      result: { 
+        metricName: metric_name, 
+        currentVal: curValue, 
+        previousVal: prevValue, 
+        percentageChange: 0, 
+        isFirstObservation: false, 
+        discussionLink: discussionUrl 
+      }, 
+      error: null 
+    };
+
+  } catch (err) {
+    throw err;
+  }
 }
