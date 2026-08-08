@@ -19,10 +19,23 @@
         <span class="text-2xl font-black tracking-tight">WajibPunya<span class="text-indigo-500">.</span></span>
         <span class="hidden sm:inline-block bg-slate-800 text-slate-300 text-[10px] font-bold px-2.5 py-1 rounded-md tracking-widest uppercase border border-slate-700">Live Engine</span>
       </div>
-      <nav class="flex space-x-6 text-sm font-medium text-slate-300">
-        <a href="#" class="hover:text-white transition-colors duration-200">Dashboard</a>
-        <a href="#" class="hover:text-white transition-colors duration-200">API</a>
-      </nav>
+      
+      <div class="flex items-center space-x-4">
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+          <a href="#" class="hover:text-white transition-colors duration-200" data-i18n="nav_dashboard">Dashboard</a>
+          <a href="#" class="hover:text-white transition-colors duration-200" data-i18n="nav_api">API</a>
+        </nav>
+
+        <!-- LANGUAGE SWITCHER DROPDOWN -->
+        <div class="relative">
+          <select id="langSelect" onchange="switchLanguage(this.value)" class="bg-slate-800 text-slate-200 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="en" selected>🌐 English</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+            <option value="id">Bahasa Indonesia</option>
+          </select>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -31,29 +44,29 @@
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-indigo-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
     
     <div class="relative max-w-3xl mx-auto space-y-6">
-      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight" data-i18n="hero_title">
         Instant Micro-Software Directory
       </h1>
-      <p class="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto">
+      <p class="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="hero_desc">
         A collection of lightning-fast, lightweight, and free web utilities to automate your global business, finance, and productivity.
       </p>
       
-      <!-- SEARCH BAR (Perbaikan posisi ikon & penanganan Enter yang aman) -->
+      <!-- SEARCH BAR -->
       <form id="searchForm" class="relative max-w-xl mx-auto pt-4 flex items-center" onsubmit="return false;">
         <div class="absolute left-5 flex items-center pointer-events-none text-slate-400">
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-        <input type="text" id="searchInput" placeholder="Search tools (e.g., ROI, margin, tax)..." 
+        <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="Search tools (e.g., ROI, margin, tax)..." 
                class="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 focus:outline-none transition-all shadow-sm text-sm font-medium">
       </form>
 
       <!-- FILTER PILLS -->
       <div id="filterContainer" class="flex flex-wrap items-center justify-center gap-2.5 pt-4 text-xs font-semibold">
-        <button type="button" data-filter="all" class="filter-btn px-4 py-2 bg-slate-900 text-white rounded-full shadow-sm hover:bg-slate-800 transition">All Tools</button>
-        <button type="button" data-filter="E-Commerce" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">🛒 E-Commerce</button>
-        <button type="button" data-filter="Finance" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">💰 Finance</button>
-        <button type="button" data-filter="Utilities" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">⚡ Utilities</button>
-        <button type="button" data-filter="Productivity" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm">🚀 Productivity</button>
+        <button type="button" data-filter="all" class="filter-btn px-4 py-2 bg-slate-900 text-white rounded-full shadow-sm hover:bg-slate-800 transition" data-i18n="tab_all">All Tools</button>
+        <button type="button" data-filter="E-Commerce" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm" data-i18n="tab_ecom">🛒 E-Commerce</button>
+        <button type="button" data-filter="Finance" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm" data-i18n="tab_finance">💰 Finance</button>
+        <button type="button" data-filter="Utilities" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm" data-i18n="tab_utilities">⚡ Utilities</button>
+        <button type="button" data-filter="Productivity" class="filter-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-full transition shadow-sm" data-i18n="tab_productivity">🚀 Productivity</button>
       </div>
     </div>
   </section>
@@ -64,7 +77,7 @@
     <!-- CATALOG GRID -->
     <div class="flex-1 space-y-6">
       <div class="flex items-center justify-between pb-2 border-b border-slate-200">
-        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2" data-i18n="sec_popular">
           <i class="fa-solid fa-bolt text-amber-500"></i> Popular Utilities
         </h2>
       </div>
@@ -81,13 +94,13 @@
         <div class="absolute top-0 right-0 -mr-4 -mt-4 opacity-20">
           <i class="fa-solid fa-robot text-8xl"></i>
         </div>
-        <h4 class="font-bold text-lg mb-2 relative z-10">AI-Powered Updates</h4>
-        <p class="text-sm text-indigo-100 relative z-10">This directory is autonomously managed and updated 24/7 by AI Agent systems.</p>
+        <h4 class="font-bold text-lg mb-2 relative z-10" data-i18n="sidebar_ai_title">AI-Powered Updates</h4>
+        <p class="text-sm text-indigo-100 relative z-10" data-i18n="sidebar_ai_desc">This directory is autonomously managed and updated 24/7 by AI Agent systems.</p>
       </div>
 
       <div class="bg-white p-5 border border-slate-200 rounded-2xl shadow-sm">
         <div class="flex items-center justify-between mb-4">
-          <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase">Sponsor</span>
+          <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase" data-i18n="sidebar_sponsor">Sponsor</span>
           <i class="fa-solid fa-circle-info text-slate-300"></i>
         </div>
         <div class="w-full h-[250px] bg-slate-50 border border-dashed border-slate-300 rounded-xl flex items-center justify-center text-xs text-slate-400 hover:bg-slate-100 transition-colors cursor-pointer">
@@ -106,15 +119,132 @@
         <p>© 2026 WajibPunya Engine. All Rights Reserved.</p>
       </div>
       <div class="flex space-x-6 font-medium">
-        <a href="#" class="hover:text-slate-900 transition-colors">Privacy Policy</a>
-        <a href="#" class="hover:text-slate-900 transition-colors">Terms of Service</a>
-        <a href="#" class="hover:text-slate-900 transition-colors">API Status</a>
+        <a href="#" class="hover:text-slate-900 transition-colors" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="#" class="hover:text-slate-900 transition-colors" data-i18n="footer_terms">Terms of Service</a>
+        <a href="#" class="hover:text-slate-900 transition-colors" data-i18n="footer_status">API Status</a>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT RENDER DINAMIS & SEARCH -->
+  <!-- SCRIPT MULTI-LANGUAGE (i18n) & RENDER DINAMIS -->
   <script>
+    // DICTIONARY MULTI-BAHASA
+    const translations = {
+      en: {
+        nav_dashboard: "Dashboard",
+        nav_api: "API",
+        hero_title: "Instant Micro-Software Directory",
+        hero_desc: "A collection of lightning-fast, lightweight, and free web utilities to automate your global business, finance, and productivity.",
+        search_placeholder: "Search tools (e.g., ROI, margin, tax)...",
+        tab_all: "All Tools",
+        tab_ecom: "🛒 E-Commerce",
+        tab_finance: "💰 Finance",
+        tab_utilities: "⚡ Utilities",
+        tab_productivity: "🚀 Productivity",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Popular Utilities',
+        sidebar_ai_title: "AI-Powered Updates",
+        sidebar_ai_desc: "This directory is autonomously managed and updated 24/7 by AI Agent systems.",
+        sidebar_sponsor: "Sponsor",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Service",
+        footer_status: "API Status",
+        no_tools: "No tools found matching your search.",
+        error_load: "Failed to load tools catalog data."
+      },
+      es: {
+        nav_dashboard: "Panel",
+        nav_api: "API",
+        hero_title: "Directorio de Micro-Software Instantáneo",
+        hero_desc: "Una colección de utilidades web ultrarrápidas, ligeras y gratuitas para automatizar su negocio global, finanzas y productividad.",
+        search_placeholder: "Buscar herramientas (ej. ROI, margen, impuestos)...",
+        tab_all: "Todas las herramientas",
+        tab_ecom: "🛒 Comercio Electrónico",
+        tab_finance: "💰 Finanzas",
+        tab_utilities: "⚡ Utilidades",
+        tab_productivity: "🚀 Productividad",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilidades Populares',
+        sidebar_ai_title: "Actualizaciones por IA",
+        sidebar_ai_desc: "Este directorio es gestionado y actualizado de forma autónoma las 24/7 por sistemas de agentes de IA.",
+        sidebar_sponsor: "Patrocinador",
+        footer_privacy: "Política de privacidad",
+        footer_terms: "Términos de servicio",
+        footer_status: "Estado de API",
+        no_tools: "No se encontraron herramientas yang coincidan con su búsqueda.",
+        error_load: "Error al cargar los datos del catálogo de herramientas."
+      },
+      de: {
+        nav_dashboard: "Dashboard",
+        nav_api: "API",
+        hero_title: "Sofortiges Mikro-Software-Verzeichnis",
+        hero_desc: "Eine Sammlung von blitzschnellen, leichten und kostenlosen Web-Tools zur Automatisierung Ihres globalen Geschäfts, Finanzen und Produktivität.",
+        search_placeholder: "Werkzeuge suchen (z.B. ROI, Marge, Steuer)...",
+        tab_all: "Alle Werkzeuge",
+        tab_ecom: "🛒 E-Commerce",
+        tab_finance: "💰 Finanzen",
+        tab_utilities: "⚡ Dienstprogramme",
+        tab_productivity: "🚀 Produktivität",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Beliebte Dienstprogramme',
+        sidebar_ai_title: "KI-gestützte Updates",
+        sidebar_ai_desc: "Dieses Verzeichnis wird rund um die Uhr autonom von KI-Agentensystemen verwaltet und aktualisiert.",
+        sidebar_sponsor: "Sponsor",
+        footer_privacy: "Datenschutz-Bestimmungen",
+        footer_terms: "Nutzungsbedingungen",
+        footer_status: "API-Status",
+        no_tools: "Keine Werkzeuge gefunden, die Ihrer Suche entsprechen.",
+        error_load: "Fehler beim Laden der Werkzeugkatalogdaten."
+      },
+      id: {
+        nav_dashboard: "Dashboard",
+        nav_api: "API",
+        hero_title: "Direktori Mikro-Software Instan",
+        hero_desc: "Kumpulan utilitas web yang cepat, ringan, dan gratis untuk mengotomatisasi bisnis global, keuangan, dan produktivitas Anda.",
+        search_placeholder: "Cari tools (misal: ROI, margin, pajak)...",
+        tab_all: "Semua Tools",
+        tab_ecom: "🛒 E-Commerce",
+        tab_finance: "💰 Keuangan",
+        tab_utilities: "⚡ Utilitas",
+        tab_productivity: "🚀 Produktivitas",
+        sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> Utilitas Populer',
+        sidebar_ai_title: "Pembaruan Berbasis AI",
+        sidebar_ai_desc: "Direktori ini dikelola dan diperbarui secara otonom 24/7 oleh sistem AI Agent.",
+        sidebar_sponsor: "Sponsor",
+        footer_privacy: "Kebijakan Privasi",
+        footer_terms: "Syarat & Ketentuan",
+        footer_status: "Status API",
+        no_tools: "Tidak ada tools yang sesuai dengan pencarian Anda.",
+        error_load: "Gagal memuat data katalog tools."
+      }
+    };
+
+    let currentLang = 'en';
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      
+      // Update DOM Text
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          element.innerHTML = translations[lang][key];
+        }
+      });
+
+      // Update Placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+          element.setAttribute('placeholder', translations[lang][key]);
+        }
+      });
+
+      localStorage.setItem('user_lang', lang);
+      
+      // Re-render katalog tools jika data sudah dimuat
+      if (window.filterToolsFn) {
+        window.filterToolsFn();
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", async function() {
       const toolsGrid = document.getElementById('toolsGrid');
       const searchInput = document.getElementById('searchInput');
@@ -124,20 +254,25 @@
       let allTools = [];
       let currentCategory = 'all';
 
+      // Load saved language choice
+      const savedLang = localStorage.getItem('user_lang') || 'en';
+      document.getElementById('langSelect').value = savedLang;
+      switchLanguage(savedLang);
+
       try {
         const response = await fetch('tools.json');
         const data = await response.json();
         allTools = data.tools;
         renderTools(allTools);
       } catch (error) {
-        toolsGrid.innerHTML = `<p class="text-sm text-rose-500 col-span-2">Failed to load tools catalog data.</p>`;
+        toolsGrid.innerHTML = `<p class="text-sm text-rose-500 col-span-2">${translations[currentLang].error_load}</p>`;
         console.error('Error fetching tools.json:', error);
       }
 
       function renderTools(tools) {
         toolsGrid.innerHTML = '';
         if (tools.length === 0) {
-          toolsGrid.innerHTML = `<p class="text-sm text-slate-400 col-span-2 py-8 text-center">No tools found matching your search.</p>`;
+          toolsGrid.innerHTML = `<p class="text-sm text-slate-400 col-span-2 py-8 text-center">${translations[currentLang].no_tools}</p>`;
           return;
         }
 
@@ -161,7 +296,7 @@
         });
       }
 
-      function filterTools() {
+      window.filterToolsFn = function() {
         const query = searchInput.value.toLowerCase().trim();
 
         const filtered = allTools.filter(tool => {
@@ -171,22 +306,20 @@
         });
 
         renderTools(filtered);
-      }
+      };
 
-      // Pencarian otomatis merespons ketikan secara real-time
-      searchInput.addEventListener('input', filterTools);
+      searchInput.addEventListener('input', window.filterToolsFn);
 
-      // Tangani tombol Enter pada form maupun input secara presisi
       searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        filterTools();
+        window.filterToolsFn();
         searchInput.blur();
       });
 
       searchInput.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
           event.preventDefault();
-          filterTools();
+          window.filterToolsFn();
           searchInput.blur();
         }
       });
@@ -202,7 +335,7 @@
           button.classList.add('bg-slate-900', 'text-white');
 
           currentCategory = button.getAttribute('data-filter');
-          filterTools();
+          window.filterToolsFn();
         });
       });
     });
