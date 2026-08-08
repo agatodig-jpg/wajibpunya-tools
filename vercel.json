@@ -4,6 +4,10 @@
     {
       "source": "/tool",
       "destination": "/tool.html"
+    },
+    {
+      "source": "/tool/:path*",
+      "destination": "/tool.html"
     }
   ]
 }
