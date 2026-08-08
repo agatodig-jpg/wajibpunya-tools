@@ -2,6 +2,7 @@
   {
     "id": "data-secure-sanitizer",
     "title": "Data Sanitizer Tool",
+    "description": "Utility tool for automated data security and client-side processing.",
     "category": "Security Utility",
     "scriptUrl": "/assets/js/tools/data-secure-sanitizer.js",
     "externalLibs": [],
