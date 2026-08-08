@@ -40,7 +40,10 @@
       }
 
       try {
-        const response = await fetch('/tools.json');
+        // Menggunakan path absolut berbasis domain root agar stabil di semua halaman
+        const response = await fetch(`${window.location.origin}/tools.json`);
+        if (!response.ok) throw new Error('Gagal mengambil file konfigurasi tools.json');
+
         const data = await response.json();
         const toolsArray = Array.isArray(data) ? data : (data.tools || []);
         const toolConfig = toolsArray.find(t => t.id === toolId);
