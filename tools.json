@@ -2,43 +2,43 @@
   "tools": [
     {
       "id": "roi-calculator",
-      "title": "ROI & Margin Calculator",
-      "description": "Calculate sales margins, net profit, and break-even points for global dropshipping operations accurately.",
-      "category": "E-Commerce",
-      "icon": "fa-solid fa-calculator",
-      "badgeColor": "text-emerald-600 bg-emerald-50 border-emerald-100",
-      "iconColor": "bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white",
-      "url": "tools/roi-calculator.html"
-    },
-    {
-      "id": "global-asset-calculator",
-      "title": "Global Asset Calculator",
-      "description": "Calculate asset ownership, threshold limits, and wealth distribution for your portfolio.",
       "category": "Finance",
-      "icon": "fa-solid fa-vault",
-      "badgeColor": "text-purple-600 bg-purple-50 border-purple-100",
-      "iconColor": "bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white",
-      "url": "tools/global-asset-calculator.html"
+      "title": "Global ROI Calculator",
+      "description": "Calculate return on investment, profit margins, and yield instantly with zero server latency.",
+      "url": "tools/roi-calculator.html",
+      "icon": "fa-solid fa-calculator",
+      "iconColor": "bg-emerald-50 text-emerald-600",
+      "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200"
     },
     {
-      "id": "tax-zakat-estimator",
-      "title": "Tax & Zakat Estimator",
-      "description": "Estimate annual income tax and charitable obligations based on monthly gross earnings.",
+      "id": "json-formatter",
       "category": "Utilities",
-      "icon": "fa-solid fa-file-invoice-dollar",
-      "badgeColor": "text-rose-600 bg-rose-50 border-rose-100",
-      "iconColor": "bg-rose-50 text-rose-600 group-hover:bg-rose-600 group-hover:text-white",
-      "url": "tools/tax-zakat-estimator.html"
+      "title": "Instant JSON Formatter",
+      "description": "Validate, parse, and format messy JSON code locally in your browser with complete data privacy.",
+      "url": "tools/json-formatter.html",
+      "icon": "fa-solid fa-code",
+      "iconColor": "bg-indigo-50 text-indigo-600",
+      "badgeColor": "bg-indigo-50 text-indigo-700 border-indigo-200"
     },
     {
-      "id": "timezone-sync-tool",
-      "title": "Timezone Sync Tool",
-      "description": "Synchronize global meeting schedules across 5 different time zones instantly.",
+      "id": "tax-duty-estimator",
+      "category": "E-Commerce",
+      "title": "Cross-Border Tax Estimator",
+      "description": "Estimate international shipping duties, import taxes, and VAT rates for global e-commerce orders.",
+      "url": "tools/tax-estimator.html",
+      "icon": "fa-solid fa-globe",
+      "iconColor": "bg-amber-50 text-amber-600",
+      "badgeColor": "bg-amber-50 text-amber-700 border-amber-200"
+    },
+    {
+      "id": "base64-converter",
       "category": "Productivity",
-      "icon": "fa-solid fa-clock-rotate-left",
-      "badgeColor": "text-blue-600 bg-blue-50 border-blue-100",
-      "iconColor": "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
-      "url": "tools/timezone-sync.html"
+      "title": "Base64 Encoder / Decoder",
+      "description": "Encode text and images to Base64 format or decode them instantly right inside your browser.",
+      "url": "tools/base64-converter.html",
+      "icon": "fa-solid fa-file-arrow-down",
+      "iconColor": "bg-sky-50 text-sky-600",
+      "badgeColor": "bg-sky-50 text-sky-700 border-sky-200"
     }
   ]
 }
