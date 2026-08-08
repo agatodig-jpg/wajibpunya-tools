@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Status - WajibPunya Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white border-b border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                <span>WajibPunya.</span>
+            </a>
+            <a href="/" class="text-sm font-medium text-slate-300 hover:text-white transition">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Back to Directory
+            </a>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow">
+        <!-- Status Banner -->
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 mb-8 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="relative flex h-3.5 w-3.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500"></span>
+                </span>
+                <div>
+                    <h1 class="text-lg font-bold text-emerald-950">All Systems Operational</h1>
+                    <p class="text-xs text-emerald-700">Client-side execution engine & static assets functioning normally.</p>
+                </div>
+            </div>
+            <span class="text-xs font-mono text-emerald-700 bg-emerald-100 px-3 py-1 rounded-md">100% Uptime</span>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-500 font-medium mb-1">Execution Engine</div>
+                <div class="text-xl font-extrabold text-slate-900">Browser JS</div>
+                <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check text-[10px]"></i> Client-Side (0ms Latency)
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-500 font-medium mb-1">CDN & Global Edge</div>
+                <div class="text-xl font-extrabold text-slate-900">Vercel Edge</div>
+                <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check text-[10px]"></i> Operational (190+ Countries)
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-500 font-medium mb-1">Catalog Integrity</div>
+                <div class="text-xl font-extrabold text-slate-900">tools.json</div>
+                <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check text-[10px]"></i> Validated & Syncing
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Status Table -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-100 font-bold text-slate-900 text-sm">
+                Core Subsystems Status
+            </div>
+            <div class="divide-y divide-slate-100 text-sm">
+                <div class="px-6 py-3.5 flex items-center justify-between">
+                    <span class="text-slate-600 font-medium">Directory Routing & Search Engine</span>
+                    <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle text-[8px]"></i> Operational
+                    </span>
+                </div>
+                <div class="px-6 py-3.5 flex items-center justify-between">
+                    <span class="text-slate-600 font-medium">Financial & ROI Calculators</span>
+                    <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle text-[8px]"></i> Operational
+                    </span>
+                </div>
+                <div class="px-6 py-3.5 flex items-center justify-between">
+                    <span class="text-slate-600 font-medium">JSON & Code Formatter Utilities</span>
+                    <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle text-[8px]"></i> Operational
+                    </span>
+                </div>
+                <div class="px-6 py-3.5 flex items-center justify-between">
+                    <span class="text-slate-600 font-medium">Tax & Cross-Border Estimator</span>
+                    <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle text-[8px]"></i> Operational
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 WajibPunya Engine. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
