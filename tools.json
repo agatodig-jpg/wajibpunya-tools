@@ -1,9 +1,9 @@
 [
   {
-    "id": "ai-observability-tracker",
-    "title": "AI Observability Tracker",
-    "description": "Tracker for AI metrics and performance observation.",
-    "category": "Utility",
-    "scriptUrl": "/assets/js/tools/ai-observability-tracker.js"
+    "id": "auto-tool",
+    "title": "auto-tool",
+    "description": "Utility tool for automated data security and client-side processing.",
+    "category": "Security Utility",
+    "scriptUrl": "/assets/js/tools/auto-tool.js"
   }
 ]
