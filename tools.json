@@ -1,34 +1,10 @@
-{
-  "tools": [
-    {
-      "id": "kalkulator-zakat-mal",
-      "title": "Kalkulator Zakat Mal",
-      "category": "Finance",
-      "description": "Hitung kewajiban zakat harta (mal) Anda secara otomatis dan akurat sesuai ketentuan nisab.",
-      "url": "/tools/kalkulator-zakat-mal",
-      "icon": "fa-solid fa-hand-holding-dollar",
-      "iconColor": "bg-emerald-50 text-emerald-600",
-      "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200"
-    },
-    {
-      "id": "kalkulator-roi-margin-dropship",
-      "title": "Kalkulator ROI & Margin Dropship",
-      "category": "E-Commerce",
-      "description": "Hitung estimasi keuntungan, profit margin, dan return on investment usaha dropship Anda.",
-      "url": "/tools/kalkulator-roi-margin-dropship",
-      "icon": "fa-solid fa-calculator",
-      "iconColor": "bg-amber-50 text-amber-600",
-      "badgeColor": "bg-amber-50 text-amber-700 border-amber-200"
-    },
-    {
-      "id": "andromeld",
-      "title": "Andromeld Utility",
-      "category": "Utilities",
-      "description": "Utilitas pemrosesan dan automasi data serbaguna berbasis browser.",
-      "url": "/tools/andromeld",
-      "icon": "fa-solid fa-microchip",
-      "iconColor": "bg-indigo-50 text-indigo-600",
-      "badgeColor": "bg-indigo-50 text-indigo-700 border-indigo-200"
-    }
-  ]
-}
+[
+  {
+    "id": "data-secure-sanitizer",
+    "title": "Data Sanitizer Tool",
+    "category": "Security Utility",
+    "scriptUrl": "/assets/js/tools/data-secure-sanitizer.js",
+    "externalLibs": [],
+    "schema": {}
+  }
+]
