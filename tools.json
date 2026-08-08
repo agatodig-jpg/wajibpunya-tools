@@ -2,8 +2,8 @@
   "tools": [
     {
       "id": "kalkulator-zakat-mal",
-      "category": "Finance",
       "title": "Kalkulator Zakat Mal",
+      "category": "Finance",
       "description": "Hitung kewajiban zakat harta (mal) Anda secara otomatis dan akurat sesuai ketentuan nisab.",
       "url": "/tools/kalkulator-zakat-mal",
       "icon": "fa-solid fa-hand-holding-dollar",
@@ -12,8 +12,8 @@
     },
     {
       "id": "kalkulator-roi-margin-dropship",
-      "category": "E-Commerce",
       "title": "Kalkulator ROI & Margin Dropship",
+      "category": "E-Commerce",
       "description": "Hitung estimasi keuntungan, profit margin, dan return on investment usaha dropship Anda.",
       "url": "/tools/kalkulator-roi-margin-dropship",
       "icon": "fa-solid fa-calculator",
@@ -22,8 +22,8 @@
     },
     {
       "id": "andromeld",
-      "category": "Utilities",
       "title": "Andromeld Utility",
+      "category": "Utilities",
       "description": "Utilitas pemrosesan dan automasi data serbaguna berbasis browser.",
       "url": "/tools/andromeld",
       "icon": "fa-solid fa-microchip",
