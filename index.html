@@ -19,13 +19,15 @@
   <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
-        <span class="text-2xl font-black tracking-tight">WajibPunya<span class="text-indigo-500">.</span></span>
+        <a href="/" class="text-2xl font-black tracking-tight text-white flex items-center gap-1">
+          WajibPunya<span class="text-indigo-500">.</span>
+        </a>
         <span class="hidden sm:inline-block bg-slate-800 text-slate-300 text-[10px] font-bold px-2.5 py-1 rounded-md tracking-widest uppercase border border-slate-700">Live Engine</span>
       </div>
       
       <div class="flex items-center space-x-4 rtl:space-x-reverse">
         <nav class="hidden md:flex space-x-6 rtl:space-x-reverse text-sm font-medium text-slate-300">
-          <a href="#" class="hover:text-white transition-colors duration-200" data-i18n="nav_dashboard">Dashboard</a>
+          <a href="/" class="hover:text-white transition-colors duration-200" data-i18n="nav_dashboard">Dashboard</a>
           <a href="/api-status.html" class="text-sm font-medium text-slate-300 hover:text-white transition">API</a>
         </nav>
 
@@ -126,9 +128,9 @@
         <p>© 2026 WajibPunya Engine. All Rights Reserved.</p>
       </div>
       <div class="flex space-x-6 rtl:space-x-reverse font-medium">
-       <a href="/privacy.html" class="hover:text-slate-900 transition">Privacy Policy</a>
-<a href="/terms.html" class="hover:text-slate-900 transition">Terms of Service</a>
-<a href="/api-status.html" class="hover:text-slate-900 transition">API Status</a>
+        <a href="/privacy.html" class="hover:text-slate-900 transition" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="/terms.html" class="hover:text-slate-900 transition" data-i18n="footer_terms">Terms of Service</a>
+        <a href="/api-status.html" class="hover:text-slate-900 transition" data-i18n="footer_status">API Status</a>
       </div>
     </div>
   </footer>
@@ -362,7 +364,7 @@
       try {
         const response = await fetch('tools.json');
         const data = await response.json();
-        allTools = data.tools;
+        allTools = data.tools || data; // Mendukung array langsung atau object { tools: [...] }
         renderTools(allTools);
       } catch (error) {
         toolsGrid.innerHTML = `<p class="text-sm text-rose-500 col-span-2">${translations[currentLang].error_load}</p>`;
@@ -378,16 +380,26 @@
 
         tools.forEach(tool => {
           const card = document.createElement('a');
-          card.href = tool.url;
+          
+          // PENYESUAIAN SINKRONISASI TEMPLATE DENGAN DYNAMIC URL
+          // Jika `tool.url` sudah disiapkan, gunakan. Jika belum, buat URL dinamis berbasis `tool.id`
+          const targetUrl = tool.url || `/tool.html?id=${tool.id}`;
+          card.href = targetUrl;
+          
           card.setAttribute('data-category', tool.category);
           card.className = "tool-card group relative bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-100 transition-all duration-300 transform hover:-translate-y-1 block";
           
+          // Nilai default styling ikon & badge jika belum tersedia di JSON
+          const badgeColor = tool.badgeColor || 'bg-indigo-50 text-indigo-700 border-indigo-200';
+          const iconColor = tool.iconColor || 'bg-indigo-50 text-indigo-600';
+          const iconClass = tool.icon || 'fa-solid fa-wrench';
+
           card.innerHTML = `
             <div class="absolute top-5 right-5 rtl:right-auto rtl:left-5">
-              <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${tool.badgeColor} rounded-md border">${tool.category}</span>
+              <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${badgeColor} rounded-md border">${tool.category}</span>
             </div>
-            <div class="w-14 h-14 ${tool.iconColor} rounded-xl flex items-center justify-center text-2xl mb-5 transition-colors duration-300">
-              <i class="${tool.icon}"></i>
+            <div class="w-14 h-14 ${iconColor} rounded-xl flex items-center justify-center text-2xl mb-5 transition-colors duration-300">
+              <i class="${iconClass}"></i>
             </div>
             <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">${tool.title}</h3>
             <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed">${tool.description}</p>
@@ -401,7 +413,7 @@
 
         const filtered = allTools.filter(tool => {
           const matchesQuery = tool.title.toLowerCase().includes(query) || tool.description.toLowerCase().includes(query);
-          const matchesCategory = currentCategory === 'all' || tool.category === currentCategory;
+          const matchesCategory = currentCategory === 'all' || tool.category.toLowerCase() === currentCategory.toLowerCase();
           return matchesQuery && matchesCategory;
         });
 
