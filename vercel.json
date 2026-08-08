@@ -1,7 +1,12 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/tool",
+      "destination": "/tool-template.html"
+    },
+    {
+      "source": "/tool.html",
       "destination": "/tool-template.html"
     }
   ]
