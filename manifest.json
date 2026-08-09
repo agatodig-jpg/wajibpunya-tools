@@ -1,45 +1,45 @@
 [
   {
-    "id": "basedash-sub-tracker",
-    "category": "Productivity",
-    "scriptUrl": "assets/js/tools/basedash-sub-tracker.js",
-    "htmlUrl": "tools/basedash-sub-tracker.html",
-    "icon": "fa-solid fa-clock-rotate-left",
+    "id": "shootclip-ai-editor",
+    "category": "Media Processing",
+    "scriptUrl": "assets/js/tools/shootclip-ai-editor.js",
+    "htmlUrl": "tools/shootclip-ai-editor.html",
+    "icon": "fa-solid fa-calculator",
     "externalLibs": [
-      "https://cdn.tailwindcss.com"
+      "https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/umd/index.min.js"
     ],
     "i18n": {
       "en": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Unit Calculator",
+        "description": "Quickly convert values between various units of measurement."
       },
       "es": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Unit Calculator",
+        "description": "Quickly convert values between various units of measurement."
       },
       "de": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Unit Calculator",
+        "description": "Quickly convert values between various units of measurement."
       },
       "fr": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Unit Calculator",
+        "description": "Quickly convert values between various units of measurement."
       },
       "pt": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Unit Calculator",
+        "description": "Quickly convert values between various units of measurement."
       },
       "ja": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Unit Calculator",
+        "description": "Quickly convert values between various units of measurement."
       },
       "ar": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Unit Calculator",
+        "description": "Quickly convert values between various units of measurement."
       },
       "id": {
-        "title": "Basedash Subscription Manager",
-        "description": "Manages subscriptions and tracks next delivery dates."
+        "title": "Kalkulator Unit",
+        "description": "Konversikan nilai antar berbagai unit pengukuran dengan cepat."
       }
     }
   }
