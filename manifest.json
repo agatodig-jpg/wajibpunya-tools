@@ -1,110 +1,45 @@
 [
   {
-    "id": "har-agent-harness-configurator",
-    "category": "Developer Tools",
-    "scriptUrl": "assets/js/tools/har-agent-harness-configurator.js",
+    "id": "basedash-sub-tracker",
+    "category": "Productivity",
+    "scriptUrl": "assets/js/tools/basedash-sub-tracker.js",
+    "htmlUrl": "tools/basedash-sub-tracker.html",
+    "icon": "fa-solid fa-clock-rotate-left",
     "externalLibs": [
-      "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"
+      "https://cdn.tailwindcss.com"
     ],
     "i18n": {
       "en": {
-        "title": "HAR Agent Workflow Visualizer",
-        "description": "Browser-based automated utility tool."
-      },
-      "id": {
-        "title": "HAR Agent Workflow Visualizer",
-        "description": "Browser-based automated utility tool."
-      }
-    },
-    "schema": {
-      "icon": "fa-solid fa-wrench",
-      "fields": [
-        {
-          "name": "agent_names",
-          "type": "text",
-          "label": "agent_names"
-        },
-        {
-          "name": "roles",
-          "type": "text",
-          "label": "roles"
-        },
-        {
-          "name": "workflow_steps",
-          "type": "text",
-          "label": "workflow_steps"
-        },
-        {
-          "name": "connection_types",
-          "type": "text",
-          "label": "connection_types"
-        }
-      ]
-    },
-    "guide": {
-      "en": {
-        "steps": [
-          "Step 1: Enter the required tool specification details or upload your dynamic form schema file.",
-          "Step 2: Input the field definitions including data types and validation rules into the provided editor.",
-          "Step 3: Click 'Render' to generate a preview of how the micro-tool will display inputs."
-        ],
-        "tips": "Tip: Ensure all input fields match the defined keys exactly for proper rendering. Valid JSON format is mandatory in all steps above."
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       },
       "es": {
-        "steps": [
-          "Paso 1: Ingresa los detalles de la especificación de la herramienta o carga el archivo del esquema del formulario dinámico.",
-          "Paso 2: Introduce las definiciones de campo, incluidos tipos de datos y reglas de validación en el editor proporcionado.",
-          "Paso 3: Haz clic en 'Renderizar' para generar una vista previa de cómo mostrará la micro-herramienta los inputs."
-        ],
-        "tips": "Consejo: Asegúrate de que todos los campos de entrada coincidan con las claves definidas exactamente. El formato JSON válido es obligatorio en todos los pasos anteriores."
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       },
       "de": {
-        "steps": [
-          "Schritt 1: Geben Sie die erforderlichen Tool-Spezifikationen ein oder laden Sie Ihre dynamische Formularschema-Datei hoch.",
-          "Schritt 2: Integrieren Sie Felddefinitionen, einschließlich Datentypen und Validierungsregeln in den bereitgestellten Editor.",
-          "Schritt 3: Klicken Sie auf 'Rendern', um einen Vorschau zu generieren, wie das Micro-Tool die Eingaben anzeigt."
-        ],
-        "tips": "Hinweis: Stellen Sie sicher, dass alle Eingabefelder genau den definierten Keys entsprechen. JSON-gültiges Format ist in allen Schritten zwingend erforderlich."
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       },
       "fr": {
-        "steps": [
-          "Étape 1 : Entrez les détails de la spécification d'outil ou téléchargez votre fichier de schéma de formulaire dynamique.",
-          "Étape 2 : Saisissez les définitions des champs, y compris types de données et règles de validation dans l'éditeur fourni.",
-          "Étape 3 : Cliquez sur 'Rendrir' pour générer une prévisualisation de la façon dont la micro-outil affichera les entrées."
-        ],
-        "tips": "Astuce : Assurez-vous que tous les champs d'entrée correspondent exactement aux clés définies. Le format JSON valide est obligatoire dans toutes les étapes ci-dessus."
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       },
       "pt": {
-        "steps": [
-          "Passo 1: Digite os detalhes de especificação da ferramenta ou faça o upload do arquivo de esquema de formulário dinâmico.",
-          "Passo 2: Insira as definições dos campos, incluindo tipos de dados e regras de validação no editor fornecido.",
-          "Passo 3: Clique em 'Renderizar' para gerar uma prévia de como a micro-ferramenta exibirá os inputs."
-        ],
-        "tips": "Dica: Certifique-se de que todos os campos de entrada correspondam exatamente às chaves definidas. Formato JSON válido é obrigatório em todas as etapas acima."
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       },
       "ja": {
-        "steps": [
-          "手順 1：ツール仕様の詳細を入力するか、動的フォームスキーマファイルをアップロードします。",
-          "手順 2：定義されたエディタにデータタイプとバリデーションルールを含むフィールドの定義を入力します。",
-          "手順 3: 'レンダリング'ボタンをクリックして、マイクロツールの入力がどのように表示されるかのプレビューを生成します。"
-        ],
-        "tips": "ヒント：すべての入力フィールドが正確に定義されたキーと一致していることを確認してください。上記の全ステップで有効な JSON 形式が必要です。"
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       },
       "ar": {
-        "steps": [
-          "الخطوة 1: أدخل تفاصيل مواصفات الأداة أو قم بتحميل ملف مخطط النموذج الديناميكي الخاص بك.",
-          "الخطوة 2: أدخل تعريفات الحقول، بما في ذلك أنواع البيانات وقواعد التحقق داخل المحرر الموفر.",
-          "الخطوة 3: انقر على 'Render' لتوليد معاينة لكيفية عرض الأداة الدقيقة للمدخلات."
-        ],
-        "tips": "نصيحة : تأكد من مطابقة جميع حقول الإدخال مع المفاتيح المحددة بدقة. صيغة JSON السليمة إلزامية في جميع الخطوات المذكورة أعلاه."
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       },
       "id": {
-        "steps": [
-          "Langkah 1: Masukkan detail spesifikasi alat atau unggah file skema formulir dinamis Anda.",
-          "Langkah 2: Masukkan definisi field, termasuk jenis data dan aturan validasi ke editor yang disediakan.",
-          "Langkah 3: Klik 'Render' untuk menghasilkan pratinjau bagaimana mikro-alat akan menampilkan input."
-        ],
-        "tips": "Tips : Pastikan semua bidang input sesuai dengan kunci yang didefinisikan secara persis. Format JSON yang sah adalah wajib di semua langkah di atas."
+        "title": "Basedash Subscription Manager",
+        "description": "Manages subscriptions and tracks next delivery dates."
       }
     }
   }
