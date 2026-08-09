@@ -1,117 +1,46 @@
 [
   {
-    "id": "text-transformer-v2",
-    "category": "Text Tools",
-    "scriptUrl": "/assets/js/tools/text-transformer-v2.js",
-    "externalLibs": [],
+    "id": "progress-ai-observability",
+    "category": "AI Tooling & Monitoring",
+    "scriptUrl": "/assets/js/tools/progress-ai-observability.js",
+    "externalLibs": [
+      "https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
+    ],
     "i18n": {
       "en": {
-        "title": "Text Case Transformer v2",
-        "description": "Transform text between different cases (uppercase, lowercase, title case) with character and word frequency analysis."
+        "title": "Progress AI Observability Dashboard",
+        "description": "Parse incoming JSONL trace logs to extract latency, status codes (success/error), and token usage metrics with ECharts visualization."
       },
       "es": {
-        "title": "Transformador de Texto V2",
-        "description": "Convierta texto entre diferentes casos mayúsculas/minusculas con análisis de frecuencia y conteo de palabras."
+        "title": "Panel de Supervisión IA Progress",
+        "description": "Analizar registros en formato JSONL para extraer latencia y códigos de estado con visualización gráfica."
       },
       "de": {
-        "title": "Text-Kasten-Transformer V2",
-        "description": "Verwandeln Sie Text zwischen verschiedenen Fällen (groß, klein, Titel) mit Zeichen- und Wortfrequenzanalyse."
+        "title": "AI Observability Dashboard von Progress AI",
+        "description": "JSONL-Protokolle analysieren, Latenzzeiten und Statuscodes extrahieren mit Charts."
       },
       "fr": {
-        "title": "Transformateur Texte v2",
-        "description": "Transformez le texte entre différents cas avec analyse de fréquence et comptage de mots."
+        "title": "Tableau de Bord d\\'Observabilité IA Progress",
+        "description": "Analyser les journaux JSONL pour extraire la latence et l\\'utilisation des tokens."
       },
       "pt": {
-        "title": "Transformador de Texto V2",
-        "description": "Transforme texto entre diferentes casos com análise de frequência e contagem de palavras."
+        "title": "Painel Observabilidade AI Progress",
+        "description": "Analisar logs em formato JSONL para extrair métricas de desempenho e status."
       },
       "ja": {
-        "title": "テキストケース変換器 v2",
-        "description": "異なる文字列形式 (大、小、タイトル) 間の変換および頻度分析を行います。"
+        "title": "Progress AI 観測ダッシュボード",
+        "description": "JSONLトレースログを解析し、レイテンシとステータスコードを検出します。"
       },
       "ar": {
-        "title": "محول حالة النص V2",
-        "description": "قم بتحويل النص بين الحالات المختلفة وتحليل تكرار الكلمات."
+        "title": "لوحة مراقبة الذكاء الاصطناعي Progress AI",
+        "description": "تحليل سجلات التتبع بصيغة JSONL لاستخراج أوقات الاستجابة وحالة الطلب."
       },
       "id": {
-        "title": "Transformer Teks v2",
-        "description": "Transformasikan teks antar kasus dengan analisis frekuensi dan penghitung kata."
+        "title": "Papan Pengamatan Observabilitas IA Progress",
+        "description": "Analisis log jejak dalam format JSONL untuk mengekstrak latensi dan kode status dengan visualisasi grafik."
       }
     },
     "schema": {},
-    "guide": {
-      "en": {
-        "steps": [
-          "Open the tool in your preferred text editor.",
-          "Enter the inputText you want to transform into the configuration object.",
-          "Specify targetCase as 'upper', 'lower', or 'title'.",
-          "Execute executeTool() with the inputs parameter."
-        ],
-        "tips": "Use lowercase for better readability, uppercase for headers. Title case works well for proper nouns and sentences."
-      },
-      "es": {
-        "steps": [
-          "Abra la herramienta en su editor de texto.",
-          "Ingrese el inputText que desea transformar en objeto configuración.",
-          "Especifique targetCase como 'upper', 'lower' o 'title'.",
-          "Execute executeTool() con parámetro inputs."
-        ],
-        "tips": "Use minúsculas para mejor legibilidad, mayúsculas para encabezados."
-      },
-      "de": {
-        "steps": [
-          "Öffnen Sie die Tool in Ihrem Texteditor.",
-          "Geben Sie den inputText ein im Konfigurationsobjekt.",
-          "Wählen targetCase 'upper', 'lower' oder 'title'.",
-          "Führen Sie executeTool() mit inputs aus."
-        ],
-        "tips": "Verwenden Sie Kleinbuchstaben für bessere Lesbarkeit, Großbuchstaben für Überschriften."
-      },
-      "fr": {
-        "steps": [
-          "Ouvrez loutil dans votre éditeur.",
-          "Entrez le texte à transformer.",
-          "Spécifiez targetCase appropriée.",
-          "Exécuter executeTool()."
-        ],
-        "tips": "Uppercase pour les titres, lowercase pour lecture facile."
-      },
-      "pt": {
-        "steps": [
-          "Abra a ferramenta no editor de texto.",
-          "Digite o inputText desejado na configuração.",
-          "Especifique targetCase como 'upper', 'lower' ou 'title'.",
-          "Execute executeTool() com parâmetro inputs."
-        ],
-        "tips": "Use maiúsculo para títulos, minúsculo para melhor leitura."
-      },
-      "ja": {
-        "steps": [
-          "テキストエディタでツールを開きます。",
-          "変換したい inputText を入力します。",
-          "targetCase に 'upper', 'lower', および 'title' を指定。",
-          "executeTool() 関数を実行してパラメータを渡す。"
-        ],
-        "tips": "読みやすさのために小文字、見出しには大文字を使用してください。"
-      },
-      "ar": {
-        "steps": [
-          "افتح الأداة في محرر النص الخاص بك.",
-          "أدخل النص المطلوب التحويل.",
-          "حدد حالة الهدف المناسبة.",
-          "انفذ executeTool()."
-        ],
-        "tips": "استخدم الأحرف الكبيرة للعناوين والأصغر للقراءة السهلة."
-      },
-      "id": {
-        "steps": [
-          "Buka alat di editor teks Anda yang dipilih.",
-          "Masukkan inputText untuk diubah dalam objek konfigurasi.",
-          "Spesifikasi targetCase sebagai 'upper', 'lower' atau 'title'.",
-          "Jalankan executeTool() dengan parameter inputs."
-        ],
-        "tips": "Gunakan huruf kecil untuk keterbacaan, kapital untuk judul."
-      }
-    }
+    "guide": {}
   }
 ]
