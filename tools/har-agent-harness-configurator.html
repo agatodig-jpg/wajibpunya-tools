@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAR Agent Workflow Visualizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-6 flex flex-col justify-center items-center">
+    <main class="w-full max-w-2xl bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-700">
+        <div class="mb-6 border-b border-slate-700 pb-4">
+            <h1 class="text-2xl font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-wrench"></i> HAR Agent Workflow Visualizer
+            </h1>
+            <p class="text-slate-400 text-sm">Browser-based automated utility tool.</p>
+        </div>
+
+        <form id="toolForm" onsubmit="handleExecute(event)" class="space-y-5">
+            <div id="app" class="space-y-4"></div>
+            <button type="submit" id="btnSubmit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-lg transition duration-200 shadow-lg shadow-indigo-500/20 flex justify-center items-center gap-2">
+                <span>Jalankan Tool</span>
+            </button>
+        </form>
+
+        <div id="resultBox" class="mt-6 hidden p-4 bg-slate-950 rounded-lg border border-slate-700">
+            <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Hasil Eksekusi:</h3>
+            <pre id="resultOutput" class="text-sm text-green-400 overflow-x-auto whitespace-pre-wrap font-mono"></pre>
+        </div>
+    </main>
+
+    <script src="../assets/js/tools/har-agent-harness-configurator.js"></script>
+
+    <script>
+        const schemaFields = [{"name":"agent_names","type":"text","label":"agent_names"},{"name":"roles","type":"text","label":"roles"},{"name":"workflow_steps","type":"text","label":"workflow_steps"},{"name":"connection_types","type":"text","label":"connection_types"}];
+
+        function renderForm() {
+            const container = document.getElementById('app');
+            if (!schemaFields || schemaFields.length === 0) {
+                container.innerHTML = '<p class="text-slate-400 text-xs italic">Tool ini dapat dijalankan langsung tanpa parameter input.</p>';
+                return;
+            }
+
+            container.innerHTML = schemaFields.map(f => {
+                const label = f.label || f.label_id || f.label_en || f.name;
+                const ph = f.placeholder ? `placeholder="${f.placeholder}"` : '';
+                const req = f.required !== false ? 'required' : '';
+
+                if (f.type === 'select' && f.options) {
+                    const opts = f.options.map(o => {
+                        const val = typeof o === 'object' ? o.value : o;
+                        const lbl = typeof o === 'object' ? (o.label || o.value) : o;
+                        return `<option value="${val}">${lbl}</option>`;
+                    }).join('');
+                    return `<div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">${label}</label>
+                        <select name="${f.name}" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none" ${req}>${opts}</select>
+                    </div>`;
+                }
+
+                if (f.type === 'textarea') {
+                    return `<div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">${label}</label>
+                        <textarea name="${f.name}" rows="3" ${ph} class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none" ${req}></textarea>
+                    </div>`;
+                }
+
+                return `<div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1.5">${label}</label>
+                    <input type="${f.type || 'text'}" name="${f.name}" ${ph} class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none" ${req} />
+                </div>`;
+            }).join('');
+        }
+
+        async function handleExecute(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            const resBox = document.getElementById('resultBox');
+            const resOut = document.getElementById('resultOutput');
+            
+            const formData = new FormData(e.target);
+            const inputs = {};
+            formData.forEach((value, key) => inputs[key] = value);
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Memproses...</span>';
+
+            try {
+                if (typeof executeTool !== 'function') throw new Error('Fungsi executeTool() tidak ditemukan pada file JS engine.');
+                const res = await executeTool(inputs);
+                resBox.classList.remove('hidden');
+                
+                if (typeof res === 'object') {
+                    resOut.innerText = JSON.stringify(res.result !== undefined ? res.result : res, null, 2);
+                } else {
+                    resOut.innerText = String(res);
+                }
+            } catch (err) {
+                resBox.classList.remove('hidden');
+                resOut.innerText = 'Error: ' + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>Jalankan Tool</span>';
+            }
+        }
+
+        renderForm();
+    </script>
+</body>
+</html>
