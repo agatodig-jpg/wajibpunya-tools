@@ -1,44 +1,120 @@
 [
   {
-    "id": "crew-agent-manager",
-    "category": "AI_AGENT_CONFIGURATION",
-    "scriptUrl": "/assets/js/tools/crew-agent-manager.js",
+    "id": "basedash-subscriptions-manager",
+    "category": "Automation & Scheduling",
+    "scriptUrl": "assets/js/tools/basedash-subscriptions-manager.js",
     "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "Crew Agent Manager",
-        "description": "Create and manage AI agent personas for local CLI automation without backend dependencies."
+        "title": "Basedash Subscriptions Manager",
+        "description": "Manage dashboard subscriptions with automated scheduling and notifications"
       },
       "es": {
-        "title": "Gestor de Agentes Crew",
-        "description": "Crear y gestionar personalidades de agentes IA para automatización CLI local sin dependencias de servidor."
+        "title": "Gestor de Suscripciones Basedash",
+        "description": "Administrar suscripciones de panel con programación automatizada y notificaciones"
       },
       "de": {
-        "title": "Crew-Agenten-Manager",
-        "description": "Erstellen und verwalten von KI-Agent-Personas für lokale CLI-Automatisierung ohne Backend-Abhängigkeiten."
+        "title": "Basis-Abonnements Manager",
+        "description": "Verwalten von Dashboard-Abonnements mit automatischer Planung und Benachrichtigungen"
       },
       "fr": {
-        "title": "Gestionnaire d'Agents Crew",
-        "description": "Créer et gérer des personnalités d'agents IA pour l'automatisation CLI locale sans dépendances backend."
+        "title": "Gestionnaire d'abonnements Basedash",
+        "description": "Gérer les abonnements de tableau de bord avec programmation et notifications automatiques"
       },
       "pt": {
-        "title": "Gerente de Agentes da Tripulação",
-        "description": "Criar e gerenciar personalidades de agentes IA para automação CLI local sem dependências de servidor."
+        "title": "Gerenciador de Assinaturas Basedash",
+        "description": "Gerenciar assinaturas de painel com programação automática e notificações"
       },
       "ja": {
-        "title": "Crewエージェントマネージャー",
-        "description": "ローカルCLI自動化のためのAIエージェントパーソナリティを作成・管理する、バックエンド依存なし。"
+        "title": "Basedash サブスクリプションマネージャー",
+        "description": "自動スケジュールと通知でダッシュボードの購読を管理します"
       },
       "ar": {
-        "title": "مدير وكلاء الطاقم",
-        "description": "إنشاء وإدارة شخصيات وكلاء الذكاء الاصطناعي للآلية المحلية CLI بدون اعتمادات على الخلفية."
+        "title": "مدير مشتركي Basedash",
+        "description": "إدارة اشتراكات لوحة القيادة مع جدولة تلقائية وإشعارات"
       },
       "id": {
-        "title": "Manajer Agen Crew",
-        "description": "Buat dan kelola persona agen AI untuk otomatisasi CLI lokal tanpa ketergantungan backend."
+        "title": "Manajer Langganan Basedash",
+        "description": "Kelola langganan dashboard dengan penjadwalan otomatis dan pemberitahuan"
       }
     },
-    "schema": {},
-    "guide": {}
+    "schema": {
+      "icon": "fa-solid fa-calendar-check",
+      "fields": []
+    },
+    "guide": {
+      "en": {
+        "steps": [
+          "Step 1: Enter Dashboard URL to set up the subscription source.",
+          "Step 2: Choose schedule frequency (hourly/daily/weekly) for next delivery calculation.",
+          "Step 3: Provide notification endpoint email or webhook URL if applicable.",
+          "Step 4: Submit to generate embed config and alert link."
+        ],
+        "tips": "Tip: Notification endpoints must include @ symbol for mailto links, otherwise a generic webhook format is used. All timestamps are calculated relative to current time at execution."
+      },
+      "es": {
+        "steps": [
+          "Paso 1: Ingresa la URL del Panel para configurar el origen de suscripción.",
+          "Paso 2: Elige frecuencia (cada hora/día/semana) para calcular próxima entrega.",
+          "Paso 3: Proporciona email o webhook URL de notificaciones si aplica.",
+          "Paso 4: Envía para generar configuración y enlace alerta."
+        ],
+        "tips": "Tips: Puntos finales deben incluir @ para enlaces mailto, si no se usa formato genérico. Todos los timestamps son relativos a hora actual al momento de ejecución."
+      },
+      "de": {
+        "steps": [
+          "Schritt 1: Geben Sie die Dashboard-URL ein.",
+          "Schritt 2: Wählen Sie Frequenz (stündlich/täglich/wöchentlich).",
+          "Schritt 3: Bereitstellung Benachrichtigungs-Endpoint.",
+          "Schritt 4: Absenden zur Generierung."
+        ],
+        "tips": "Hinweis: Endpunkte müssen @ für mailto enthalten, sonst wird Webhook verwendet. Alle Zeitstempel relativ zu aktueller Ausführungszeit berechnet."
+      },
+      "fr": {
+        "steps": [
+          "Étape 1 : Entrez l'URL du tableau de bord.",
+          "Étape 2 : Choisissez la fréquence (heure/jour/semaine).",
+          "Étape 3 : Fournissez le point de notification.",
+          "Étape 4 : Soumettez pour générer."
+        ],
+        "tips": "Astuce : Les endpoints doivent inclure @ pour mailto, sinon format webhook. Tous les timestamps calculés relatifs au temps d'exécution actuel."
+      },
+      "pt": {
+        "steps": [
+          "Passo 1: Insira URL do Painel.",
+          "Passo 2: Escolha frequência (hora/dia/semana).",
+          "Passo 3: Forneça ponto de notificação se aplicável.",
+          "Passo 4: Envie para gerar config."
+        ],
+        "tips": "Dica: Pontos devem incluir @ para mailto. Timestamps calculados relativos ao tempo atual."
+      },
+      "ja": {
+        "steps": [
+          "ステップ1：ダッシュボードURLを入力。",
+          "ステップ2：スケジュール頻度を指定（毎時間/日/週間）。",
+          "ステップ3：通知エンドポイントを提供（オプション）.",
+          "ステップ4：埋め込み設定を生成して送信する。"
+        ],
+        "tips": "ヒント：通知ポイントは@を含む必要がありますが、そうでない場合は汎用フォーマットを使用します。すべてのタイムスタンプは実行時の現在の時刻に対して相対計算されます。"
+      },
+      "ar": {
+        "steps": [
+          "الخطوة 1: أدخل عنوان لوحة التحكم.",
+          "الخطوة 2: اختر التكرار (ساعة/يوم/أسبوع).",
+          "الخطوة 3: قدم نقطة الإشعار إذا لزم الأمر.",
+          "الخطوة 4: أرسل لتوليد الرابط."
+        ],
+        "tips": "ملاحظة: يجب أن تحتوي نقاط الإشعار على @ للروابط البريدية، وإلا سيتم استخدام تنسيق webHook عام. جميع الأوقات محسوبة بالنسبة للوقت الحالي وقت التنفيذ."
+      },
+      "id": {
+        "steps": [
+          "Langkah 1: Masukkan URL Dashboard.",
+          "Langkah 2: Pilih frekuensi (jam/hari/minggu).",
+          "Langkah 3: Berikan titik notifikasi jika diperlukan.",
+          "Langkah 4: Kirim untuk menghasilkan konfigurasi."
+        ],
+        "tips": "Tips: Titik notifikasi harus menyertakan @ untuk tautan mailto, jika tidak akan digunakan format webhook umum. Semua timestamp dihitung relatif terhadap waktu saat eksekusi."
+      }
+    }
   }
 ]
