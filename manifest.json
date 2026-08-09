@@ -1,43 +1,41 @@
 [
   {
-    "id": "progress-ai-observability",
-    "category": "AI Tooling & Monitoring",
-    "scriptUrl": "/assets/js/tools/progress-ai-observability.js",
-    "externalLibs": [
-      "https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
-    ],
+    "id": "crew-agent-manager",
+    "category": "AI_AGENT_CONFIGURATION",
+    "scriptUrl": "/assets/js/tools/crew-agent-manager.js",
+    "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "Progress AI Observability Dashboard",
-        "description": "Parse incoming JSONL trace logs to extract latency, status codes (success/error), and token usage metrics with ECharts visualization."
+        "title": "Crew Agent Manager",
+        "description": "Create and manage AI agent personas for local CLI automation without backend dependencies."
       },
       "es": {
-        "title": "Panel de Supervisión IA Progress",
-        "description": "Analizar registros en formato JSONL para extraer latencia y códigos de estado con visualización gráfica."
+        "title": "Gestor de Agentes Crew",
+        "description": "Crear y gestionar personalidades de agentes IA para automatización CLI local sin dependencias de servidor."
       },
       "de": {
-        "title": "AI Observability Dashboard von Progress AI",
-        "description": "JSONL-Protokolle analysieren, Latenzzeiten und Statuscodes extrahieren mit Charts."
+        "title": "Crew-Agenten-Manager",
+        "description": "Erstellen und verwalten von KI-Agent-Personas für lokale CLI-Automatisierung ohne Backend-Abhängigkeiten."
       },
       "fr": {
-        "title": "Tableau de Bord d\\'Observabilité IA Progress",
-        "description": "Analyser les journaux JSONL pour extraire la latence et l\\'utilisation des tokens."
+        "title": "Gestionnaire d'Agents Crew",
+        "description": "Créer et gérer des personnalités d'agents IA pour l'automatisation CLI locale sans dépendances backend."
       },
       "pt": {
-        "title": "Painel Observabilidade AI Progress",
-        "description": "Analisar logs em formato JSONL para extrair métricas de desempenho e status."
+        "title": "Gerente de Agentes da Tripulação",
+        "description": "Criar e gerenciar personalidades de agentes IA para automação CLI local sem dependências de servidor."
       },
       "ja": {
-        "title": "Progress AI 観測ダッシュボード",
-        "description": "JSONLトレースログを解析し、レイテンシとステータスコードを検出します。"
+        "title": "Crewエージェントマネージャー",
+        "description": "ローカルCLI自動化のためのAIエージェントパーソナリティを作成・管理する、バックエンド依存なし。"
       },
       "ar": {
-        "title": "لوحة مراقبة الذكاء الاصطناعي Progress AI",
-        "description": "تحليل سجلات التتبع بصيغة JSONL لاستخراج أوقات الاستجابة وحالة الطلب."
+        "title": "مدير وكلاء الطاقم",
+        "description": "إنشاء وإدارة شخصيات وكلاء الذكاء الاصطناعي للآلية المحلية CLI بدون اعتمادات على الخلفية."
       },
       "id": {
-        "title": "Papan Pengamatan Observabilitas IA Progress",
-        "description": "Analisis log jejak dalam format JSONL untuk mengekstrak latensi dan kode status dengan visualisasi grafik."
+        "title": "Manajer Agen Crew",
+        "description": "Buat dan kelola persona agen AI untuk otomatisasi CLI lokal tanpa ketergantungan backend."
       }
     },
     "schema": {},
