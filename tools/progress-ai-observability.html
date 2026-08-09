@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROGRESS AI OBSERVABILITY DASHBOARD - Free Online Tool</title>
+    <meta name="description" content="Parse incoming JSONL trace logs to extract latency, status codes (success/error), and token usage metrics with ECharts visualization.">
+    <link rel="stylesheet" href="[https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css](https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css)">
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css)">
+</head>
+<body class="bg-slate-900 text-slate-100 p-6 min-h-screen flex flex-col justify-center items-center">
+    <main class="w-full max-w-3xl bg-slate-800 p-8 rounded-xl shadow-2xl border border-slate-700">
+        <h1 id="tool-title" class="text-3xl font-extrabold mb-2 text-indigo-400">PROGRESS AI OBSERVABILITY DASHBOARD</h1>
+        <p id="tool-desc" class="text-slate-400 mb-6">Parse incoming JSONL trace logs to extract latency, status codes (success/error), and token usage metrics with ECharts visualization.</p>
+        
+        <div id="app-container" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-2 text-slate-300">Input Data / Text</label>
+                <textarea id="inputText" class="w-full h-36 p-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-indigo-500 font-mono text-sm" placeholder="Enter input here..."></textarea>
+            </div>
+            
+            <button onclick="runProcess()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 rounded-lg font-bold text-white transition duration-200 shadow-md">Execute Tool</button>
+
+            <div>
+                <label class="block text-sm font-medium mb-2 text-slate-300">Output Result</label>
+                <textarea id="outputText" readonly class="w-full h-36 p-3 bg-slate-900/60 border border-slate-700 rounded-lg text-emerald-400 font-mono text-sm" placeholder="Result will appear here..."></textarea>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/tools/progress-ai-observability.js"></script>
+    <script>
+        async function runProcess() {
+            const inputVal = document.getElementById('inputText').value;
+            const outputEl = document.getElementById('outputText');
+            if (typeof executeTool === 'function') {
+                try {
+                    const result = await executeTool({ inputText: inputVal, input: inputVal });
+                    outputEl.value = typeof result === 'object' ? JSON.stringify(result, null, 2) : result;
+                } catch (e) {
+                    outputEl.value = 'Execution Error: ' + e.message;
+                }
+            } else {
+                outputEl.value = 'Processing Output:
+' + inputVal;
+            }
+        }
+    </script>
+</body>
+</html>
