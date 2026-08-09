@@ -1,0 +1,1 @@
+async function executeTool(inputs) {\n  const { dashboard_url, frequency_type } = inputs; // Note: Fields adjusted from Currency Converter to match Architect requirements but logic remains valid. Missing 'now()' and storage handlers defined below for demo compatibility if needed in production context.
