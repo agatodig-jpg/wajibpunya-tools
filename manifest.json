@@ -1,112 +1,90 @@
 [
   {
-    "id": "glm-53-code-sanitizer",
-    "category": "FORM_CONVERTER",
-    "scriptUrl": "assets/js/tools/glm-53-code-sanitizer.js",
-    "externalLibs": [],
+    "id": "talvo-local-tracker",
+    "category": "Financial Utility",
+    "scriptUrl": "assets/js/tools/talvo-local-tracker.js",
+    "externalLibs": [
+      "https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"
+    ],
     "i18n": {
       "en": {
-        "title": "Currency Converter",
-        "description": "Convert amounts between different global currencies."
+        "title": "Talvo Local Expense Analyzer",
+        "description": "Analyze local CSV expense data without server requests."
       },
       "es": {
-        "title": "Conversor de Moneda",
-        "description": "Convierte cantidades entre diferentes monedas globales."
+        "title": "Analizador de Gastos Talvo Local",
+        "description": "Analice datos de gastos CSV locales sin solicitudes al servidor."
       },
       "de": {
-        "title": "Währungsumrechner",
-        "description": "Konvertieren Sie Beträge zwischen verschiedenen globalen Währungen."
+        "title": "Talvo Local Ausgaben Analyzer",
+        "description": "Analysieren Sie lokale CSV-Ausgaben-Data ohne Serveranfragen."
       },
       "fr": {
-        "title": "Convertisseur de devises",
-        "description": "Convertissez des montants entre différentes devises mondiales."
+        "title": "Analyseur de Dépenses Talvo Local",
+        "description": "Analysez les données de dépenses CSV locales sans requêtes serveur."
       },
       "pt": {
-        "title": "Conversor de Moedas",
-        "description": "Converta valores entre diferentes moedas globais."
+        "title": "Analizador de Gastos Talvo Local",
+        "description": "Analise dados locais de despesas CSV sem solicitações ao servidor."
       },
       "ja": {
-        "title": "通貨換算機",
-        "description": "異なる世界の通貨間で金額を換算します。"
+        "title": "Talvo ローカル費用分析器",
+        "description": "サーバーリクエストなしでローカルCSV支出データを分析します。"
       },
       "ar": {
-        "title": "محول العملات",
-        "description": "تحويل المبالغ بين العملات العالمية المختلفة."
+        "title": "محلل المصروفات المحلي تالفو",
+        "description": "قم بتحليل بيانات مصاريف CSV المحلية دون طلبات خادم."
       },
       "id": {
-        "title": "Konverter Mata Uang",
-        "description": "Konversikan jumlah antara berbagai mata uang global."
+        "title": "Penganalisis Pengeluaran Talvo Lokal",
+        "description": "Analisis data pengeluaran CSV lokal tanpa permintaan server."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-money-bill-1",
+      "icon": "fa-solid fa-calculator",
       "fields": [
         {
-          "name": "amount",
+          "name": "input_key",
           "type": "number",
           "label": {
-            "en": "Amount",
-            "es": "Cantidad",
-            "de": "Betrag",
-            "fr": "Montant",
-            "pt": "Valor",
-            "ja": "金額",
-            "ar": "المبلغ",
-            "id": "Jumlah"
+            "en": "Label",
+            "es": "Etiqueta",
+            "de": "Beschriftung",
+            "fr": "Étiquette",
+            "pt": "Rótulo",
+            "ja": "ラベル",
+            "ar": "التسمية",
+            "id": "Label"
           },
-          "placeholder": "0.00"
-        },
-        {
-          "name": "from_currency",
-          "type": "select",
-          "label": {
-            "en": "From Currency",
-            "es": "Moneda Origen",
-            "de": "Ausgangswährung",
-            "fr": "Devise Source",
-            "pt": "Moeda de Origem",
-            "ja": "元通貨",
-            "ar": "العملة الأصلية",
-            "id": "Mata Uang Asal"
-          }
-        },
-        {
-          "name": "to_currency",
-          "type": "select",
-          "label": {
-            "en": "To Currency",
-            "es": "Moneda Destino",
-            "de": "Zielwährung",
-            "fr": "Devise Destination",
-            "pt": "Moeda de Destino",
-            "ja": "変換先通貨",
-            "ar": "العملة الهدف",
-            "id": "Mata Uang Tujuan"
-          }
+          "placeholder": "100"
         }
       ]
     },
     "guide": {
       "en": {
         "steps": [
-          "Enter the numerical value you wish to convert into the 'Amount' field.",
-          "Select your current currency from the dropdown menu labeled 'From Currency'.",
-          "Choose the target currency from the options listed in the 'To Currency' dropdown."
+          "Open the tool by clicking on it or searching from the toolbox.",
+          "Paste your CSV data into the input field labeled 'CSV Data'.",
+          "Specify a start date and an end date to filter transactions within a range.",
+          "Click the calculate button to process your input.",
+          "View the summary table and spending statistics below.",
+          "Use the reset function to clear all fields and start over."
         ],
-        "tips": "Ensure both amount and currency selections are accurate for reliable conversion rates. The result updates automatically upon changing values or currencies."
+        "tips": "For accurate calculations, ensure you enter valid CSV data. Use consistent date formats (YYYY-MM-DD). Ensure amount columns are numeric."
       },
       "id": {
         "steps": [
-          "Masukkan nilai numerik yang ingin Anda konversi ke dalam kolom 'Jumlah'.",
-          "Pilih mata uang saat ini dari menu dropdown berlabel 'Mata Uang Asal'.",
-          "Pilih mata uang tujuan dari opsi yang tercantum di dropdown 'Mata Uang Tujuan'."
+          "Buka alat ini dengan mengkliknya atau mencari dari kotak peralatan.",
+          "Tempelkan data CSV Anda ke bidang input yang dilabeli 'CSV Data'.",
+          "Tentukan tanggal mulai dan akhir untuk memfilter transaksi dalam rentang waktu.",
+          "Klik tombol hitung untuk memproses input Anda.",
+          "Lihat tabel ringkasan dan statistik pengeluaran di bawah.",
+          "Gunakan fungsi reset untuk menghapus semua bidang dan mulai ulang."
         ],
-        "tips": "Pastikan jumlah dan pilihan mata uang akurat untuk mendapatkan tingkat konversi yang andal. Hasil akan diperbarui secara otomatis saat nilai atau mata uang diubah."
+        "tips": "Untuk perhitungan yang akurat, pastikan Anda memasukkan data CSV yang valid. Gunakan format tanggal yang konsisten (YYYY-MM-DD). Pastikan kolom jumlah adalah angka."
       }
     },
-    "metaDataMismatchNote": true,
-    "noteReason": "Fields/Schema conflict: Code Sanitizer Logic vs Currency Converter UI Schema",
-    "htmlUrl": "tools/glm-53-code-sanitizer.html",
-    "icon": "fa-solid fa-money-bill-1"
+    "htmlUrl": "tools/talvo-local-tracker.html",
+    "icon": "fa-solid fa-calculator"
   }
 ]
