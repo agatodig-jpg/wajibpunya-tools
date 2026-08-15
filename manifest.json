@@ -1,90 +1,100 @@
 [
   {
-    "id": "joy-confetti-trigger-web",
-    "category": "CANVAS_GRAPHICS_GENERATOR",
-    "scriptUrl": "assets/js/tools/joy-confetti-trigger-web.js",
-    "externalLibs": [
-      "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
-    ],
+    "id": "suno-local-seq-v2",
+    "category": "Utility Tool (Conflict Detected)",
+    "scriptUrl": "assets/js/tools/suno-local-seq-v2.js",
+    "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "Joy Confetti Trigger (Web)",
-        "description": "Launch celebratory confetti animations on trigger events with customizable themes."
+        "title": "Weight Converter",
+        "description": "Convert weight between different units (kg, lbs, stone)."
       },
       "es": {
-        "title": "Disparador de Confeti Joy",
-        "description": "Lanzar animaciones festivas con temas personalizables al activarse eventos del disparador."
+        "title": "Converter de Peso",
+        "description": "Convierta peso entre unidades diferentes."
       },
       "de": {
-        "title": "Joy Konfettiauslöser (Web)",
-        "description": "Starten Sie feierliche Konfetti-Animationen bei Auslösereignissen mit benutzerdefinierten Themen."
+        "title": "Gewichtskonverter",
+        "description": "Konvertiere Gewicht zwischen verschiedenen Einheiten."
       },
       "fr": {
-        "title": "Déclencheur Conféti Joy",
-        "description": "Lancer des animations de confettis festifs lors d'événements déclenchants avec des thèmes personnalisables."
+        "title": "Conversionneur de Poids",
+        "description": "Convertissez le poids entre différentes unités."
       },
       "pt": {
-        "title": "Joy Gatilho Confete (Web)",
-        "description": "Iniciar animações de confetes comemorativos em eventos acionadores com temas personalizáveis."
+        "title": "Conversor de Peso",
+        "description": "Converter peso entre unidades diferentes (kg, lbs, pedra)."
       },
       "ja": {
-        "title": "ジョイ 花火トリガー",
-        "description": "カスタマイズ可能なテーマで、イベント起動時に祝祭的なコンフェティアニメーションを起動します。"
+        "title": "重量変換器",
+        "description": "異なる単位間（kg、lbs、ストーン）の重さを変換します。"
       },
       "ar": {
-        "title": "Joy Confetti Trigger (Web)",
-        "description": "إطلاق عروض احتفالية برفات على أحداث التفعيل مع مواضيع قابلة للتخصيص."
+        "title": "محول الوزن",
+        "description": "تحويل الوزن بين وحدات مختلفة (كجم، باوند)."
       },
       "id": {
-        "title": "Pemicat Konfeti Joy",
-        "description": "Luncurkan animasi konfeti meriah pada acara pemicu dengan tema yang dapat disesuaikan."
+        "title": "Pengubah Berat",
+        "description": "Konversikan berat antara unit yang berbeda."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-calculator",
+      "icon": "fa-solid fa-weight-hanging",
       "fields": [
         {
-          "name": "amount",
+          "name": "weight_value",
           "type": "number",
-          "label_en": "Amount",
-          "label_id": "Jumlah",
-          "placeholder": "100.00"
+          "label_en": "Weight Value",
+          "label_id": "Nilai Berat",
+          "placeholder": "100"
         },
         {
-          "name": "source_currency",
+          "name": "unit_type",
           "type": "select",
-          "label_en": "From Currency",
-          "label_id": "Mata Uang Asal",
+          "label_en": "Select Unit",
+          "label_id": "Pilih Satuan",
           "placeholder": "Select"
         },
         {
-          "name": "target_currency",
-          "type": "select",
-          "label_en": "To Currency",
-          "label_id": "Mata Uang Tujuan",
-          "placeholder": "Select"
+          "name": "user_note",
+          "type": "text",
+          "label_en": "Notes",
+          "label_id": "Catatan",
+          "placeholder": "Enter details..."
+        },
+        {
+          "name": "confidence_level",
+          "type": "range",
+          "label_en": "Confidence Level",
+          "label_id": "Tingkat Keyakinan",
+          "placeholder": "0-100"
+        },
+        {
+          "name": "evidence_file",
+          "type": "file",
+          "label_en": "Upload Proof",
+          "label_id": "Unggah Bukti",
+          "placeholder": "Click to upload"
         }
       ]
     },
     "guide": {
       "en": {
         "steps": [
-          "Click anywhere to trigger confetti animation or press Ctrl+J keyboard shortcut.",
-          "The full-screen canvas overlay will capture the celebration event instantly.",
-          "Particles spawn with random velocities and gravity for natural fall effects."
+          "Fill out input fields",
+          "Click execute to calculate"
         ],
-        "tips": "This tool runs silently in background without blocking your UI. Supports resize events automatically."
+        "tips": "Runs 100% client-side in browser."
       },
       "id": {
         "steps": [
-          "Klik di mana saja untuk memicu animasi konfeti atau tekan pintasan Ctrl+J keyboard.",
-          "Overlay canvas full-screen akan menangkap acara perayaan seinstan.",
-          "Partikel muncul dengan kecepatan acak dan gravitasi untuk efek jatuh alami."
+          "Isi kolom input",
+          "Klik eksekusi untuk menghitung"
         ],
-        "tips": "Alat ini berjalan diam-diam tanpa menghalangi UI Anda. Mendukung event resize secara otomatis."
+        "tips": "Berjalan 100% lokal di browser."
       }
     },
-    "htmlUrl": "tools/joy-confetti-trigger-web.html",
-    "icon": "fa-solid fa-calculator"
+    "htmlUrl": "tools/suno-local-seq-v2.html",
+    "icon": "fa-solid fa-weight-hanging"
   }
 ]
