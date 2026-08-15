@@ -1,90 +1,104 @@
 [
   {
-    "id": "talvo-local-tracker",
-    "category": "Financial Utility",
-    "scriptUrl": "assets/js/tools/talvo-local-tracker.js",
-    "externalLibs": [
-      "https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"
-    ],
+    "id": "glm-53-tokenizer",
+    "category": "Text Manipulation",
+    "scriptUrl": "assets/js/tools/glm-53-tokenizer.js",
+    "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "Talvo Local Expense Analyzer",
-        "description": "Analyze local CSV expense data without server requests."
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       },
       "es": {
-        "title": "Analizador de Gastos Talvo Local",
-        "description": "Analice datos de gastos CSV locales sin solicitudes al servidor."
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       },
       "de": {
-        "title": "Talvo Local Ausgaben Analyzer",
-        "description": "Analysieren Sie lokale CSV-Ausgaben-Data ohne Serveranfragen."
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       },
       "fr": {
-        "title": "Analyseur de Dépenses Talvo Local",
-        "description": "Analysez les données de dépenses CSV locales sans requêtes serveur."
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       },
       "pt": {
-        "title": "Analizador de Gastos Talvo Local",
-        "description": "Analise dados locais de despesas CSV sem solicitações ao servidor."
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       },
       "ja": {
-        "title": "Talvo ローカル費用分析器",
-        "description": "サーバーリクエストなしでローカルCSV支出データを分析します。"
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       },
       "ar": {
-        "title": "محلل المصروفات المحلي تالفو",
-        "description": "قم بتحليل بيانات مصاريف CSV المحلية دون طلبات خادم."
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       },
       "id": {
-        "title": "Penganalisis Pengeluaran Talvo Lokal",
-        "description": "Analisis data pengeluaran CSV lokal tanpa permintaan server."
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index based on weight and height."
       }
     },
     "schema": {
       "icon": "fa-solid fa-calculator",
       "fields": [
         {
-          "name": "input_key",
+          "name": "weight_kg",
           "type": "number",
           "label": {
-            "en": "Label",
-            "es": "Etiqueta",
-            "de": "Beschriftung",
-            "fr": "Étiquette",
-            "pt": "Rótulo",
-            "ja": "ラベル",
-            "ar": "التسمية",
-            "id": "Label"
+            "en": "Weight (kg)",
+            "es": "Peso (kg)",
+            "de": "Gewicht (kg)",
+            "fr": "Poids (kg)",
+            "pt": "Peso (kg)",
+            "ja": "体重 (kg)",
+            "ar": "الوزن (كجم)",
+            "id": "Berat (kg)"
           },
-          "placeholder": "100"
+          "placeholder": "70"
+        },
+        {
+          "name": "height_cm",
+          "type": "number",
+          "label": {
+            "en": "Height (cm)",
+            "es": "Altura (cm)",
+            "de": "Größe (cm)",
+            "fr": "Taille (cm)",
+            "pt": "Altura (cm)",
+            "ja": "身長 (cm)",
+            "ar": "الطول (سم)",
+            "id": "Tinggi (cm)"
+          },
+          "placeholder": "175"
+        },
+        {
+          "name": "age_years",
+          "type": "number",
+          "label": {
+            "en": "Age (years)",
+            "es": "Edad (años)",
+            "de": "Alter (Jahre)",
+            "fr": "Âge (ans)",
+            "pt": "Idade (anos)",
+            "ja": "年齢 (歳)",
+            "ar": "العمر (سنة)",
+            "id": "Usia (tahun)"
+          },
+          "placeholder": "25"
         }
       ]
     },
     "guide": {
       "en": {
-        "steps": [
-          "Open the tool by clicking on it or searching from the toolbox.",
-          "Paste your CSV data into the input field labeled 'CSV Data'.",
-          "Specify a start date and an end date to filter transactions within a range.",
-          "Click the calculate button to process your input.",
-          "View the summary table and spending statistics below.",
-          "Use the reset function to clear all fields and start over."
-        ],
-        "tips": "For accurate calculations, ensure you enter valid CSV data. Use consistent date formats (YYYY-MM-DD). Ensure amount columns are numeric."
+        "steps": [],
+        "tips": ""
       },
       "id": {
-        "steps": [
-          "Buka alat ini dengan mengkliknya atau mencari dari kotak peralatan.",
-          "Tempelkan data CSV Anda ke bidang input yang dilabeli 'CSV Data'.",
-          "Tentukan tanggal mulai dan akhir untuk memfilter transaksi dalam rentang waktu.",
-          "Klik tombol hitung untuk memproses input Anda.",
-          "Lihat tabel ringkasan dan statistik pengeluaran di bawah.",
-          "Gunakan fungsi reset untuk menghapus semua bidang dan mulai ulang."
-        ],
-        "tips": "Untuk perhitungan yang akurat, pastikan Anda memasukkan data CSV yang valid. Gunakan format tanggal yang konsisten (YYYY-MM-DD). Pastikan kolom jumlah adalah angka."
+        "steps": [],
+        "tips": ""
       }
     },
-    "htmlUrl": "tools/talvo-local-tracker.html",
+    "htmlUrl": "tools/glm-53-tokenizer.html",
     "icon": "fa-solid fa-calculator"
   }
 ]
