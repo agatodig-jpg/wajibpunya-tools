@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileRouter: Local Content Manager</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-6 flex flex-col justify-center items-center">
+    <header class="w-full max-w-2xl flex justify-between items-center mb-4 px-1">
+        <a href="../index.html" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-arrow-left"></i> <span id="navBackText">Back</span>
+        </a>
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-globe text-slate-400 text-xs"></i>
+            <select id="toolLangSelect" onchange="changeToolLanguage(this.value)" class="bg-slate-800 text-xs text-slate-200 border border-slate-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+                <option value="en">🌐 English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="pt">Português</option>
+                <option value="ja">日本語</option>
+                <option value="ar">العربية</option>
+                <option value="id">Bahasa Indonesia</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-700">
+        <div class="mb-6 border-b border-slate-700 pb-4">
+            <h1 id="toolTitle" class="text-2xl font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-house-chimney"></i> FileRouter: Local Content Manager
+            </h1>
+            <p id="toolDesc" class="text-slate-400 text-sm">Process uploaded files locally without server transmission. Supports JSON formatting, CSV parsing, and TXT encoding via base64 cipher.</p>
+        </div>
+
+        <form id="toolForm" onsubmit="handleExecute(event)" class="space-y-5">
+            <div id="app" class="space-y-4"></div>
+            <button type="submit" id="btnSubmit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center gap-2 shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-play text-xs"></i>
+                <span id="btnSubmitText">Execute Tool</span>
+            </button>
+        </form>
+
+        <div id="resultBox" class="mt-6 hidden p-4 bg-slate-950 rounded-lg border border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Output Result:</h3>
+                <button onclick="copyResult()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy</span>
+                </button>
+            </div>
+            <pre id="resultOutput" class="text-sm text-green-400 overflow-x-auto whitespace-pre-wrap font-mono bg-slate-900/50 p-3 rounded border border-slate-800"></pre>
+        </div>
+
+        <div id="guideSection" class="mt-8 pt-6 border-t border-slate-700">
+            <h3 class="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                <span id="guideTitleText">User Guide</span>
+            </h3>
+            <ol id="guideSteps" class="list-decimal list-inside space-y-1.5 text-xs text-slate-400 mb-4 leading-relaxed"></ol>
+            <div id="guideTipsBox" class="p-3 bg-indigo-950/40 border border-indigo-800/50 rounded-lg text-xs text-indigo-300 hidden flex items-start gap-2">
+                <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                <div><span class="font-semibold">Tips:</span> <span id="guideTips"></span></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- LOGIKA BISNIS INLINE (LANGSUNG TEREKSEKUSI TANPA FETCH EKSTERNAL) -->
+    <script>
+        async function executeTool(inputs) {
+    const { fileInput, processType } = inputs || {};
+    let processedContent = '';
+
+    try {
+        if (!fileInput) {
+            throw new Error('No file input provided');
+        }
+
+        // Handle content reading
+        let content = '';
+        
+        // Ensure we have a File object or string to read
+        let fileToRead = fileInput;
+        
+        if (typeof fileInput === 'string') {
+            // If passed as raw text string, wrap in Blob for FileReader
+            fileToRead = new Blob([fileInput], { type: 'text/plain' });
+        }
+
+        // Use FileReader to read the content
+        const reader = new FileReader();
+        await new Promise((resolve, reject) => {
+            reader.onload = (e) => resolve(e.target.result);
+            reader.onerror = (err) => reject(err);
+            reader.readAsText(fileToRead);
+        });
+        
+        content = reader.result;
+
+        // Identify file type based on extension or processType override
+        let detectedType = 'txt';
+        if (typeof fileInput === 'object' && fileInput.name) {
+            const ext = fileInput.name.split('.').pop()?.toLowerCase() || '';
+            detectedType = ext === 'json' ? 'json' : 
+                           ext === 'csv' ? 'csv' : 
+                           ext === 'txt' ? 'txt' : 'unknown';
+        }
+
+        // Determine logic based on type or explicit processType
+        if (detectedType === 'json' || processType === 'json') {
+            try {
+                const parsed = JSON.parse(content);
+                processedContent = JSON.stringify(parsed, null, 2);
+            } catch (e) {
+                throw new Error('Invalid JSON format: Cannot parse content');
+            }
+        } else if (detectedType === 'csv' || processType === 'csv') {
+            // Split lines using newline delimiter
+            const lines = content.split(/\r?\n/);
+            processedContent = '=== CSV Header:\n' + lines[0] + '\n\n=== Data:\n' + lines.slice(1).join('\n');
+        } else if (detectedType === 'txt' || processType === 'txt') {
+            try {
+                // Apply simple Base64 cipher
+                processedContent = btoa(unescape(encodeURIComponent(content)));
+            } catch (e) {
+                throw new Error('Text encoding failed');
+            }
+        } else {
+            // Fallback for unknown types: Base64 encode to ensure safe transfer view
+            try {
+                processedContent = btoa(unescape(encodeURIComponent(content)));
+            } catch (e) {
+                throw new Error('Unknown file type fallback failed');
+            }
+        }
+
+        return { success: true, result: processedContent };
+
+    } catch (err) {
+        console.error('FileRouter Error:', err);
+        return { success: false, error: err.message || 'Processing failed' };
+    }
+}
+    </script>
+
+    <!-- ENGINE UI & I18N DRIVER -->
+    <script>
+        const schemaFields = [{"name":"loan_amount","type":"number","label":{"en":"Loan Amount","es":"Monto del Préstamo","de":"Kreditbetrag","fr":"Montant du Prêt","pt":"Valor do Empréstimo","ja":"借入金額","ar":"مبلغ القرض","id":"Jumlah Pinjaman"},"placeholder":"250000"},{"name":"interest_rate","type":"number","label":{"en":"Annual Interest Rate (%)","es":"Tasa de Interés Anual (%)","de":"Jährlicher Zinssatz (%)","fr":"Taux d'Intérêt Annuel (%)","pt":"Taxa de Juro Anual (%)","ja":"年利 (%)","ar":"معدل الفائدة السنوي (%)","id":"Tingkat Bunga Tahunan (%)"},"placeholder":"3.5"},{"name":"loan_term","type":"number","label":{"en":"Loan Term (Years)","es":"Plazo del Préstamo (Años)","de":"Kreditlaufzeit (Jahre)","fr":"Durée du Prêt (Années)","pt":"Prazo do Empréstimo (Anos)","ja":"借入期間（年）","ar":"مدة القرض (بالسنوات)","id":"Jangka Waktu Pinjaman (Tahun)"},"placeholder":"30"}];
+        const i18nMap = {"en":{"title":"FileRouter: Local Content Manager","description":"Process uploaded files locally without server transmission. Supports JSON formatting, CSV parsing, and TXT encoding via base64 cipher."},"es":{"title":"Archivador de Archivos: Administrador de Contenido Local","description":"Procese archivos subidos localmente sin transmisión al servidor. Soporta formateo JSON, análisis CSV y codificación TXT mediante cifrado base64."},"de":{"title":"FileRouter: Lokaler Inhaltmanager","description":"Verarbeiten Sie hochgeladene Dateien lokal ohne Serverübermittlung. Unterstützt JSON-Formatierung, CSV-Parsing und TXT-Kodierung via Base64-Cipher."},"fr":{"title":"FileRouter: Gestionnaire de Contenu Local","description":"Traitez les fichiers téléchargés localement sans transmission au serveur. Prend en charge le formatage JSON, l'analyse CSV et le codage TXT via chiffrement Base64."},"pt":{"title":"Arquivador de Arquivos: Gerenciador de Conteúdo Local","description":"Processe arquivos carregados localmente sem transmissão ao servidor. Suporta formatação JSON, análise CSV e codificação TXT via ciframento Base64."},"ja":{"title":"ファイルルーター：ローカルコンテンツマネージャー","description":"サーバーへの送信なしでアップロードされたファイルをローカルで処理します。JSON 書式化、CSV 解析、Base64 サイファによる TXT コーディングをサポートします。"},"ar":{"title":"مستودع الملفات: مدير المحتوى المحلي","description":"قم بمعالجة الملفات المرفوعة محلياً دون إرسالها إلى الخادم. يدعم تنسيق JSON، وتحليل CSV، وتشفير TXT عبر شفرة base64."},"id":{"title":"FileRouter: Pengelola Konten Lokal","description":"Pemrosesan file yang diunggah secara lokal tanpa transmisi ke server. Mendukung formatasi JSON, parsing CSV, dan enkoding TXT melalui cipher base64."}};
+        const guideMap = {"en":{"steps":["1. Upload a file (.json, .csv, or .txt)","2. Optionally select a process type (auto-detects if not specified)","3. Click Process button to handle the file locally in browser","4. View the processed result displayed on screen without server upload"],"tips":"All processing happens client-side using File API - no data leaves your device. Choose 'json' for formatting, 'csv' for parsing with headers, or 'txt' for base64 encoding."},"id":{"steps":["1. Unggah file (.json, .csv, atau .txt)","2. Opsional pilih tipe pemrosesan (otomatis mendeteksi jika tidak ditentukan)","3. Klik tombol Proses untuk menangani file secara lokal di browser","4. Lihat hasil yang sudah diproses ditampilkan di layar tanpa unggah ke server"],"tips":"Semua pemrosesan terjadi di sisi klien menggunakan File API - tidak ada data yang keluar dari perangkat Anda. Pilih 'json' untuk formatasi, 'csv' untuk parsing dengan header, atau 'txt' untuk enkoding base64."}};
+        const toolIconClass = "fa-solid fa-house-chimney";
+
+        function renderFormFields(currentLang) {
+            const appEl = document.getElementById('app');
+            if (!appEl) return;
+            
+            if (!schemaFields || schemaFields.length === 0) {
+                appEl.innerHTML = '<p class="text-xs text-slate-500">No input fields required.</p>';
+                return;
+            }
+
+            appEl.innerHTML = schemaFields.map(field => {
+                const name = field.name || 'field';
+                const type = field.type || 'text';
+                
+                let label = field.label;
+                if (typeof field.label === 'object' && field.label !== null) {
+                    label = field.label[currentLang] || field.label.en || field.label.id;
+                }
+                if (!label) {
+                    label = (currentLang === 'id') ? (field.label_id || field.label) : (field.label_en || field.label);
+                }
+                if (!label) label = name.replace(/_/g, ' ').toUpperCase();
+
+                const placeholder = field.placeholder || '';
+
+                if (type === 'select' && Array.isArray(field.options)) {
+                    const optionsHTML = field.options.map(opt => {
+                        let val = opt;
+                        let txt = opt;
+                        if (typeof opt === 'object' && opt !== null) {
+                            val = opt.value ?? opt.id ?? opt.key ?? opt.val ?? JSON.stringify(opt);
+                            txt = opt.label ?? opt.text ?? opt.name ?? val;
+                            if (typeof txt === 'object' && txt !== null) {
+                                txt = txt[currentLang] || txt.en || txt.id || val;
+                            }
+                        }
+                        return `<option value="${val}">${txt}</option>`;
+                    }).join('');
+
+                    return `
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                            <select name="${name}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">
+                                ${optionsHTML}
+                            </select>
+                        </div>
+                    `;
+                }
+
+                if (type === 'textarea') {
+                    return `
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                            <textarea name="${name}" rows="${field.rows || 4}" placeholder="${placeholder}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                        <input type="${type}" name="${name}" placeholder="${placeholder}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function changeToolLanguage(lang) {
+            localStorage.setItem('user_lang', lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const langData = i18nMap[lang] || i18nMap['en'] || i18nMap['id'] || {};
+            const guideData = guideMap[lang] || guideMap['en'] || guideMap['id'] || {};
+
+            renderFormFields(lang);
+
+            const titleEl = document.getElementById('toolTitle');
+            const descEl = document.getElementById('toolDesc');
+            if (titleEl && langData.title) titleEl.innerHTML = `<i class="${toolIconClass}"></i> ${langData.title}`;
+            if (descEl && langData.description) descEl.innerText = langData.description;
+
+            const btnSubmitText = document.getElementById('btnSubmitText');
+            const navBackText = document.getElementById('navBackText');
+            if (btnSubmitText) btnSubmitText.innerText = (lang === 'id') ? 'Jalankan Tool' : 'Execute Tool';
+            if (navBackText) navBackText.innerText = (lang === 'id') ? 'Kembali' : 'Back';
+
+            const stepsEl = document.getElementById('guideSteps');
+            const tipsBox = document.getElementById('guideTipsBox');
+            const tipsEl = document.getElementById('guideTips');
+
+            if (stepsEl && guideData.steps && guideData.steps.length > 0) {
+                stepsEl.innerHTML = guideData.steps.map(step => `<li>${step}</li>`).join('');
+            }
+
+            if (tipsEl && guideData.tips) {
+                tipsEl.innerText = guideData.tips;
+                tipsBox.classList.remove('hidden');
+            } else if (tipsBox) {
+                tipsBox.classList.add('hidden');
+            }
+
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+
+        async function handleExecute(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const inputs = Object.fromEntries(formData.entries());
+            const resBox = document.getElementById('resultBox');
+            const resOut = document.getElementById('resultOutput');
+            
+            if (typeof executeTool === 'function') {
+                try {
+                    const res = await executeTool(inputs);
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = (typeof res === 'object') ? JSON.stringify(res, null, 2) : res;
+                } catch (err) {
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = "Error: " + err.message;
+                }
+            }
+        }
+
+        function copyResult() {
+            const resOut = document.getElementById('resultOutput');
+            if (!resOut) return;
+            navigator.clipboard.writeText(resOut.innerText);
+            const copyBtnText = document.getElementById('copyBtnText');
+            if (copyBtnText) {
+                copyBtnText.innerText = 'Copied!';
+                setTimeout(() => { copyBtnText.innerText = 'Copy'; }, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('user_lang') || 'en';
+            document.getElementById('toolLangSelect').value = savedLang;
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
