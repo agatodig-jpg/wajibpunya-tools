@@ -1,45 +1,106 @@
 [
   {
-    "id": "shootclip-ai-editor",
-    "category": "Media Processing",
-    "scriptUrl": "assets/js/tools/shootclip-ai-editor.js",
-    "htmlUrl": "tools/shootclip-ai-editor.html",
-    "icon": "fa-solid fa-calculator",
+    "id": "distance-calculator",
+    "category": "Developer Tools",
+    "scriptUrl": "assets/js/tools/distance-calculator.js",
+    "htmlUrl": "tools/distance-calculator.html",
+    "icon": "fa-solid fa-ruler-triangle",
     "externalLibs": [
-      "https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/umd/index.min.js"
+      "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/build/highlight.min.js"
     ],
     "i18n": {
       "en": {
-        "title": "Unit Calculator",
-        "description": "Quickly convert values between various units of measurement."
+        "title": "Distance Calculator",
+        "description": "Calculate the distance between two points."
       },
       "es": {
-        "title": "Unit Calculator",
-        "description": "Quickly convert values between various units of measurement."
+        "title": "Distance Calculator",
+        "description": "Calculate the distance between two points."
       },
       "de": {
-        "title": "Unit Calculator",
-        "description": "Quickly convert values between various units of measurement."
+        "title": "Distance Calculator",
+        "description": "Calculate the distance between two points."
       },
       "fr": {
-        "title": "Unit Calculator",
-        "description": "Quickly convert values between various units of measurement."
+        "title": "Distance Calculator",
+        "description": "Calculate the distance between two points."
       },
       "pt": {
-        "title": "Unit Calculator",
-        "description": "Quickly convert values between various units of measurement."
+        "title": "Distance Calculator",
+        "description": "Calculate the distance between two points."
       },
       "ja": {
-        "title": "Unit Calculator",
-        "description": "Quickly convert values between various units of measurement."
+        "title": "Distance Calculator",
+        "description": "Calculate the distance between two points."
       },
       "ar": {
-        "title": "Unit Calculator",
-        "description": "Quickly convert values between various units of measurement."
+        "title": "Distance Calculator",
+        "description": "Calculate the distance between two points."
       },
       "id": {
-        "title": "Kalkulator Unit",
-        "description": "Konversikan nilai antar berbagai unit pengukuran dengan cepat."
+        "title": "Kalkulator Jarak",
+        "description": "Hitung jarak antara dua titik."
+      }
+    },
+    "schema": {
+      "icon": "fa-solid fa-ruler-triangle",
+      "fields": [
+        {
+          "name": "start_point",
+          "type": "text",
+          "label_en": "Start Point",
+          "label_id": "Titik Awal",
+          "placeholder": "Enter starting location"
+        },
+        {
+          "name": "end_point",
+          "type": "text",
+          "label_en": "End Point",
+          "label_id": "Titik Akhir",
+          "placeholder": "Enter destination"
+        },
+        {
+          "name": "unit_preference",
+          "type": "select",
+          "label_en": "Unit Preference",
+          "label_id": "Preferensi Satuan",
+          "options": [
+            {
+              "value": "km",
+              "label_en": "Kilometers",
+              "label_id": "Kilometer"
+            },
+            {
+              "value": "miles",
+              "label_en": "Miles",
+              "label_id": "Mil"
+            }
+          ]
+        },
+        {
+          "name": "precision",
+          "type": "range",
+          "label_en": "Precision Level",
+          "label_id": "Tingkat Presisi",
+          "min": 0,
+          "max": 100
+        }
+      ]
+    },
+    "guide": {
+      "en": {
+        "steps": [
+          "Fill out input fields",
+          "Click execute to calculate"
+        ],
+        "tips": "Runs 100% client-side in browser."
+      },
+      "id": {
+        "steps": [
+          "Isi kolom input",
+          "Klik eksekusi untuk menghitung"
+        ],
+        "tips": "Berjalan 100% lokal di browser."
       }
     }
   }
