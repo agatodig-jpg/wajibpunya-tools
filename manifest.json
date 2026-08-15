@@ -1,169 +1,232 @@
 [
   {
-    "id": "attyn-cursor-intelligence",
-    "category": "Text Manipulation",
-    "scriptUrl": "/assets/js/tools/text-transformer-tool.js",
+    "id": "architect-project-estimator",
+    "category": "Utilities",
+    "scriptUrl": "/assets/js/tools/architect-project-estimator.js",
     "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "Attyn: Cursor Intelligence",
-        "description": "Advanced text transformation tool for cursor intelligence."
+        "title": "Project Estimator",
+        "description": "Calculate material costs and construction timelines for architectural projects."
       },
       "es": {
-        "title": "Inteligencia del CursoR",
-        "description": "Herramienta avanzada de transformación de texto para inteligencia del cursor."
+        "title": "Estimador de Proyectos",
+        "description": "Calcule los costos de materiales y los cronogramas de construcción para proyectos arquitectónicos."
       },
       "de": {
-        "title": "Attyn: Cursor-Intelligenz",
-        "description": "Fortgeschrittenes Texttransformationstool für Cursor-Intelligenz."
+        "title": "Projektplaner",
+        "description": "Berechnen Sie Materialkosten und Bauzeiten für Architekturprojekte."
       },
       "fr": {
-        "title": "Intelligence Curseur Attyn",
-        "description": "Outil de transformation de texte avancé pour l'intelligence du curseur."
+        "title": "Estimateur de Projet",
+        "description": "Calculez les coûts des matériaux et les délais de construction pour les projets architecturaux."
       },
       "pt": {
-        "title": "Inteligência do Cursor Attyn",
-        "description": "Ferramenta avançada de transformação de texto para inteligência de cursor."
+        "title": "Estimador de Projeto",
+        "description": "Calcule os custos de materiais e os cronogramas de construção para projetos arquitetónicos."
       },
       "ja": {
-        "title": "Attyn: カーソルインテリジェンス",
-        "description": "カーソルインテリジェンス向けの高度なテキスト変換ツール。"
+        "title": "プロジェクト見積もり",
+        "description": "建築プロジェクトの材料費と工期を計算します。"
       },
       "ar": {
-        "title": "عقلية الكرسور Attyn",
-        "description": "أداة متقدمة لتحويل النصوص لذكاء الكرسور."
+        "title": "مقدر المشاريع",
+        "description": "احسب تكاليف المواد والجداول الزمنية للبناء للمشاريع المعمارية."
       },
       "id": {
-        "title": "Attyn: Intelijen Kursor",
-        "description": "Alat transformasi teks canggih untuk kecerdasan kursor."
+        "title": "Estimator Proyek",
+        "description": "Hitung biaya material dan linimasa konstruksi untuk proyek arsitektur."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-weight-hanging",
+      "icon": "fa-solid fa-drafting-rules",
       "fields": [
         {
-          "name": "weight_kg",
-          "type": "number",
+          "name": "project_name",
+          "type": "text",
           "label": {
-            "en": "Weight (kg)",
-            "es": "Peso (kg)",
-            "de": "Gewicht (kg)",
-            "fr": "Poids (kg)",
-            "pt": "Peso (kg)",
-            "ja": "体重 (kg)",
-            "ar": "الوزن (كجم)",
-            "id": "Berat (kg)"
+            "en": "Project Name",
+            "es": "Nombre del Proyecto",
+            "de": "Projektname",
+            "fr": "Nom du Projet",
+            "pt": "Nome do Projeto",
+            "ja": "プロジェクト名",
+            "ar": "اسم المشروع",
+            "id": "Nama Proyek"
           },
-          "placeholder": "70"
+          "placeholder": "e.g. Modern Villa"
         },
         {
-          "name": "height_cm",
+          "name": "total_area",
           "type": "number",
           "label": {
-            "en": "Height (cm)",
-            "es": "Altura (cm)",
-            "de": "Größe (cm)",
-            "fr": "Taille (cm)",
-            "pt": "Altura (cm)",
-            "ja": "身長 (cm)",
-            "ar": "الطول (سم)",
-            "id": "Tinggi (cm)"
+            "en": "Total Area (m²)",
+            "es": "Área Total (m²)",
+            "de": "Gesamtfläche (m²)",
+            "fr": "Surface Totale (m²)",
+            "pt": "Área Total (m²)",
+            "ja": "総面積 (m²)",
+            "ar": "المساحة الإجمالية (م²)",
+            "id": "Luas Total (m²)"
           },
-          "placeholder": "175"
+          "placeholder": "1500"
+        },
+        {
+          "name": "material_grade",
+          "type": "select",
+          "label": {
+            "en": "Material Quality",
+            "es": "Calidad del Material",
+            "de": "Materialqualität",
+            "fr": "Qualité du Matériau",
+            "pt": "Qualidade do Material",
+            "ja": "材料の品質",
+            "ar": "جودة المواد",
+            "id": "Kualitas Bahan"
+          },
+          "options": [
+            {
+              "label": {
+                "en": "Standard",
+                "es": "Estándar",
+                "de": "Standard",
+                "fr": "Standard",
+                "pt": "Padrão",
+                "ja": "標準",
+                "ar": "قياسي",
+                "id": "Standar"
+              },
+              "value": "standard"
+            },
+            {
+              "label": {
+                "en": "Premium",
+                "es": "Premium",
+                "de": "Premium",
+                "fr": "Premium",
+                "pt": "Premium",
+                "ja": "プレミアム",
+                "ar": "مميز",
+                "id": "Premium"
+              },
+              "value": "premium"
+            },
+            {
+              "label": {
+                "en": "Luxury",
+                "es": "Lujo",
+                "de": "Luxus",
+                "fr": "Luxe",
+                "pt": "Luxo",
+                "ja": "豪華",
+                "ar": "فاخر",
+                "id": "Mewah"
+              },
+              "value": "luxury"
+            }
+          ]
+        },
+        {
+          "name": "waste_margin",
+          "type": "range",
+          "label": {
+            "en": "Waste Margin (%)",
+            "es": "Margen de Desperdicio (%)",
+            "de": "Abfallmarge (%)",
+            "fr": "Marge de Perte (%)",
+            "pt": "Margem de Desperdício (%)",
+            "ja": "廃棄マージン (%)",
+            "ar": "هامش الهدر (%)",
+            "id": "Margin Pemborosan (%)"
+          },
+          "min": 0,
+          "max": 20,
+          "step": 1
+        },
+        {
+          "name": "estimated_budget",
+          "type": "number",
+          "label": {
+            "en": "Estimated Budget",
+            "es": "Presupuesto Estimado",
+            "de": "Geschätztes Budget",
+            "fr": "Budget Estimé",
+            "pt": "Orçamento Estimado",
+            "ja": "推定予算",
+            "ar": "الميزانية المقدرة",
+            "id": "Anggaran Diperkirakan"
+          },
+          "placeholder": "500000"
         }
       ]
     },
     "guide": {
       "en": {
         "steps": [
-          "Step 1: Open UI Weaver application and select your project.",
-          "Step 2: Navigate to Form Builder section.",
-          "Step 3: Click 'Add New Input Field' button.",
-          "Step 4: Define field properties (name, type, validation rules).",
-          "Step 5: Preview form in real-time mode for layout verification.",
-          "Step 6: Save and export configuration with unique project name."
+          "Enter all required input parameters into the available fields",
+          "Click the Execute button to process the request",
+          "Review the generated output in the result section"
         ],
-        "tips": "Always validate all input rules before deploying the form."
+        "tips": "Ensure all text inputs follow the specified character limits and data formats."
       },
       "es": {
         "steps": [
-          "Paso 1: Abra la aplicación UI Weaver y seleccione su proyecto.",
-          "Paso 2: Navegue a la sección Constructor de Formularios.",
-          "Paso 3: Haga clic en 'Agregar Nuevo Campo Input'.",
-          "Paso 4: Defina propiedades del campo (nombre, tipo, reglas de validación).",
-          "Paso 5: Vista previa el formulario en modo tiempo real.",
-          "Paso 6: Guarde y exporte la configuración con nombre único."
+          "Ingrese todos los parámetros de entrada requeridos en los campos disponibles",
+          "Haga clic en el botón Ejecutar para procesar la solicitud",
+          "Revise el resultado generado en la sección de resultados"
         ],
-        "tips": "Verifique siempre las reglas de validación antes de publicar el formulario."
+        "tips": "Asegúrese de que todas las entradas de texto sigan los límites de caracteres y formatos especificados."
       },
       "de": {
         "steps": [
-          "Schritt 1: Öffnen Sie UI Weaver und wählen Sie Ihr Projekt.",
-          "Schritt 2: Navigieren Sie zur Formular-Builders-Sektion.",
-          "Schritt 3: Klicken Sie auf 'Neues Eingabefeld hinzufügen'.",
-          "Schritt 4: Definieren Sie Feldattribute (Name, Typ, Validierungsregeln).",
-          "Schritt 5: Sehen Sie sich das Formular im Live-Modus an.",
-          "Schritt 6: Speichern und exportieren Sie die Konfiguration."
+          "Geben Sie alle erforderlichen Eingabeparameter in die verfügbaren Felder ein",
+          "Klicken Sie auf die Schaltfläche Ausführen, um die Anforderung zu verarbeiten",
+          "Überprüfen Sie das generierte Ergebnis im Ergebnissbereich"
         ],
-        "tips": "Überprüfen Sie alle Validierungsregeln vor der Veröffentlichung."
+        "tips": "Stellen Sie sicher, dass alle Texteingaben den angegebenen Zeichenlimits und Datenformaten entsprechen."
       },
       "fr": {
         "steps": [
-          "Étape 1 : Ouvrez UI Weaver et sélectionnez votre projet.",
-          "Étape 2 : Naviguez vers la section du Constructeur de Formulaires.",
-          "Étape 3 : Cliquez sur 'Ajouter un champ d'entrée'.",
-          "Étape 4 : Définissez les propriétés du champ (nom, type, règles).",
-          "Étape 5 : Vérifiez l'aperçu en mode temps réel.",
-          "Étape 6 : Enregistrez et exportez la configuration."
+          "Saisissez tous les paramètres d'entrée requis dans les champs disponibles",
+          "Cliquez sur le bouton Exécuter pour traiter la demande",
+          "Vérifiez le résultat généré dans la section des résultats"
         ],
-        "tips": "Vérifiez toutes les règles de validation avant publication."
+        "tips": "Assurez-vous que toutes les entrées de texte respectent les limites de caractères et formats de données spécifiés."
       },
       "pt": {
         "steps": [
-          "Passo 1: Abra o aplicativo UI Weaver e selecione seu projeto.",
-          "Passo 2: Navegue até a seção Construtor de Formulários.",
-          "Passo 3: Clique em 'Adicionar Novo Campo'.",
-          "Passo 4: Defina propriedades do campo (nome, tipo, regras).",
-          "Passo 5: Visualize o formulário no modo tempo real.",
-          "Passo 6: Salve e exporte a configuração com nome único."
+          "Preencha todos os parâmetros de entrada necessários nos campos disponíveis",
+          "Clique no botão Executar para processar a solicitação",
+          "Revise o resultado gerado na seção de resultados"
         ],
-        "tips": "Sempre verifique as regras de validação antes de publicar."
+        "tips": "Garanta que todas as entradas de texto sigam os limites de caracteres e formatos de dados especificados."
       },
       "ja": {
         "steps": [
-          "ステップ1：UI Weaver アプリを開きプロジェクトを選択する。",
-          "ステップ2：フォームビルダーセクションへ移動する。",
-          "ステップ3：「フィールドを追加」をクリックする。",
-          "ステップ4：フィールド属性（名前、タイプ、検証ルール）を指定する。",
-          "ステップ5：リアルタイムモードでフォームを確認する。",
-          "ステップ6：ユニークな名前で設定を保存しエクスポートする。"
+          "利用可能なフィールドにすべての必要な入力パラメータを入力します",
+          "処理を実行するための「実行」ボタンをクリックします",
+          "結果セクションに表示された生成された出力をレビューします"
         ],
-        "tips": "公開前にすべての検証ルールを確認してください。"
+        "tips": "すべてのテキスト入力が指定された文字制限とデータ形式に従っていることを確認してください。"
       },
       "ar": {
         "steps": [
-          "الخطوة 1: افتح تطبيق UI Weaver واختر مشروعك.",
-          "الخطوة 2: انتقل إلى قسم منشئ النماذج.",
-          "الخطوة 3: انقر على 'إضافة حقل إدخال جديد'.",
-          "الخطوة 4: حدد خصائص الحقل (الاسم، النوع، قواعد التحقق).",
-          "الخطوة 5: معاينة النموذج في وضع الوقت الحقيقي.",
-          "الخطوة 6: احفظ وصدر التكوين باسم فريد."
+          "أدخل جميع معاملات الإدخال المطلوبة في الحقول المتاحة",
+          "انقر على زر تنفيذ لمعالجة الطلب",
+          "راجع الناتج الذي تم توليده في قسم النتائج"
         ],
-        "tips": "تحقق دائمًا من جميع قواعد التحقق قبل نشر النموذج."
+        "tips": "تأكد من أن جميع مدخلات النص تتبع حدود الأحجام وتنسيقات البيانات المحددة."
       },
       "id": {
         "steps": [
-          "Langkah 1: Buka aplikasi UI Weaver dan pilih proyek Anda.",
-          "Langkah 2: Masuk ke menu Builder Formulir.",
-          "Langkah 3: Klik tombol 'Tambah Medan Input Baru'.",
-          "Langkah 4: Isi properti medan seperti nama, tipe, aturan validasi.",
-          "Langkah 5: Lihat pratinjau formulir dalam mode real-time.",
-          "Langkah 6: Simpan dan ekspor konfigurasi dengan nama unik."
+          "Masukkan semua parameter input yang diperlukan ke dalam kolom yang tersedia",
+          "Klik tombol Eksekusi untuk memproses permintaan",
+          "Lihat hasil yang dihasilkan di bagian hasil"
         ],
-        "tips": "Selalu periksa aturan validasi sebelum mempublikasikan formulir."
+        "tips": "Pastikan semua input teks mengikuti batas karakter dan format data yang ditentukan."
       }
     },
-    "htmlUrl": "tools/attyn-cursor-intelligence.html",
-    "icon": "fa-solid fa-weight-hanging"
+    "htmlUrl": "tools/architect-project-estimator.html",
+    "icon": "fa-solid fa-drafting-rules"
   }
 ]
