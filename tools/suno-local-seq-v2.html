@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-6 flex flex-col justify-center items-center">
+    <header class="w-full max-w-2xl flex justify-between items-center mb-4 px-1">
+        <a href="../index.html" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-arrow-left"></i> <span id="navBackText">Back</span>
+        </a>
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-globe text-slate-400 text-xs"></i>
+            <select id="toolLangSelect" onchange="changeToolLanguage(this.value)" class="bg-slate-800 text-xs text-slate-200 border border-slate-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+                <option value="en">🌐 English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="pt">Português</option>
+                <option value="ja">日本語</option>
+                <option value="ar">العربية</option>
+                <option value="id">Bahasa Indonesia</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-700">
+        <!-- Title & Description Header -->
+        <div class="mb-6 border-b border-slate-700 pb-4">
+            <h1 id="toolTitle" class="text-2xl font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-weight-hanging"></i> Weight Converter
+            </h1>
+            <p id="toolDesc" class="text-slate-400 text-sm">Convert weight between different units (kg, lbs, stone).</p>
+        </div>
+
+        <!-- Dynamic Form -->
+        <form id="toolForm" onsubmit="handleExecute(event)" class="space-y-5">
+            <div id="app" class="space-y-4"></div>
+            <button type="submit" id="btnSubmit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center gap-2 shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-play text-xs"></i>
+                <span id="btnSubmitText">Execute Tool</span>
+            </button>
+        </form>
+
+        <!-- Result Display -->
+        <div id="resultBox" class="mt-6 hidden p-4 bg-slate-950 rounded-lg border border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider" id="resultLabelText">Output Result:</h3>
+                <button onclick="copyResult()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy</span>
+                </button>
+            </div>
+            <pre id="resultOutput" class="text-sm text-green-400 overflow-x-auto whitespace-pre-wrap font-mono bg-slate-900/50 p-3 rounded border border-slate-800"></pre>
+        </div>
+
+        <!-- Dynamic User Guide Section -->
+        <div id="guideSection" class="mt-8 pt-6 border-t border-slate-700">
+            <h3 class="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                <span id="guideTitleText">User Guide</span>
+            </h3>
+            <ol id="guideSteps" class="list-decimal list-inside space-y-1.5 text-xs text-slate-400 mb-4 leading-relaxed"></ol>
+            <div id="guideTipsBox" class="p-3 bg-indigo-950/40 border border-indigo-800/50 rounded-lg text-xs text-indigo-300 hidden flex items-start gap-2">
+                <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                <div><span class="font-semibold">Tips:</span> <span id="guideTips"></span></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/tools/suno-local-seq-v2.js"></script>
+    <script>
+        const schemaFields = [{"name":"weight_value","type":"number","label_en":"Weight Value","label_id":"Nilai Berat","placeholder":"100"},{"name":"unit_type","type":"select","label_en":"Select Unit","label_id":"Pilih Satuan","placeholder":"Select"},{"name":"user_note","type":"text","label_en":"Notes","label_id":"Catatan","placeholder":"Enter details..."},{"name":"confidence_level","type":"range","label_en":"Confidence Level","label_id":"Tingkat Keyakinan","placeholder":"0-100"},{"name":"evidence_file","type":"file","label_en":"Upload Proof","label_id":"Unggah Bukti","placeholder":"Click to upload"}];
+        const i18nMap = {"en":{"title":"Weight Converter","description":"Convert weight between different units (kg, lbs, stone)."},"es":{"title":"Converter de Peso","description":"Convierta peso entre unidades diferentes."},"de":{"title":"Gewichtskonverter","description":"Konvertiere Gewicht zwischen verschiedenen Einheiten."},"fr":{"title":"Conversionneur de Poids","description":"Convertissez le poids entre différentes unités."},"pt":{"title":"Conversor de Peso","description":"Converter peso entre unidades diferentes (kg, lbs, pedra)."},"ja":{"title":"重量変換器","description":"異なる単位間（kg、lbs、ストーン）の重さを変換します。"},"ar":{"title":"محول الوزن","description":"تحويل الوزن بين وحدات مختلفة (كجم، باوند)."},"id":{"title":"Pengubah Berat","description":"Konversikan berat antara unit yang berbeda."}};
+        const guideMap = {"en":{"steps":["Fill out input fields","Click execute to calculate"],"tips":"Runs 100% client-side in browser."},"id":{"steps":["Isi kolom input","Klik eksekusi untuk menghitung"],"tips":"Berjalan 100% lokal di browser."}};
+        const toolIconClass = "fa-solid fa-weight-hanging";
+
+        // Dynamic Form Field Renderer Engine dengan Dukungan Multi-bahasa & Robust Option Parser
+        function renderFormFields(currentLang) {
+            const appEl = document.getElementById('app');
+            if (!appEl) return;
+            
+            if (!schemaFields || schemaFields.length === 0) {
+                appEl.innerHTML = '<p class="text-xs text-slate-500">No input fields required.</p>';
+                return;
+            }
+
+            appEl.innerHTML = schemaFields.map(field => {
+                const name = field.name || 'field';
+                const type = field.type || 'text';
+                
+                // Parser Label Multi-Bahasa Dinamis
+                let label = field.label;
+                if (typeof field.label === 'object' && field.label !== null) {
+                    label = field.label[currentLang] || field.label.en || field.label.id;
+                }
+                if (!label) {
+                    label = (currentLang === 'id') ? (field.label_id || field.label) : (field.label_en || field.label);
+                }
+                if (!label) label = name.replace(/_/g, ' ').toUpperCase();
+
+                const placeholder = field.placeholder || '';
+
+                if (type === 'select' && Array.isArray(field.options)) {
+                    const optionsHTML = field.options.map(opt => {
+                        let val = opt;
+                        let txt = opt;
+                        
+                        if (typeof opt === 'object' && opt !== null) {
+                            val = opt.value ?? opt.id ?? opt.key ?? opt.val ?? JSON.stringify(opt);
+                            txt = opt.label ?? opt.text ?? opt.name ?? val;
+                            if (typeof txt === 'object' && txt !== null) {
+                                txt = txt[currentLang] || txt.en || txt.id || val;
+                            }
+                        }
+                        return `<option value="${val}">${txt}</option>`;
+                    }).join('');
+
+                    return `
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                            <select name="${name}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">
+                                ${optionsHTML}
+                            </select>
+                        </div>
+                    `;
+                }
+
+                if (type === 'range') {
+                    return `
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                            <input type="range" name="${name}" min="${field.min || 0}" max="${field.max || 100}" step="${field.step || 1}" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        </div>
+                    `;
+                }
+
+                if (type === 'textarea') {
+                    return `
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                            <textarea name="${name}" rows="${field.rows || 4}" placeholder="${placeholder}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                        <input type="${type}" name="${name}" placeholder="${placeholder}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function changeToolLanguage(lang) {
+            localStorage.setItem('user_lang', lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const langData = i18nMap[lang] || i18nMap['en'] || i18nMap['id'] || {};
+            const guideData = guideMap[lang] || guideMap['en'] || guideMap['id'] || {};
+
+            // Render ulang form field agar label berubah sesuai bahasa
+            renderFormFields(lang);
+
+            // Title & Description Update
+            const titleEl = document.getElementById('toolTitle');
+            const descEl = document.getElementById('toolDesc');
+            if (titleEl && langData.title) titleEl.innerHTML = `<i class="${toolIconClass}"></i> ${langData.title}`;
+            if (descEl && langData.description) descEl.innerText = langData.description;
+
+            // Interface Control Translations
+            const btnSubmitText = document.getElementById('btnSubmitText');
+            const navBackText = document.getElementById('navBackText');
+            
+            if (btnSubmitText) btnSubmitText.innerText = (lang === 'id') ? 'Jalankan Tool' : 'Execute Tool';
+            if (navBackText) navBackText.innerText = (lang === 'id') ? 'Kembali' : 'Back';
+
+            // Guide Section Update
+            const guideTitleEl = document.getElementById('guideTitleText');
+            const stepsEl = document.getElementById('guideSteps');
+            const tipsBox = document.getElementById('guideTipsBox');
+            const tipsEl = document.getElementById('guideTips');
+
+            if (guideTitleEl) guideTitleEl.innerText = (lang === 'id') ? 'Panduan Penggunaan' : 'User Guide';
+
+            if (stepsEl && guideData.steps && guideData.steps.length > 0) {
+                stepsEl.innerHTML = guideData.steps.map(step => `<li>${step}</li>`).join('');
+            } else if (stepsEl) {
+                stepsEl.innerHTML = (lang === 'id') 
+                    ? '<li>Isi parameter di atas dan klik jalankan tool.</li>' 
+                    : '<li>Fill out the parameters and click execute.</li>';
+            }
+
+            if (tipsEl && guideData.tips) {
+                tipsEl.innerText = guideData.tips;
+                tipsBox.classList.remove('hidden');
+            } else if (tipsBox) {
+                tipsBox.classList.add('hidden');
+            }
+
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+
+        async function handleExecute(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const inputs = Object.fromEntries(formData.entries());
+            const resBox = document.getElementById('resultBox');
+            const resOut = document.getElementById('resultOutput');
+            
+            if (typeof executeTool === 'function') {
+                try {
+                    const res = await executeTool(inputs);
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = (typeof res === 'object') ? JSON.stringify(res, null, 2) : res;
+                } catch (err) {
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = "Error: " + err.message;
+                }
+            } else {
+                resBox.classList.remove('hidden');
+                resOut.innerText = "Error: Logic function (executeTool) is not defined.";
+            }
+        }
+
+        function copyResult() {
+            const resOut = document.getElementById('resultOutput');
+            if (!resOut) return;
+            navigator.clipboard.writeText(resOut.innerText);
+            const copyBtnText = document.getElementById('copyBtnText');
+            if (copyBtnText) {
+                copyBtnText.innerText = 'Copied!';
+                setTimeout(() => { copyBtnText.innerText = 'Copy'; }, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('user_lang') || 'en';
+            document.getElementById('toolLangSelect').value = savedLang;
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
