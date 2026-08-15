@@ -1,166 +1,166 @@
 [
   {
-    "id": "utility-tool-01",
+    "id": "text-case-converter",
     "category": "Utilities",
-    "icon": "fa-solid fa-wrench",
+    "icon": "fa-solid fa-font",
     "externalLibs": [],
-    "jsCode": "// Tool logic placeholder for translation demo\nfunction process() { return true; }",
+    "jsCode": "// Tool logic for text case conversion\nfunction convertCase(text, type) {\n  switch(type) {\n    case 'upper': return text.toUpperCase();\n    case 'lower': return text.toLowerCase();\n    case 'title': return text.replace(/\\b\\w/g, c => c.toUpperCase());\n    default: return text;\n  }\n}",
     "fields": [
       {
-        "name": "input_key",
-        "type": "text",
+        "name": "inputText",
+        "type": "textarea",
         "label": {
-          "en": "Input Key",
-          "es": "Clave de Entrada",
-          "de": "Eingabe-Schlüssel",
-          "fr": "Clé d'Entrée",
-          "pt": "Chave de Entrada",
-          "ja": "入力キー",
-          "ar": "مفتاح الإدخال",
-          "id": "Kunci Input"
+          "en": "Input Text",
+          "es": "Texto de Entrada",
+          "de": "Eingabetext",
+          "fr": "Texte d'entrée",
+          "pt": "Texto de Entrada",
+          "ja": "入力テキスト",
+          "ar": "النص المدخل",
+          "id": "Teks Input"
         },
         "placeholder": {
-          "en": "Enter key...",
-          "es": "Ingrese clave...",
-          "de": "Geben Sie Schlüssel ein...",
-          "fr": "Entrez la clé...",
-          "pt": "Digite a chave...",
-          "ja": "キーを入力してください",
-          "ar": "أدخل المفتاح...",
-          "id": "Masukkan kunci..."
+          "en": "Enter text here...",
+          "es": "Ingrese texto aquí...",
+          "de": "Text hier eingeben...",
+          "fr": "Entrez du texte ici...",
+          "pt": "Digite o texto aqui...",
+          "ja": "ここにテキストを入力...",
+          "ar": "أدخل النص هنا...",
+          "id": "Masukkan teks di sini..."
         }
       },
       {
-        "name": "output_key",
-        "type": "text",
+        "name": "outputFormat",
+        "type": "select",
         "label": {
-          "en": "Output Key",
-          "es": "Clave de Salida",
-          "de": "Ausgabeschlüssel",
-          "fr": "Clé de Sortie",
-          "pt": "Chave de Saída",
-          "ja": "出力キー",
-          "ar": "مخرج المفتاح",
-          "id": "Kunci Output"
+          "en": "Output Format",
+          "es": "Formato de Salida",
+          "de": "Ausgabeformat",
+          "fr": "Format de sortie",
+          "pt": "Formato de Saída",
+          "ja": "出力形式",
+          "ar": "تنسيق الإخراج",
+          "id": "Format Output"
         },
         "placeholder": {
-          "en": "Result...",
-          "es": "Resultado...",
-          "de": "Ergebnis...",
-          "fr": "Résultat...",
-          "pt": "Resultado...",
-          "ja": "結果...",
-          "ar": "النتيجة...",
-          "id": "Hasil..."
+          "en": "Select case type",
+          "es": "Seleccionar tipo de caso",
+          "de": "Fallsort auswählen",
+          "fr": "Choisir le type de cas",
+          "pt": "Selecione o tipo de caso",
+          "ja": "ケースタイプを選択",
+          "ar": "اختر نوع الحالة",
+          "id": "Pilih jenis kasus"
         }
       }
     ],
     "i18n": {
       "en": {
-        "title": "Utility Tool",
-        "description": "A versatile utility tool for processing data."
+        "title": "Text Case Converter",
+        "description": "Easily convert text between uppercase, lowercase, title case, and other formats instantly."
       },
       "es": {
-        "title": "Herramienta de Utilidad",
-        "description": "Una herramienta versátil para procesar datos."
+        "title": "Convertidor de Mayúsculas y Minúsculas",
+        "description": "Convierte fácilmente el texto entre mayúsculas, minúsculas, título y otros formatos al instante."
       },
       "de": {
-        "title": "Dienstleistungstool",
-        "description": "Ein vielseitiges Dienstleistungstool zur Datenverarbeitung."
+        "title": "Text-Fall-Konverter",
+        "description": "Konvertieren Sie Text einfach zwischen Groß-, Klein- und Titelformat sofort."
       },
       "fr": {
-        "title": "Outil Utilitaire",
-        "description": "Un outil utilitaire polyvalent pour traiter les données."
+        "title": "Convertisseur de Cas Texte",
+        "description": "Convertissez facilement le texte entre majuscules, minuscules et autres formats instantanément."
       },
       "pt": {
-        "title": "Ferramenta de Utilidade",
-        "description": "Uma ferramenta versátil para processar dados."
+        "title": "Conversor de Maiúsculas e Minúsculas",
+        "description": "Converta facilmente o texto entre maiúsculas, minúsculas, título e outros formatos instantaneamente."
       },
       "ja": {
-        "title": "ユーティリティツール",
-        "description": "データを処理するための多目的なユーティリティツールです。"
+        "title": "テキストケース変換ツール",
+        "description": "大文字、小文字、タイトルケースなどの間でテキストを簡単に瞬時に変換できます。"
       },
       "ar": {
-        "title": "أداة المرافق",
-        "description": "أداة مرافق متعددة الاستخدامات لمعالجة البيانات."
+        "title": "محول حالة النص",
+        "description": "قم بتحويل النص بسهولة بين الأحرف الكبيرة والصغيرة وعناوين وأخرى فوراً."
       },
       "id": {
-        "title": "Alat Utilitas",
-        "description": "Alat utilitas serbaguna untuk memproses data."
+        "title": "Konverter Kasus Teks",
+        "description": "Mudah mengubah teks antara huruf besar, kecil, judul, dan format lainnya secara instan."
       }
     },
     "guide": {
       "en": {
         "steps": [
-          "Open the tool interface.",
-          "Enter your input key in the provided field.",
-          "Click the process button to generate output.",
-          "Copy or save the result."
+          "Paste or type your text into the input field.",
+          "Select the desired case format from the dropdown menu.",
+          "Click the 'Convert' button to see the result.",
+          "Copy the converted text using the provided button."
         ],
-        "tips": "Ensure your input key is valid before processing."
+        "tips": "Remember to escape special characters if needed before converting."
       },
       "es": {
         "steps": [
-          "Abra la interfaz de la herramienta.",
-          "Ingrese su clave de entrada en el campo proporcionado.",
-          "Haga clic en el botón de procesamiento para generar la salida.",
-          "Copie o guarde el resultado."
+          "Pega o escribe tu texto en el campo de entrada.",
+          "Selecciona el formato de caso deseado del menú desplegable.",
+          "Haz clic en el botón 'Convertir' para ver el resultado.",
+          "Copia el texto convertido usando el botón proporcionado."
         ],
-        "tips": "Asegúrese de que su clave de entrada sea válida antes de procesar."
+        "tips": "Recuerda escapar caracteres especiales si es necesario antes de convertir."
       },
       "de": {
         "steps": [
-          "Öffnen Sie die Tool-Oberfläche.",
-          "Geben Sie Ihren Eingabeschlüssel im bereitgestellten Feld ein.",
-          "Klicken Sie auf die Prozess-Schaltfläche, um die Ausgabe zu generieren.",
-          "Kopieren oder speichern Sie das Ergebnis."
+          "Fügen Sie Ihren Text in das Eingabefeld ein.",
+          "Wählen Sie das gewünschte Fallformat aus dem Dropdown-Menü.",
+          "Klicken Sie auf die 'Konvertieren'-Schaltfläche, um das Ergebnis zu sehen.",
+          "Kopieren Sie den konvertierten Text mit der bereitgestellten Schaltfläche."
         ],
-        "tips": "Stellen Sie sicher, dass Ihr Eingabeschlüssel gültig ist, bevor Sie verarbeiten."
+        "tips": "Denken Sie daran, Sonderzeichen vor der Konvertierung zu escapen, falls erforderlich."
       },
       "fr": {
         "steps": [
-          "Ouvrez l'interface de l'outil.",
-          "Entrez votre clé d'entrée dans le champ fourni.",
-          "Cliquez sur le bouton de traitement pour générer la sortie.",
-          "Copiez ou enregistrez le résultat."
+          "Collez ou tapez votre texte dans le champ d'entrée.",
+          "Sélectionnez le format de cas souhaité dans le menu déroulant.",
+          "Cliquez sur le bouton 'Convertir' pour voir le résultat.",
+          "Copiez le texte converti en utilisant le bouton fourni."
         ],
-        "tips": "Assurez-vous que votre clé d'entrée est valide avant le traitement."
+        "tips": "N'oubliez pas d'échapper les caractères spéciaux si nécessaire avant de convertir."
       },
       "pt": {
         "steps": [
-          "Abra a interface da ferramenta.",
-          "Digite sua chave de entrada no campo fornecido.",
-          "Clique no botão de processar para gerar a saída.",
-          "Copie ou salve o resultado."
+          "Cole ou digite seu texto no campo de entrada.",
+          "Selecione o formato de caso desejado no menu suspenso.",
+          "Clique no botão 'Converter' para ver o resultado.",
+          "Copie o texto convertido usando o botão fornecido."
         ],
-        "tips": "Certifique-se de que sua chave de entrada é válida antes de processar."
+        "tips": "Lembre-se de escapar caracteres especiais se necessário antes de converter."
       },
       "ja": {
         "steps": [
-          "ツールインターフェースを開きます。",
-          "提供されたフィールドに入力キーを入力します。",
-          "出力を生成するために処理ボタンをクリックします。",
-          "結果をコピーまたは保存します。"
+          "入力フィールドにテキストを貼り付けまたは入力します。",
+          "ドロップダウンメニューから必要なケース形式を選択します。",
+          "'変換'ボタンをクリックして結果を表示します。",
+          "提供されたボタンを使用して変換されたテキストをコピーします。"
         ],
-        "tips": "処理する前に、入力キーが有効であることを確認してください。"
+        "tips": "変換する前に必要に応じて特殊文字をエスケープすることを忘れないでください。"
       },
       "ar": {
         "steps": [
-          "افتح واجهة الأداة.",
-          "أدخل مفتاح الإدخال في الحقل المقدم.",
-          "انقر على زر المعالجة لتوليد المخرجات.",
-          "انسخ أو احفظ النتيجة."
+          "الصق النص أو اكتبه في حقل الإدخال.",
+          "اختر تنسيق الحالة المطلوب من قائمة المنسدلة.",
+          "اضغط على زر 'تحويل' لرؤية النتيجة.",
+          "انسخ النص المحول باستخدام الزر المقدم."
         ],
-        "tips": "تأكد من صحة مفتاح الإدخال قبل المعالجة."
+        "tips": "تذكر الهروب من الأحرف الخاصة إذا لزم الأمر قبل التحويل."
       },
       "id": {
         "steps": [
-          "Buka antarmuka alat.",
-          "Masukkan kunci input di bidang yang disediakan.",
-          "Klik tombol proses untuk menghasilkan output.",
-          "Salin atau simpan hasil."
+          "Tempelkan atau ketik teks Anda ke bidang input.",
+          "Pilih format kasus yang diinginkan dari menu dropdown.",
+          "Klik tombol 'Konversi' untuk melihat hasilnya.",
+          "Salin teks yang dikonversi menggunakan tombol yang disediakan."
         ],
-        "tips": "Pastikan kunci input Anda valid sebelum memproses."
+        "tips": "Ingat untuk melarikan diri karakter khusus jika diperlukan sebelum mengkonversi."
       }
     }
   }
