@@ -1,252 +1,169 @@
 [
   {
-    "id": "ns1-breathing-trainer",
-    "category": "HEALTH_CALCULATOR",
-    "scriptUrl": "/assets/js/tools/ns1-breathing-trainer.js",
+    "id": "attyn-cursor-intelligence",
+    "category": "Text Manipulation",
+    "scriptUrl": "/assets/js/tools/text-transformer-tool.js",
     "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "Architect Project Estimator",
-        "description": "Calculate area, materials, and budget for architectural construction projects."
+        "title": "Attyn: Cursor Intelligence",
+        "description": "Advanced text transformation tool for cursor intelligence."
       },
       "es": {
-        "title": "Estimador de Proyectos de Arquitectura",
-        "description": "Calcule el área, los materiales y el presupuesto para proyectos de construcción arquitectónica."
+        "title": "Inteligencia del CursoR",
+        "description": "Herramienta avanzada de transformación de texto para inteligencia del cursor."
       },
       "de": {
-        "title": "Architekturprojekt-Schätzer",
-        "description": "Berechnen Sie Fläche, Materialien und Budget für Architektur-Bauprojekte."
+        "title": "Attyn: Cursor-Intelligenz",
+        "description": "Fortgeschrittenes Texttransformationstool für Cursor-Intelligenz."
       },
       "fr": {
-        "title": "Estimateur de Projet d'Architecture",
-        "description": "Calculez la surface, les matériaux et le budget pour les projets de construction architecturale."
+        "title": "Intelligence Curseur Attyn",
+        "description": "Outil de transformation de texte avancé pour l'intelligence du curseur."
       },
       "pt": {
-        "title": "Estimador de Projetos de Arquitetura",
-        "description": "Calcule a área, os materiais e o orçamento para projetos de construção arquitetônica."
+        "title": "Inteligência do Cursor Attyn",
+        "description": "Ferramenta avançada de transformação de texto para inteligência de cursor."
       },
       "ja": {
-        "title": "建築プロジェクト見積もり",
-        "description": "建築プロジェクトの面積、資材、予算を計算します。"
+        "title": "Attyn: カーソルインテリジェンス",
+        "description": "カーソルインテリジェンス向けの高度なテキスト変換ツール。"
       },
       "ar": {
-        "title": "مقدر مشاريع الهندسة المعمارية",
-        "description": "احسب المساحة والمواد والميزانية لمشاريع البناء المعماري."
+        "title": "عقلية الكرسور Attyn",
+        "description": "أداة متقدمة لتحويل النصوص لذكاء الكرسور."
       },
       "id": {
-        "title": "Estimator Proyek Arsitektur",
-        "description": "Hitung luas, bahan, dan anggaran untuk proyek konstruksi arsitektur."
+        "title": "Attyn: Intelijen Kursor",
+        "description": "Alat transformasi teks canggih untuk kecerdasan kursor."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-drafting-rules",
+      "icon": "fa-solid fa-weight-hanging",
       "fields": [
         {
-          "name": "project_name",
-          "type": "text",
-          "label": {
-            "en": "Project Name",
-            "es": "Nombre del Proyecto",
-            "de": "Projektname",
-            "fr": "Nom du Projet",
-            "pt": "Nome do Projeto",
-            "ja": "プロジェクト名",
-            "ar": "اسم المشروع",
-            "id": "Nama Proyek"
-          },
-          "placeholder": "e.g. Modern Villa"
-        },
-        {
-          "name": "total_area",
+          "name": "weight_kg",
           "type": "number",
           "label": {
-            "en": "Total Area (m²)",
-            "es": "Área Total (m²)",
-            "de": "Gesamtfläche (m²)",
-            "fr": "Surface Totale (m²)",
-            "pt": "Área Total (m²)",
-            "ja": "総面積 (m²)",
-            "ar": "المساحة الإجمالية (م²)",
-            "id": "Luas Total (m²)"
+            "en": "Weight (kg)",
+            "es": "Peso (kg)",
+            "de": "Gewicht (kg)",
+            "fr": "Poids (kg)",
+            "pt": "Peso (kg)",
+            "ja": "体重 (kg)",
+            "ar": "الوزن (كجم)",
+            "id": "Berat (kg)"
           },
-          "placeholder": "150"
+          "placeholder": "70"
         },
         {
-          "name": "construction_type",
-          "type": "select",
+          "name": "height_cm",
+          "type": "number",
           "label": {
-            "en": "Construction Type",
-            "es": "Tipo de Construcción",
-            "de": "Baubeschreibung",
-            "fr": "Type de Construction",
-            "pt": "Tipo de Construção",
-            "ja": "建設タイプ",
-            "ar": "نوع البناء",
-            "id": "Tipe Konstruksi"
+            "en": "Height (cm)",
+            "es": "Altura (cm)",
+            "de": "Größe (cm)",
+            "fr": "Taille (cm)",
+            "pt": "Altura (cm)",
+            "ja": "身長 (cm)",
+            "ar": "الطول (سم)",
+            "id": "Tinggi (cm)"
           },
-          "options": [
-            {
-              "label": {
-                "en": "Residential",
-                "es": "Residencial",
-                "de": "Wohngebäude",
-                "fr": "Résidentiel",
-                "pt": "Residencial",
-                "ja": "住宅",
-                "ar": "سكني",
-                "id": "Residensial"
-              }
-            },
-            {
-              "label": {
-                "en": "Commercial",
-                "es": "Comercial",
-                "de": "Gewerbe",
-                "fr": "Commercial",
-                "pt": "Comercial",
-                "ja": "商業",
-                "ar": "تجاري",
-                "id": "Komersial"
-              }
-            },
-            {
-              "label": {
-                "en": "Industrial",
-                "es": "Industrial",
-                "de": "Industrie",
-                "fr": "Industriel",
-                "pt": "Industrial",
-                "ja": "工業",
-                "ar": "صناعي",
-                "id": "Industri"
-              }
-            }
-          ]
-        },
-        {
-          "name": "budget_range",
-          "type": "range",
-          "label": {
-            "en": "Estimated Budget",
-            "es": "Presupuesto Estimado",
-            "de": "Geschätztes Budget",
-            "fr": "Budget Estimé",
-            "pt": "Orçamento Estimado",
-            "ja": "推定予算",
-            "ar": "الميزانية المقدرة",
-            "id": "Estimasi Anggaran"
-          },
-          "min": 10000,
-          "max": 1000000
-        },
-        {
-          "name": "blueprint_file",
-          "type": "file",
-          "label": {
-            "en": "Upload Blueprint",
-            "es": "Subir Plano",
-            "de": "Bauplan hochladen",
-            "fr": "Télécharger le Plan",
-            "pt": "Enviar Planta",
-            "ja": "設計図をアップロード",
-            "ar": "تحميل المخططات",
-            "id": "Unggah Cetak Biru"
-          },
-          "placeholder": "Select PDF or DWG"
+          "placeholder": "175"
         }
       ]
     },
     "guide": {
       "en": {
         "steps": [
-          "Enter your project name in the \"Project Name\" field.",
-          "Input the total area value (m²) in the \"Total Area (m²)\" field.",
-          "Select a construction type from the \"Construction Type\" dropdown menu.",
-          "Adjust the budget range within the 10,000 to 1,000,000 limit using the \"Estimated Budget\" slider.",
-          "Upload the blueprint file to the \"Upload Blueprint\" field (accepts PDF or DWG).",
-          "Review calculated results for area, materials, and budget estimates."
+          "Step 1: Open UI Weaver application and select your project.",
+          "Step 2: Navigate to Form Builder section.",
+          "Step 3: Click 'Add New Input Field' button.",
+          "Step 4: Define field properties (name, type, validation rules).",
+          "Step 5: Preview form in real-time mode for layout verification.",
+          "Step 6: Save and export configuration with unique project name."
         ],
-        "tips": "Ensure all input values are accurate for reliable estimates. Always verify uploaded files are in PDF or DWG format."
+        "tips": "Always validate all input rules before deploying the form."
       },
       "es": {
         "steps": [
-          "Ingrese el nombre del proyecto en el campo \"Nombre del Proyecto\".",
-          "Indique el valor del área total (m²) en el campo \"Área Total (m²)\".",
-          "Seleccione un tipo de construcción desde el menú desplegable \"Tipo de Construcción\".",
-          "Ajuste el rango de presupuesto utilizando el control deslizante \"Presupuesto Estimado\" (límite: 10,000 a 1,000,000).",
-          "Suba el archivo del plano al campo \"Subir Plano\" (acepta PDF o DWG).",
-          "Revise los resultados calculados mostrados para el área, los materiales y la estimación del presupuesto."
+          "Paso 1: Abra la aplicación UI Weaver y seleccione su proyecto.",
+          "Paso 2: Navegue a la sección Constructor de Formularios.",
+          "Paso 3: Haga clic en 'Agregar Nuevo Campo Input'.",
+          "Paso 4: Defina propiedades del campo (nombre, tipo, reglas de validación).",
+          "Paso 5: Vista previa el formulario en modo tiempo real.",
+          "Paso 6: Guarde y exporte la configuración con nombre único."
         ],
-        "tips": "Asegúrese de que todos los valores ingresados sean precisos para obtener estimaciones confiables. Verifique siempre que los archivos subidos estén en formato PDF o DWG antes de enviarlos."
+        "tips": "Verifique siempre las reglas de validación antes de publicar el formulario."
       },
       "de": {
         "steps": [
-          "Geben Sie den Projektnamen im Feld \"Projektname\" ein.",
-          "Verfügen Sie die Gesamtfläche (m²) im Feld \"Gesamtfläche (m²)\" ein.",
-          "Wählen Sie den Typ der Konstruktion aus dem Dropdown-Menü \"Baubeschreibung\".",
-          "Stellen Sie den geschätzten Budgetbereich mit dem Slider \"Geschätztes Budget\" innerhalb des Bereichs von 10.000 bis 1.000.000 ein.",
-          "Laden Sie das Bauplan-Datei im Feld \"Bauplan hochladen\" (akzeptiert PDF oder DWG).",
-          "Überprüfen Sie die berechneten Ergebnisse für Fläche, Materialien und Budget."
+          "Schritt 1: Öffnen Sie UI Weaver und wählen Sie Ihr Projekt.",
+          "Schritt 2: Navigieren Sie zur Formular-Builders-Sektion.",
+          "Schritt 3: Klicken Sie auf 'Neues Eingabefeld hinzufügen'.",
+          "Schritt 4: Definieren Sie Feldattribute (Name, Typ, Validierungsregeln).",
+          "Schritt 5: Sehen Sie sich das Formular im Live-Modus an.",
+          "Schritt 6: Speichern und exportieren Sie die Konfiguration."
         ],
-        "tips": "Stellen Sie sicher, dass alle Eingabedaten präzise sind, um zuverlässige Schätzungen zu erhalten. Überprüfen Sie vor dem Senden, ob die hochgeladenen Dateien im PDF- oder DWG-Format liegen."
+        "tips": "Überprüfen Sie alle Validierungsregeln vor der Veröffentlichung."
       },
       "fr": {
         "steps": [
-          "Entrez le nom du projet dans le champ \"Nom du Projet\".",
-          "Saisissez la surface totale (m²) dans le champ \"Surface Totale (m²)\".",
-          "Sélectionnez un type de construction dans le menu déroulant \"Type de Construction\".",
-          "Ajustez le budget estimé à l'aide du curseur \"Budget Estimé\" (plage : 10 000 à 1 000 000).",
-          "Téléchargez le fichier de plan dans le champ \"Télécharger le Plan\" (accepte PDF ou DWG).",
-          "Examinez les résultats calculés pour la surface, les matériaux et le budget."
+          "Étape 1 : Ouvrez UI Weaver et sélectionnez votre projet.",
+          "Étape 2 : Naviguez vers la section du Constructeur de Formulaires.",
+          "Étape 3 : Cliquez sur 'Ajouter un champ d'entrée'.",
+          "Étape 4 : Définissez les propriétés du champ (nom, type, règles).",
+          "Étape 5 : Vérifiez l'aperçu en mode temps réel.",
+          "Étape 6 : Enregistrez et exportez la configuration."
         ],
-        "tips": "Assurez-vous que toutes les données saisies sont précises pour obtenir des estimations fiables. Vérifiez toujours que les fichiers téléchargés sont au format PDF ou DWG avant l'envoi."
+        "tips": "Vérifiez toutes les règles de validation avant publication."
       },
       "pt": {
         "steps": [
-          "Insira o nome do projeto no campo \"Nome do Projeto\".",
-          "Digite a área total (m²) no campo \"Área Total (m²)\".",
-          "Selecione um tipo de construção no menu suspenso \"Tipo de Construção\".",
-          "Ajuste o orçamento estimado usando o controle deslizante \"Orçamento Estimado\" (faixa: 10.000 a 1.000.000).",
-          "Faça upload do arquivo da planta no campo \"Enviar Planta\" (aceita PDF ou DWG).",
-          "Revise os resultados calculados para área, materiais e orçamento."
+          "Passo 1: Abra o aplicativo UI Weaver e selecione seu projeto.",
+          "Passo 2: Navegue até a seção Construtor de Formulários.",
+          "Passo 3: Clique em 'Adicionar Novo Campo'.",
+          "Passo 4: Defina propriedades do campo (nome, tipo, regras).",
+          "Passo 5: Visualize o formulário no modo tempo real.",
+          "Passo 6: Salve e exporte a configuração com nome único."
         ],
-        "tips": "Certifique-se de que todos os dados inseridos sejam precisos para obter estimativas confiáveis. Verifique se os arquivos enviados estão no formato PDF ou DWG antes de prosseguir."
+        "tips": "Sempre verifique as regras de validação antes de publicar."
       },
       "ja": {
         "steps": [
-          "プロジェクト名をフィールド \"プロジェクト名\" に記入してください。",
-          "総面積 (m²) をフィールド \"総面積 (m²)\" に入力してください。",
-          "ドロップダウンメニュー \"建設タイプ\" から建設タイプを選択してください。",
-          "スライダー \"推定予算\" を使用して予算範囲を 10,000～1,000,000 の間で調整してください。",
-          "ブループリファイル（PDF または DWG）をフィールド \"設計図をアップロード\" にアップロードしてください。",
-          "面積、資材、予算の見積もり結果を確認してください。"
+          "ステップ1：UI Weaver アプリを開きプロジェクトを選択する。",
+          "ステップ2：フォームビルダーセクションへ移動する。",
+          "ステップ3：「フィールドを追加」をクリックする。",
+          "ステップ4：フィールド属性（名前、タイプ、検証ルール）を指定する。",
+          "ステップ5：リアルタイムモードでフォームを確認する。",
+          "ステップ6：ユニークな名前で設定を保存しエクスポートする。"
         ],
-        "tips": "入力されたデータが正確であることを確認し、信頼性の高い見積もりを取得してください。アップロードしたファイルが PDF または DWG 形式であるか確認してから進んでください。"
+        "tips": "公開前にすべての検証ルールを確認してください。"
       },
       "ar": {
         "steps": [
-          "أدخل اسم المشروع في الحقل المخصص \"اسم المشروع\".",
-          "أدخل قيمة إجمالي المساحة (م²) في حقل \"المساحة الإجمالية (م²)\".",
-          "اختر نوع البناء من القائمة المنسدلة \"نوع البناء\".",
-          "ضبط نطاق الميزانية المقدرة باستخدام شريط التمرير \"الميزانية المقدرة\" ضمن النطاق 10,000 إلى 1,000,000.",
-          "قم بتحميل ملف المخططات إلى حقل \"تحميل المخططات\" (يقبل PDF أو DWG).",
-          "راجع النتائج المحسوبة للمساحة والمواد والميزانية."
+          "الخطوة 1: افتح تطبيق UI Weaver واختر مشروعك.",
+          "الخطوة 2: انتقل إلى قسم منشئ النماذج.",
+          "الخطوة 3: انقر على 'إضافة حقل إدخال جديد'.",
+          "الخطوة 4: حدد خصائص الحقل (الاسم، النوع، قواعد التحقق).",
+          "الخطوة 5: معاينة النموذج في وضع الوقت الحقيقي.",
+          "الخطوة 6: احفظ وصدر التكوين باسم فريد."
         ],
-        "tips": "تأكد من دقة جميع البيانات المدخلة للحصول على تقديرات موثوقة. تحقق دائمًا من أن الملفات المرفوعة بصيغة PDF أو DWG قبل الإرسال."
+        "tips": "تحقق دائمًا من جميع قواعد التحقق قبل نشر النموذج."
       },
       "id": {
         "steps": [
-          "Masukkan Nama Proyek di kolom \"Nama Proyek\".",
-          "Isi nilai Luas Total (m²) di kolom \"Luas Total (m²)\".",
-          "Pilih Tipe Konstruksi dari menu dropdown \"Tipe Konstruksi\".",
-          "Sesuaikan Estimasi Anggaran menggunakan slider \"Estimasi Anggaran\" (range: 10.000 - 1.000.000).",
-          "Unggah Cetak Biru ke kolom \"Unggah Cetak Biru\" (format PDF atau DWG).",
-          "Lihat hasil estimasi untuk luas, bahan, dan anggaran."
+          "Langkah 1: Buka aplikasi UI Weaver dan pilih proyek Anda.",
+          "Langkah 2: Masuk ke menu Builder Formulir.",
+          "Langkah 3: Klik tombol 'Tambah Medan Input Baru'.",
+          "Langkah 4: Isi properti medan seperti nama, tipe, aturan validasi.",
+          "Langkah 5: Lihat pratinjau formulir dalam mode real-time.",
+          "Langkah 6: Simpan dan ekspor konfigurasi dengan nama unik."
         ],
-        "tips": "Pastikan semua data yang dimasukkan akurat untuk estimasi yang dapat diandalkan. Periksa file yang diunggah berada dalam format PDF atau DWG sebelum melanjutkan."
+        "tips": "Selalu periksa aturan validasi sebelum mempublikasikan formulir."
       }
     },
-    "htmlUrl": "tools/ns1-breathing-trainer.html",
-    "icon": "fa-solid fa-drafting-rules"
+    "htmlUrl": "tools/attyn-cursor-intelligence.html",
+    "icon": "fa-solid fa-weight-hanging"
   }
 ]
