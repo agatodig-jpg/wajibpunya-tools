@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architect Project Estimator</title>
+    <!-- Fix 1: Clean CDN URLs without markdown wrapper -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-6 flex flex-col justify-center items-center">
+    <header class="w-full max-w-2xl flex justify-between items-center mb-4 px-1">
+        <a href="../index.html" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-arrow-left"></i> <span id="navBackText">Back</span>
+        </a>
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-globe text-slate-400 text-xs"></i>
+            <select id="toolLangSelect" onchange="changeToolLanguage(this.value)" class="bg-slate-800 text-xs text-slate-200 border border-slate-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+                <option value="en">🌐 English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="pt">Português</option>
+                <option value="ja">日本語</option>
+                <option value="ar">العربية</option>
+                <option value="id">Bahasa Indonesia</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-700">
+        <div class="mb-6 border-b border-slate-700 pb-4">
+            <h1 id="toolTitle" class="text-2xl font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-drafting-rules"></i> Architect Project Estimator
+            </h1>
+            <p id="toolDesc" class="text-slate-400 text-sm">Calculate area, materials, and budget for architectural construction projects.</p>
+        </div>
+
+        <form id="toolForm" onsubmit="handleExecute(event)" class="space-y-5">
+            <div id="app" class="space-y-4"></div>
+            <button type="submit" id="btnSubmit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center gap-2 shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-play text-xs"></i>
+                <span id="btnSubmitText">Execute Tool</span>
+            </button>
+        </form>
+
+        <div id="resultBox" class="mt-6 hidden p-4 bg-slate-950 rounded-lg border border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Output Result:</h3>
+                <button onclick="copyResult()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy</span>
+                </button>
+            </div>
+            <pre id="resultOutput" class="text-sm text-green-400 overflow-x-auto whitespace-pre-wrap font-mono bg-slate-900/50 p-3 rounded border border-slate-800"></pre>
+        </div>
+
+        <div id="guideSection" class="mt-8 pt-6 border-t border-slate-700">
+            <h3 class="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                <span id="guideTitleText">User Guide</span>
+            </h3>
+            <ol id="guideSteps" class="list-decimal list-inside space-y-1.5 text-xs text-slate-400 mb-4 leading-relaxed"></ol>
+            <div id="guideTipsBox" class="p-3 bg-indigo-950/40 border border-indigo-800/50 rounded-lg text-xs text-indigo-300 hidden flex items-start gap-2">
+                <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                <div><span class="font-semibold">Tips:</span> <span id="guideTips"></span></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- INLINE ENGINE LOGIC -->
+    <script>
+        async function executeTool(inputs) {
+  try {
+    const inhale = Number(inputs.inhaleSeconds);
+    const hold = Number(inputs.holdSeconds);
+    const exhale = Number(inputs.exhaleSeconds);
+    const duration = Number(inputs.sessionDuration);
+
+    if (!inhale || !hold || !exhale || !duration) {
+      throw new Error("Inputs required");
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 300;
+    canvas.height = 200;
+    if (document.body) document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let startTime = Date.now();
+    let timerId = null;
+
+    const drawFrame = () => {
+      const now = Date.now();
+      const elapsed = (now - startTime) / 1000;
+
+      if (elapsed >= duration) {
+        clearInterval(timerId);
+        ctx.fillStyle = '#333';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        ctx.fillText('Complete', 145, 100);
+        if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+        return;
+      }
+
+      const cycleLen = inhale + hold + exhale;
+      let currentPhase = 'inhale';
+
+      // Determine phase based on modulo arithmetic
+      const remainder = elapsed % cycleLen;
+      if (remainder < inhale) {
+        currentPhase = 'inhale';
+      } else if (remainder < inhale + hold) {
+        currentPhase = 'hold';
+      } else {
+        currentPhase = 'exhale';
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const colors = { inhale: '#3b82f6', hold: '#ef4444', exhale: '#22c55e' };
+      ctx.fillStyle = colors[currentPhase];
+      ctx.fillRect(10, 10, canvas.width - 20, 180);
+
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 14px sans-serif';
+      const timeLeft = Math.max(0, duration - elapsed).toFixed(1);
+      ctx.fillText(`Phase: ${currentPhase.toUpperCase()}`, 5, 25);
+      ctx.fillText(`${timeLeft}s remaining`, 15, 45);
+    };
+
+    timerId = setInterval(drawFrame, 200);
+
+    return new Promise((resolve) => {
+      const finishTimeout = setTimeout(() => {
+        if (timerId) clearInterval(timerId);
+        resolve({ success: true, result: { completed: true }, error: null });
+      }, duration * 1000);
+    });
+
+  } catch (err) {
+    return { success: false, result: null, error: err.message };
+  }
+}
+    </script>
+
+    <!-- UI & I18N RENDER DRIVER -->
+    <script>
+        const schemaFields = [{"name":"project_name","type":"text","label":{"en":"Project Name","es":"Nombre del Proyecto","de":"Projektname","fr":"Nom du Projet","pt":"Nome do Projeto","ja":"プロジェクト名","ar":"اسم المشروع","id":"Nama Proyek"},"placeholder":"e.g. Modern Villa"},{"name":"total_area","type":"number","label":{"en":"Total Area (m²)","es":"Área Total (m²)","de":"Gesamtfläche (m²)","fr":"Surface Totale (m²)","pt":"Área Total (m²)","ja":"総面積 (m²)","ar":"المساحة الإجمالية (م²)","id":"Luas Total (m²)"},"placeholder":"150"},{"name":"construction_type","type":"select","label":{"en":"Construction Type","es":"Tipo de Construcción","de":"Baubeschreibung","fr":"Type de Construction","pt":"Tipo de Construção","ja":"建設タイプ","ar":"نوع البناء","id":"Tipe Konstruksi"},"options":[{"label":{"en":"Residential","es":"Residencial","de":"Wohngebäude","fr":"Résidentiel","pt":"Residencial","ja":"住宅","ar":"سكني","id":"Residensial"}},{"label":{"en":"Commercial","es":"Comercial","de":"Gewerbe","fr":"Commercial","pt":"Comercial","ja":"商業","ar":"تجاري","id":"Komersial"}},{"label":{"en":"Industrial","es":"Industrial","de":"Industrie","fr":"Industriel","pt":"Industrial","ja":"工業","ar":"صناعي","id":"Industri"}}]},{"name":"budget_range","type":"range","label":{"en":"Estimated Budget","es":"Presupuesto Estimado","de":"Geschätztes Budget","fr":"Budget Estimé","pt":"Orçamento Estimado","ja":"推定予算","ar":"الميزانية المقدرة","id":"Estimasi Anggaran"},"min":10000,"max":1000000},{"name":"blueprint_file","type":"file","label":{"en":"Upload Blueprint","es":"Subir Plano","de":"Bauplan hochladen","fr":"Télécharger le Plan","pt":"Enviar Planta","ja":"設計図をアップロード","ar":"تحميل المخططات","id":"Unggah Cetak Biru"},"placeholder":"Select PDF or DWG"}];
+        const i18nMap = {"en":{"title":"Architect Project Estimator","description":"Calculate area, materials, and budget for architectural construction projects."},"es":{"title":"Estimador de Proyectos de Arquitectura","description":"Calcule el área, los materiales y el presupuesto para proyectos de construcción arquitectónica."},"de":{"title":"Architekturprojekt-Schätzer","description":"Berechnen Sie Fläche, Materialien und Budget für Architektur-Bauprojekte."},"fr":{"title":"Estimateur de Projet d'Architecture","description":"Calculez la surface, les matériaux et le budget pour les projets de construction architecturale."},"pt":{"title":"Estimador de Projetos de Arquitetura","description":"Calcule a área, os materiais e o orçamento para projetos de construção arquitetônica."},"ja":{"title":"建築プロジェクト見積もり","description":"建築プロジェクトの面積、資材、予算を計算します。"},"ar":{"title":"مقدر مشاريع الهندسة المعمارية","description":"احسب المساحة والمواد والميزانية لمشاريع البناء المعماري."},"id":{"title":"Estimator Proyek Arsitektur","description":"Hitung luas, bahan, dan anggaran untuk proyek konstruksi arsitektur."}};
+        const guideMap = {"en":{"steps":["Enter your project name in the \"Project Name\" field.","Input the total area value (m²) in the \"Total Area (m²)\" field.","Select a construction type from the \"Construction Type\" dropdown menu.","Adjust the budget range within the 10,000 to 1,000,000 limit using the \"Estimated Budget\" slider.","Upload the blueprint file to the \"Upload Blueprint\" field (accepts PDF or DWG).","Review calculated results for area, materials, and budget estimates."],"tips":"Ensure all input values are accurate for reliable estimates. Always verify uploaded files are in PDF or DWG format."},"es":{"steps":["Ingrese el nombre del proyecto en el campo \"Nombre del Proyecto\".","Indique el valor del área total (m²) en el campo \"Área Total (m²)\".","Seleccione un tipo de construcción desde el menú desplegable \"Tipo de Construcción\".","Ajuste el rango de presupuesto utilizando el control deslizante \"Presupuesto Estimado\" (límite: 10,000 a 1,000,000).","Suba el archivo del plano al campo \"Subir Plano\" (acepta PDF o DWG).","Revise los resultados calculados mostrados para el área, los materiales y la estimación del presupuesto."],"tips":"Asegúrese de que todos los valores ingresados sean precisos para obtener estimaciones confiables. Verifique siempre que los archivos subidos estén en formato PDF o DWG antes de enviarlos."},"de":{"steps":["Geben Sie den Projektnamen im Feld \"Projektname\" ein.","Verfügen Sie die Gesamtfläche (m²) im Feld \"Gesamtfläche (m²)\" ein.","Wählen Sie den Typ der Konstruktion aus dem Dropdown-Menü \"Baubeschreibung\".","Stellen Sie den geschätzten Budgetbereich mit dem Slider \"Geschätztes Budget\" innerhalb des Bereichs von 10.000 bis 1.000.000 ein.","Laden Sie das Bauplan-Datei im Feld \"Bauplan hochladen\" (akzeptiert PDF oder DWG).","Überprüfen Sie die berechneten Ergebnisse für Fläche, Materialien und Budget."],"tips":"Stellen Sie sicher, dass alle Eingabedaten präzise sind, um zuverlässige Schätzungen zu erhalten. Überprüfen Sie vor dem Senden, ob die hochgeladenen Dateien im PDF- oder DWG-Format liegen."},"fr":{"steps":["Entrez le nom du projet dans le champ \"Nom du Projet\".","Saisissez la surface totale (m²) dans le champ \"Surface Totale (m²)\".","Sélectionnez un type de construction dans le menu déroulant \"Type de Construction\".","Ajustez le budget estimé à l'aide du curseur \"Budget Estimé\" (plage : 10 000 à 1 000 000).","Téléchargez le fichier de plan dans le champ \"Télécharger le Plan\" (accepte PDF ou DWG).","Examinez les résultats calculés pour la surface, les matériaux et le budget."],"tips":"Assurez-vous que toutes les données saisies sont précises pour obtenir des estimations fiables. Vérifiez toujours que les fichiers téléchargés sont au format PDF ou DWG avant l'envoi."},"pt":{"steps":["Insira o nome do projeto no campo \"Nome do Projeto\".","Digite a área total (m²) no campo \"Área Total (m²)\".","Selecione um tipo de construção no menu suspenso \"Tipo de Construção\".","Ajuste o orçamento estimado usando o controle deslizante \"Orçamento Estimado\" (faixa: 10.000 a 1.000.000).","Faça upload do arquivo da planta no campo \"Enviar Planta\" (aceita PDF ou DWG).","Revise os resultados calculados para área, materiais e orçamento."],"tips":"Certifique-se de que todos os dados inseridos sejam precisos para obter estimativas confiáveis. Verifique se os arquivos enviados estão no formato PDF ou DWG antes de prosseguir."},"ja":{"steps":["プロジェクト名をフィールド \"プロジェクト名\" に記入してください。","総面積 (m²) をフィールド \"総面積 (m²)\" に入力してください。","ドロップダウンメニュー \"建設タイプ\" から建設タイプを選択してください。","スライダー \"推定予算\" を使用して予算範囲を 10,000～1,000,000 の間で調整してください。","ブループリファイル（PDF または DWG）をフィールド \"設計図をアップロード\" にアップロードしてください。","面積、資材、予算の見積もり結果を確認してください。"],"tips":"入力されたデータが正確であることを確認し、信頼性の高い見積もりを取得してください。アップロードしたファイルが PDF または DWG 形式であるか確認してから進んでください。"},"ar":{"steps":["أدخل اسم المشروع في الحقل المخصص \"اسم المشروع\".","أدخل قيمة إجمالي المساحة (م²) في حقل \"المساحة الإجمالية (م²)\".","اختر نوع البناء من القائمة المنسدلة \"نوع البناء\".","ضبط نطاق الميزانية المقدرة باستخدام شريط التمرير \"الميزانية المقدرة\" ضمن النطاق 10,000 إلى 1,000,000.","قم بتحميل ملف المخططات إلى حقل \"تحميل المخططات\" (يقبل PDF أو DWG).","راجع النتائج المحسوبة للمساحة والمواد والميزانية."],"tips":"تأكد من دقة جميع البيانات المدخلة للحصول على تقديرات موثوقة. تحقق دائمًا من أن الملفات المرفوعة بصيغة PDF أو DWG قبل الإرسال."},"id":{"steps":["Masukkan Nama Proyek di kolom \"Nama Proyek\".","Isi nilai Luas Total (m²) di kolom \"Luas Total (m²)\".","Pilih Tipe Konstruksi dari menu dropdown \"Tipe Konstruksi\".","Sesuaikan Estimasi Anggaran menggunakan slider \"Estimasi Anggaran\" (range: 10.000 - 1.000.000).","Unggah Cetak Biru ke kolom \"Unggah Cetak Biru\" (format PDF atau DWG).","Lihat hasil estimasi untuk luas, bahan, dan anggaran."],"tips":"Pastikan semua data yang dimasukkan akurat untuk estimasi yang dapat diandalkan. Periksa file yang diunggah berada dalam format PDF atau DWG sebelum melanjutkan."}};
+        const toolIconClass = "fa-solid fa-drafting-rules";
+
+        function renderFormFields(currentLang) {
+            const appEl = document.getElementById('app');
+            if (!appEl) return;
+            
+            if (!schemaFields || schemaFields.length === 0) {
+                appEl.innerHTML = '<p class="text-xs text-slate-500">No input fields required.</p>';
+                return;
+            }
+
+            appEl.innerHTML = schemaFields.map(field => {
+                const name = field.name || 'field';
+                const type = field.type || 'text';
+                
+                let label = field.label;
+                if (typeof field.label === 'object' && field.label !== null) {
+                    label = field.label[currentLang] || field.label.en || field.label.id;
+                }
+                if (!label) {
+                    label = (currentLang === 'id') ? (field.label_id || field.label) : (field.label_en || field.label);
+                }
+                if (!label) label = name.replace(/_/g, ' ').toUpperCase();
+
+                const placeholder = field.placeholder || '';
+
+                if (type === 'select' && Array.isArray(field.options)) {
+                    const optionsHTML = field.options.map(opt => {
+                        let val = opt;
+                        let txt = opt;
+                        if (typeof opt === 'object' && opt !== null) {
+                            val = opt.value ?? opt.id ?? opt.key ?? opt.val ?? JSON.stringify(opt);
+                            txt = opt.label ?? opt.text ?? opt.name ?? val;
+                            if (typeof txt === 'object' && txt !== null) {
+                                txt = txt[currentLang] || txt.en || txt.id || val;
+                            }
+                        }
+                        return `<option value="${val}">${txt}</option>`;
+                    }).join('');
+
+                    return `
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                            <select name="${name}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">
+                                ${optionsHTML}
+                            </select>
+                        </div>
+                    `;
+                }
+
+                if (type === 'textarea') {
+                    return `
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                            <textarea name="${name}" rows="${field.rows || 4}" placeholder="${placeholder}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">${label}</label>
+                        <input type="${type}" name="${name}" placeholder="${placeholder}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function changeToolLanguage(lang) {
+            localStorage.setItem('user_lang', lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const langData = i18nMap[lang] || i18nMap['en'] || i18nMap['id'] || {};
+            const guideData = guideMap[lang] || guideMap['en'] || guideMap['id'] || {};
+
+            renderFormFields(lang);
+
+            const titleEl = document.getElementById('toolTitle');
+            const descEl = document.getElementById('toolDesc');
+            if (titleEl && langData.title) titleEl.innerHTML = `<i class="${toolIconClass}"></i> ${langData.title}`;
+            if (descEl && langData.description) descEl.innerText = langData.description;
+
+            const btnSubmitText = document.getElementById('btnSubmitText');
+            const navBackText = document.getElementById('navBackText');
+            if (btnSubmitText) btnSubmitText.innerText = (lang === 'id') ? 'Jalankan Tool' : 'Execute Tool';
+            if (navBackText) navBackText.innerText = (lang === 'id') ? 'Kembali' : 'Back';
+
+            const stepsEl = document.getElementById('guideSteps');
+            const tipsBox = document.getElementById('guideTipsBox');
+            const tipsEl = document.getElementById('guideTips');
+
+            // Fix 2: Strip angka eksis agar tidak terjadi double numbering "1. 1. Step"
+            if (stepsEl && guideData.steps && guideData.steps.length > 0) {
+                stepsEl.innerHTML = guideData.steps
+                    .map(step => `<li>${step.replace(/^[0-9]+\.\s*/, '')}</li>`)
+                    .join('');
+            }
+
+            if (tipsEl && guideData.tips) {
+                tipsEl.innerText = guideData.tips;
+                tipsBox.classList.remove('hidden');
+            } else if (tipsBox) {
+                tipsBox.classList.add('hidden');
+            }
+
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+
+        async function handleExecute(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const inputs = Object.fromEntries(formData.entries());
+            const resBox = document.getElementById('resultBox');
+            const resOut = document.getElementById('resultOutput');
+            
+            if (typeof executeTool === 'function') {
+                try {
+                    const res = await executeTool(inputs);
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = (typeof res === 'object') ? JSON.stringify(res, null, 2) : res;
+                } catch (err) {
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = "Error: " + err.message;
+                }
+            }
+        }
+
+        function copyResult() {
+            const resOut = document.getElementById('resultOutput');
+            if (!resOut) return;
+            navigator.clipboard.writeText(resOut.innerText);
+            const copyBtnText = document.getElementById('copyBtnText');
+            if (copyBtnText) {
+                copyBtnText.innerText = 'Copied!';
+                setTimeout(() => { copyBtnText.innerText = 'Copy'; }, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('user_lang') || 'en';
+            document.getElementById('toolLangSelect').value = savedLang;
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
