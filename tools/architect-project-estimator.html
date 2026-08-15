@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Estimator</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-6 flex flex-col justify-center items-center">
+    <header class="w-full max-w-2xl flex justify-between items-center mb-4 px-1">
+        <a href="../index.html" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-arrow-left"></i> <span id="navBackText">Back</span>
+        </a>
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-globe text-slate-400 text-xs"></i>
+            <select id="toolLangSelect" onchange="changeToolLanguage(this.value)" class="bg-slate-800 text-xs text-slate-200 border border-slate-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+                <option value="en">🌐 English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="pt">Português</option>
+                <option value="ja">日本語</option>
+                <option value="ar">العربية</option>
+                <option value="id">Bahasa Indonesia</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-700">
+        <div class="mb-6 border-b border-slate-700 pb-4">
+            <h1 id="toolTitle" class="text-2xl font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-drafting-rules"></i> Project Estimator
+            </h1>
+            <p id="toolDesc" class="text-slate-400 text-sm">Calculate material costs and construction timelines for architectural projects.</p>
+        </div>
+
+        <form id="toolForm" onsubmit="handleExecute(event)" class="space-y-5">
+            <div id="app" class="space-y-4"></div>
+            <button type="submit" id="btnSubmit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center gap-2 shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-play text-xs"></i>
+                <span id="btnSubmitText">Execute Tool</span>
+            </button>
+        </form>
+
+        <div id="resultBox" class="mt-6 hidden p-4 bg-slate-950 rounded-lg border border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Output Result:</h3>
+                <button onclick="copyResult()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy</span>
+                </button>
+            </div>
+            <pre id="resultOutput" class="text-sm text-green-400 overflow-x-auto whitespace-pre-wrap font-mono bg-slate-900/50 p-3 rounded border border-slate-800"></pre>
+        </div>
+
+        <div id="guideSection" class="mt-8 pt-6 border-t border-slate-700">
+            <h3 class="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                <span id="guideTitleText">User Guide</span>
+            </h3>
+            <ol id="guideSteps" class="list-decimal list-inside space-y-1.5 text-xs text-slate-400 mb-4 leading-relaxed"></ol>
+            <div id="guideTipsBox" class="p-3 bg-indigo-950/40 border border-indigo-800/50 rounded-lg text-xs text-indigo-300 hidden flex items-start gap-2">
+                <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                <div><span class="font-semibold">Tips:</span> <span id="guideTips"></span></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function executeTool(inputs) { try {
+  // Input Validation
+  if (!inputs || typeof inputs !== 'object') {
+    throw new Error('Input must be an object');
+  }
+
+  const id = inputs.id ?? 'unknown';
+  const action = inputs.action ?? 'default';
+  
+  // Coerce numeric values safely
+  const value1 = (inputs.value1 !== undefined && inputs.value1 !== null) ? parseFloat(inputs.value1) : NaN;
+  const value2 = (inputs.value2 !== undefined && inputs.value2 !== null) ? parseFloat(inputs.value2) : NaN;
+
+  // Validate for division-by-zero and NaN
+  if (!isNaN(value1)) {
+    if (inputs.operation === 'divide' && value1 === 0) {
+      throw new Error('Division by zero is not allowed');
+    }
+  } else {
+    inputs.value1 = 0;
+  }
+
+  if (!isNaN(value2)) {
+    if (inputs.operation === 'divide' && value2 === 0) {
+      throw new Error('Division by zero is not allowed');
+    }
+  } else {
+    inputs.value2 = 0;
+  }
+
+  // Process operations based on action type
+  const resultData = {};
+
+  switch (action) {
+    case 'calculate':
+      if (inputs.operation === 'add') resultData.sum = value1 + value2;
+      if (inputs.operation === 'subtract') resultData.diff = value1 - value2;
+      if (inputs.operation === 'multiply') resultData.product = value1 * value2;
+      if (inputs.operation === 'divide') resultData.quotient = value1 / value2;
+      break;
+    case 'validate':
+      resultData.valid = !isNaN(value1) && !isNaN(value2);
+      resultData.errors = [];
+      if (isNaN(value1)) resultData.errors.push('value1 is invalid');
+      if (isNaN(value2)) resultData.errors.push('value2 is invalid');
+      break;
+    case 'transform':
+      if (inputs.transformType === 'uppercase' && typeof value1 === 'string') {
+        resultData.text = value1.toUpperCase();
+      } else if (inputs.transformType === 'lowercase' && typeof value1 === 'string') {
+        resultData.text = value1.toLowerCase();
+      } else if (inputs.transformType === 'parseBoolean') {
+        resultData.boolean = Boolean(inputs.parseBool ?? inputs.value1);
+      }
+      break;
+    default:
+      resultData.status = 'default_operation_completed';
+  }
+
+  // Add metadata
+  resultData.timestamp = Date.now();
+  resultData.id = id;
+
+  return { success: true, result: resultData, error: null };
+
+} catch (err) {
+  console.error('Tool Execution Error:', err.message);
+  return { success: false, result: null, error: err.message };
+}
+}
+    </script>
+
+    <script>
+        const schemaFields = [{"name":"project_name","type":"text","label":{"en":"Project Name","es":"Nombre del Proyecto","de":"Projektname","fr":"Nom du Projet","pt":"Nome do Projeto","ja":"プロジェクト名","ar":"اسم المشروع","id":"Nama Proyek"},"placeholder":"e.g. Modern Villa"},{"name":"total_area","type":"number","label":{"en":"Total Area (m²)","es":"Área Total (m²)","de":"Gesamtfläche (m²)","fr":"Surface Totale (m²)","pt":"Área Total (m²)","ja":"総面積 (m²)","ar":"المساحة الإجمالية (م²)","id":"Luas Total (m²)"},"placeholder":"1500"},{"name":"material_grade","type":"select","label":{"en":"Material Quality","es":"Calidad del Material","de":"Materialqualität","fr":"Qualité du Matériau","pt":"Qualidade do Material","ja":"材料の品質","ar":"جودة المواد","id":"Kualitas Bahan"},"options":[{"label":{"en":"Standard","es":"Estándar","de":"Standard","fr":"Standard","pt":"Padrão","ja":"標準","ar":"قياسي","id":"Standar"},"value":"standard"},{"label":{"en":"Premium","es":"Premium","de":"Premium","fr":"Premium","pt":"Premium","ja":"プレミアム","ar":"مميز","id":"Premium"},"value":"premium"},{"label":{"en":"Luxury","es":"Lujo","de":"Luxus","fr":"Luxe","pt":"Luxo","ja":"豪華","ar":"فاخر","id":"Mewah"},"value":"luxury"}]},{"name":"waste_margin","type":"range","label":{"en":"Waste Margin (%)","es":"Margen de Desperdicio (%)","de":"Abfallmarge (%)","fr":"Marge de Perte (%)","pt":"Margem de Desperdício (%)","ja":"廃棄マージン (%)","ar":"هامش الهدر (%)","id":"Margin Pemborosan (%)"},"min":0,"max":20,"step":1},{"name":"estimated_budget","type":"number","label":{"en":"Estimated Budget","es":"Presupuesto Estimado","de":"Geschätztes Budget","fr":"Budget Estimé","pt":"Orçamento Estimado","ja":"推定予算","ar":"الميزانية المقدرة","id":"Anggaran Diperkirakan"},"placeholder":"500000"}];
+        const i18nMap = {"en":{"title":"Project Estimator","description":"Calculate material costs and construction timelines for architectural projects."},"es":{"title":"Estimador de Proyectos","description":"Calcule los costos de materiales y los cronogramas de construcción para proyectos arquitectónicos."},"de":{"title":"Projektplaner","description":"Berechnen Sie Materialkosten und Bauzeiten für Architekturprojekte."},"fr":{"title":"Estimateur de Projet","description":"Calculez les coûts des matériaux et les délais de construction pour les projets architecturaux."},"pt":{"title":"Estimador de Projeto","description":"Calcule os custos de materiais e os cronogramas de construção para projetos arquitetónicos."},"ja":{"title":"プロジェクト見積もり","description":"建築プロジェクトの材料費と工期を計算します。"},"ar":{"title":"مقدر المشاريع","description":"احسب تكاليف المواد والجداول الزمنية للبناء للمشاريع المعمارية."},"id":{"title":"Estimator Proyek","description":"Hitung biaya material dan linimasa konstruksi untuk proyek arsitektur."}};
+        const guideMap = {"en":{"steps":["Enter all required input parameters into the available fields","Click the Execute button to process the request","Review the generated output in the result section"],"tips":"Ensure all text inputs follow the specified character limits and data formats."},"es":{"steps":["Ingrese todos los parámetros de entrada requeridos en los campos disponibles","Haga clic en el botón Ejecutar para procesar la solicitud","Revise el resultado generado en la sección de resultados"],"tips":"Asegúrese de que todas las entradas de texto sigan los límites de caracteres y formatos especificados."},"de":{"steps":["Geben Sie alle erforderlichen Eingabeparameter in die verfügbaren Felder ein","Klicken Sie auf die Schaltfläche Ausführen, um die Anforderung zu verarbeiten","Überprüfen Sie das generierte Ergebnis im Ergebnissbereich"],"tips":"Stellen Sie sicher, dass alle Texteingaben den angegebenen Zeichenlimits und Datenformaten entsprechen."},"fr":{"steps":["Saisissez tous les paramètres d'entrée requis dans les champs disponibles","Cliquez sur le bouton Exécuter pour traiter la demande","Vérifiez le résultat généré dans la section des résultats"],"tips":"Assurez-vous que toutes les entrées de texte respectent les limites de caractères et formats de données spécifiés."},"pt":{"steps":["Preencha todos os parâmetros de entrada necessários nos campos disponíveis","Clique no botão Executar para processar a solicitação","Revise o resultado gerado na seção de resultados"],"tips":"Garanta que todas as entradas de texto sigam os limites de caracteres e formatos de dados especificados."},"ja":{"steps":["利用可能なフィールドにすべての必要な入力パラメータを入力します","処理を実行するための「実行」ボタンをクリックします","結果セクションに表示された生成された出力をレビューします"],"tips":"すべてのテキスト入力が指定された文字制限とデータ形式に従っていることを確認してください。"},"ar":{"steps":["أدخل جميع معاملات الإدخال المطلوبة في الحقول المتاحة","انقر على زر تنفيذ لمعالجة الطلب","راجع الناتج الذي تم توليده في قسم النتائج"],"tips":"تأكد من أن جميع مدخلات النص تتبع حدود الأحجام وتنسيقات البيانات المحددة."},"id":{"steps":["Masukkan semua parameter input yang diperlukan ke dalam kolom yang tersedia","Klik tombol Eksekusi untuk memproses permintaan","Lihat hasil yang dihasilkan di bagian hasil"],"tips":"Pastikan semua input teks mengikuti batas karakter dan format data yang ditentukan."}};
+        const toolIconClass = "fa-solid fa-drafting-rules";
+
+        function renderFormFields(currentLang) {
+            const appEl = document.getElementById('app');
+            if (!appEl) return;
+            
+            if (!schemaFields || schemaFields.length === 0) {
+                appEl.innerHTML = '<p class="text-xs text-slate-500">No input fields required.</p>';
+                return;
+            }
+
+            appEl.innerHTML = schemaFields.map(field => {
+                const name = field.name || 'field';
+                const type = field.type || 'text';
+                
+                let label = field.label;
+                if (typeof field.label === 'object' && field.label !== null) {
+                    label = field.label[currentLang] || field.label.en || field.label.id;
+                }
+                if (!label) {
+                    label = (currentLang === 'id') ? (field.label_id || field.label) : (field.label_en || field.label);
+                }
+                if (!label) label = name.replace(/_/g, ' ').toUpperCase();
+
+                const placeholder = field.placeholder || '';
+
+                if (type === 'select' && Array.isArray(field.options)) {
+                    const optionsHTML = field.options.map(opt => {
+                        let val = opt;
+                        let txt = opt;
+                        if (typeof opt === 'object' && opt !== null) {
+                            val = opt.value || opt.id || opt.key || opt.val || JSON.stringify(opt);
+                            txt = opt.label || opt.text || opt.name || val;
+                            if (typeof txt === 'object' && txt !== null) {
+                                txt = txt[currentLang] || txt.en || txt.id || val;
+                            }
+                        }
+                        return '<option value="' + String(val).replace(/"/g, '&quot;') + '">' + String(txt).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</option>';
+                    }).join('');
+
+                    return '<div class="space-y-1">' +
+                           '<label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">' + label + '</label>' +
+                           '<select name="' + name + '" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">' +
+                           optionsHTML +
+                           '</select>' +
+                           '</div>';
+                }
+
+                if (type === 'textarea') {
+                    return '<div class="space-y-1">' +
+                           '<label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">' + label + '</label>' +
+                           '<textarea name="' + name + '" rows="' + (field.rows || 4) + '" placeholder="' + placeholder + '" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>' +
+                           '</div>';
+                }
+
+                return '<div class="space-y-1">' +
+                       '<label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">' + label + '</label>' +
+                       '<input type="' + type + '" name="' + name + '" placeholder="' + placeholder + '" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">' +
+                       '</div>';
+            }).join('');
+        }
+
+        function changeToolLanguage(lang) {
+            localStorage.setItem('user_lang', lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const langData = i18nMap[lang] || i18nMap['en'] || i18nMap['id'] || {};
+            const guideData = guideMap[lang] || guideMap['en'] || guideMap['id'] || {};
+
+            renderFormFields(lang);
+
+            const titleEl = document.getElementById('toolTitle');
+            const descEl = document.getElementById('toolDesc');
+            if (titleEl && langData.title) titleEl.innerHTML = '<i class="' + toolIconClass + '"></i> ' + langData.title;
+            if (descEl && langData.description) descEl.innerText = langData.description;
+
+            const btnSubmitText = document.getElementById('btnSubmitText');
+            const navBackText = document.getElementById('navBackText');
+            if (btnSubmitText) btnSubmitText.innerText = (lang === 'id') ? 'Jalankan Tool' : 'Execute Tool';
+            if (navBackText) navBackText.innerText = (lang === 'id') ? 'Kembali' : 'Back';
+
+            const stepsEl = document.getElementById('guideSteps');
+            const tipsBox = document.getElementById('guideTipsBox');
+            const tipsEl = document.getElementById('guideTips');
+
+            if (stepsEl && guideData.steps && guideData.steps.length > 0) {
+                stepsEl.innerHTML = guideData.steps
+                    .map(step => '<li>' + step.replace(/^[0-9]+.s*/, '') + '</li>')
+                    .join('');
+            }
+
+            if (tipsEl && guideData.tips) {
+                tipsEl.innerText = guideData.tips;
+                tipsBox.classList.remove('hidden');
+            } else if (tipsBox) {
+                tipsBox.classList.add('hidden');
+            }
+
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+
+        async function handleExecute(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const inputs = Object.fromEntries(formData.entries());
+            const resBox = document.getElementById('resultBox');
+            const resOut = document.getElementById('resultOutput');
+            
+            if (typeof executeTool === 'function') {
+                try {
+                    const res = await executeTool(inputs);
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = (typeof res === 'object') ? JSON.stringify(res, null, 2) : res;
+                } catch (err) {
+                    resBox.classList.remove('hidden');
+                    resOut.innerText = JSON.stringify({ success: false, error: err.message }, null, 2);
+                }
+            } else {
+                resBox.classList.remove('hidden');
+                resOut.innerText = JSON.stringify({ success: false, error: "executeTool function is not defined." }, null, 2);
+            }
+        }
+
+        function copyResult() {
+            const resOut = document.getElementById('resultOutput');
+            if (!resOut) return;
+            navigator.clipboard.writeText(resOut.innerText);
+            const copyBtnText = document.getElementById('copyBtnText');
+            if (copyBtnText) {
+                copyBtnText.innerText = 'Copied!';
+                setTimeout(() => { copyBtnText.innerText = 'Copy'; }, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('user_lang') || 'en';
+            const langSelect = document.getElementById('toolLangSelect');
+            if (langSelect) langSelect.value = savedLang;
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
