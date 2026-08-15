@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Case Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-6 flex flex-col justify-center items-center">
+    <header class="w-full max-w-2xl flex justify-between items-center mb-4 px-1">
+        <a href="../index.html" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-arrow-left"></i> <span id="navBackText">Back</span>
+        </a>
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-globe text-slate-400 text-xs"></i>
+            <select id="toolLangSelect" onchange="changeToolLanguage(this.value)" class="bg-slate-800 text-xs text-slate-200 border border-slate-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+                <option value="en">🌐 English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="pt">Português</option>
+                <option value="ja">日本語</option>
+                <option value="ar">العربية</option>
+                <option value="id">Bahasa Indonesia</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-700">
+        <div class="mb-6 border-b border-slate-700 pb-4">
+            <h1 id="toolTitle" class="text-2xl font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-font"></i> Text Case Converter
+            </h1>
+            <p id="toolDesc" class="text-slate-400 text-sm">Easily convert text between uppercase, lowercase, title case, and other formats instantly.</p>
+        </div>
+
+        <form id="toolForm" onsubmit="handleExecute(event)" class="space-y-5">
+            <div id="app" class="space-y-4"></div>
+            <button type="submit" id="btnSubmit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center gap-2 shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-play text-xs"></i>
+                <span id="btnSubmitText">Execute Tool</span>
+            </button>
+        </form>
+
+        <div id="resultBox" class="mt-6 hidden p-4 bg-slate-950 rounded-lg border border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Output Result:</h3>
+                <button onclick="copyResult()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy</span>
+                </button>
+            </div>
+            <pre id="resultOutput" class="text-sm text-green-400 overflow-x-auto whitespace-pre-wrap font-mono bg-slate-900/50 p-3 rounded border border-slate-800"></pre>
+        </div>
+
+        <div id="guideSection" class="mt-8 pt-6 border-t border-slate-700">
+            <h3 class="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                <span id="guideTitleText">User Guide</span>
+            </h3>
+            <ol id="guideSteps" class="list-decimal list-inside space-y-1.5 text-xs text-slate-400 mb-4 leading-relaxed"></ol>
+            <div id="guideTipsBox" class="p-3 bg-indigo-950/40 border border-indigo-800/50 rounded-lg text-xs text-indigo-300 hidden flex items-start gap-2">
+                <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                <div><span class="font-semibold">Tips:</span> <span id="guideTips"></span></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tool logic for text case conversion
+function convertCase(text, type) {
+  switch(type) {
+    case 'upper': return text.toUpperCase();
+    case 'lower': return text.toLowerCase();
+    case 'title': return text.replace(/\b\w/g, c => c.toUpperCase());
+    default: return text;
+  }
+}
+    </script>
+
+    <script>
+        const schemaFields = [{"name":"inputText","type":"textarea","label":{"en":"Input Text","es":"Texto de Entrada","de":"Eingabetext","fr":"Texte d'entrée","pt":"Texto de Entrada","ja":"入力テキスト","ar":"النص المدخل","id":"Teks Input"},"placeholder":{"en":"Enter text here...","es":"Ingrese texto aquí...","de":"Text hier eingeben...","fr":"Entrez du texte ici...","pt":"Digite o texto aqui...","ja":"ここにテキストを入力...","ar":"أدخل النص هنا...","id":"Masukkan teks di sini..."}},{"name":"outputFormat","type":"select","label":{"en":"Output Format","es":"Formato de Salida","de":"Ausgabeformat","fr":"Format de sortie","pt":"Formato de Saída","ja":"出力形式","ar":"تنسيق الإخراج","id":"Format Output"},"placeholder":{"en":"Select case type","es":"Seleccionar tipo de caso","de":"Fallsort auswählen","fr":"Choisir le type de cas","pt":"Selecione o tipo de caso","ja":"ケースタイプを選択","ar":"اختر نوع الحالة","id":"Pilih jenis kasus"}}];
+        const i18nMap = {"en":{"title":"Text Case Converter","description":"Easily convert text between uppercase, lowercase, title case, and other formats instantly."},"es":{"title":"Convertidor de Mayúsculas y Minúsculas","description":"Convierte fácilmente el texto entre mayúsculas, minúsculas, título y otros formatos al instante."},"de":{"title":"Text-Fall-Konverter","description":"Konvertieren Sie Text einfach zwischen Groß-, Klein- und Titelformat sofort."},"fr":{"title":"Convertisseur de Cas Texte","description":"Convertissez facilement le texte entre majuscules, minuscules et autres formats instantanément."},"pt":{"title":"Conversor de Maiúsculas e Minúsculas","description":"Converta facilmente o texto entre maiúsculas, minúsculas, título e outros formatos instantaneamente."},"ja":{"title":"テキストケース変換ツール","description":"大文字、小文字、タイトルケースなどの間でテキストを簡単に瞬時に変換できます。"},"ar":{"title":"محول حالة النص","description":"قم بتحويل النص بسهولة بين الأحرف الكبيرة والصغيرة وعناوين وأخرى فوراً."},"id":{"title":"Konverter Kasus Teks","description":"Mudah mengubah teks antara huruf besar, kecil, judul, dan format lainnya secara instan."}};
+        const guideMap = {"en":{"steps":["Paste or type your text into the input field.","Select the desired case format from the dropdown menu.","Click the 'Convert' button to see the result.","Copy the converted text using the provided button."],"tips":"Remember to escape special characters if needed before converting."},"es":{"steps":["Pega o escribe tu texto en el campo de entrada.","Selecciona el formato de caso deseado del menú desplegable.","Haz clic en el botón 'Convertir' para ver el resultado.","Copia el texto convertido usando el botón proporcionado."],"tips":"Recuerda escapar caracteres especiales si es necesario antes de convertir."},"de":{"steps":["Fügen Sie Ihren Text in das Eingabefeld ein.","Wählen Sie das gewünschte Fallformat aus dem Dropdown-Menü.","Klicken Sie auf die 'Konvertieren'-Schaltfläche, um das Ergebnis zu sehen.","Kopieren Sie den konvertierten Text mit der bereitgestellten Schaltfläche."],"tips":"Denken Sie daran, Sonderzeichen vor der Konvertierung zu escapen, falls erforderlich."},"fr":{"steps":["Collez ou tapez votre texte dans le champ d'entrée.","Sélectionnez le format de cas souhaité dans le menu déroulant.","Cliquez sur le bouton 'Convertir' pour voir le résultat.","Copiez le texte converti en utilisant le bouton fourni."],"tips":"N'oubliez pas d'échapper les caractères spéciaux si nécessaire avant de convertir."},"pt":{"steps":["Cole ou digite seu texto no campo de entrada.","Selecione o formato de caso desejado no menu suspenso.","Clique no botão 'Converter' para ver o resultado.","Copie o texto convertido usando o botão fornecido."],"tips":"Lembre-se de escapar caracteres especiais se necessário antes de converter."},"ja":{"steps":["入力フィールドにテキストを貼り付けまたは入力します。","ドロップダウンメニューから必要なケース形式を選択します。","'変換'ボタンをクリックして結果を表示します。","提供されたボタンを使用して変換されたテキストをコピーします。"],"tips":"変換する前に必要に応じて特殊文字をエスケープすることを忘れないでください。"},"ar":{"steps":["الصق النص أو اكتبه في حقل الإدخال.","اختر تنسيق الحالة المطلوب من قائمة المنسدلة.","اضغط على زر 'تحويل' لرؤية النتيجة.","انسخ النص المحول باستخدام الزر المقدم."],"tips":"تذكر الهروب من الأحرف الخاصة إذا لزم الأمر قبل التحويل."},"id":{"steps":["Tempelkan atau ketik teks Anda ke bidang input.","Pilih format kasus yang diinginkan dari menu dropdown.","Klik tombol 'Konversi' untuk melihat hasilnya.","Salin teks yang dikonversi menggunakan tombol yang disediakan."],"tips":"Ingat untuk melarikan diri karakter khusus jika diperlukan sebelum mengkonversi."}};
+        const toolIconClass = "fa-solid fa-font";
+
+        function renderFormFields(currentLang) {
+            const appEl = document.getElementById('app');
+            if (!appEl) return;
+            if (!schemaFields || schemaFields.length === 0) {
+                appEl.innerHTML = '<p class="text-xs text-slate-500">No input fields required.</p>';
+                return;
+            }
+            appEl.innerHTML = schemaFields.map(field => {
+                const name = field.name || 'field';
+                const type = field.type || 'text';
+                let label = (typeof field.label === 'object') ? (field.label[currentLang] || field.label.en || field.label.id) : field.label;
+                if (!label) label = name.replace(/_/g, ' ').toUpperCase();
+                const placeholder = field.placeholder || '';
+                return '<div class="space-y-1">' +
+                       '<label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">' + label + '</label>' +
+                       '<input type="' + type + '" name="' + name + '" placeholder="' + placeholder + '" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">' +
+                       '</div>';
+            }).join('');
+        }
+
+        function changeToolLanguage(lang) {
+            localStorage.setItem('user_lang', lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const langData = i18nMap[lang] || i18nMap['en'] || {};
+            const guideData = guideMap[lang] || guideMap['en'] || {};
+            renderFormFields(lang);
+            const titleEl = document.getElementById('toolTitle');
+            const descEl = document.getElementById('toolDesc');
+            if (titleEl && langData.title) titleEl.innerHTML = '<i class="' + toolIconClass + '"></i> ' + langData.title;
+            if (descEl && langData.description) descEl.innerText = langData.description;
+            const stepsEl = document.getElementById('guideSteps');
+            const tipsBox = document.getElementById('guideTipsBox');
+            const tipsEl = document.getElementById('guideTips');
+            if (stepsEl && guideData.steps) {
+                stepsEl.innerHTML = guideData.steps.map(step => '<li>' + step + '</li>').join('');
+            }
+            if (tipsEl && guideData.tips) {
+                tipsEl.innerText = guideData.tips;
+                tipsBox.classList.remove('hidden');
+            }
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+
+        async function handleExecute(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const inputs = Object.fromEntries(formData.entries());
+            const resBox = document.getElementById('resultBox');
+            const resOut = document.getElementById('resultOutput');
+            try {
+                const res = await executeTool(inputs);
+                resBox.classList.remove('hidden');
+                resOut.innerText = (typeof res === 'object') ? JSON.stringify(res, null, 2) : res;
+            } catch (err) {
+                resBox.classList.remove('hidden');
+                resOut.innerText = JSON.stringify({ success: false, error: err.message }, null, 2);
+            }
+        }
+
+        function copyResult() {
+            const resOut = document.getElementById('resultOutput');
+            if (!resOut) return;
+            navigator.clipboard.writeText(resOut.innerText);
+            const copyBtnText = document.getElementById('copyBtnText');
+            if (copyBtnText) {
+                copyBtnText.innerText = 'Copied!';
+                setTimeout(() => { copyBtnText.innerText = 'Copy'; }, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('user_lang') || 'en';
+            const langSelect = document.getElementById('toolLangSelect');
+            if (langSelect) langSelect.value = savedLang;
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
