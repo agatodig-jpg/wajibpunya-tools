@@ -1,81 +1,90 @@
 [
   {
-    "id": "measurement-converter",
-    "category": "Text Manipulation & Diffing",
-    "scriptUrl": "assets/js/tools/measurement-converter.js",
-    "htmlUrl": "tools/measurement-converter.html",
-    "icon": "fa-solid fa-ruler-triangle",
+    "id": "joy-confetti-trigger-web",
+    "category": "CANVAS_GRAPHICS_GENERATOR",
+    "scriptUrl": "assets/js/tools/joy-confetti-trigger-web.js",
     "externalLibs": [
-      "https://cdn.jsdelivr.net/npm/jsdiff@5.1.0/dist/diff.min.js"
+      "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
     ],
     "i18n": {
       "en": {
-        "title": "Unit Converter",
-        "description": "Convert between various units of measurement."
+        "title": "Joy Confetti Trigger (Web)",
+        "description": "Launch celebratory confetti animations on trigger events with customizable themes."
       },
       "es": {
-        "title": "Unit Converter",
-        "description": "Convert between various units of measurement."
+        "title": "Disparador de Confeti Joy",
+        "description": "Lanzar animaciones festivas con temas personalizables al activarse eventos del disparador."
       },
       "de": {
-        "title": "Unit Converter",
-        "description": "Convert between various units of measurement."
+        "title": "Joy Konfettiauslöser (Web)",
+        "description": "Starten Sie feierliche Konfetti-Animationen bei Auslösereignissen mit benutzerdefinierten Themen."
       },
       "fr": {
-        "title": "Unit Converter",
-        "description": "Convert between various units of measurement."
+        "title": "Déclencheur Conféti Joy",
+        "description": "Lancer des animations de confettis festifs lors d'événements déclenchants avec des thèmes personnalisables."
       },
       "pt": {
-        "title": "Unit Converter",
-        "description": "Convert between various units of measurement."
+        "title": "Joy Gatilho Confete (Web)",
+        "description": "Iniciar animações de confetes comemorativos em eventos acionadores com temas personalizáveis."
       },
       "ja": {
-        "title": "Unit Converter",
-        "description": "Convert between various units of measurement."
+        "title": "ジョイ 花火トリガー",
+        "description": "カスタマイズ可能なテーマで、イベント起動時に祝祭的なコンフェティアニメーションを起動します。"
       },
       "ar": {
-        "title": "Unit Converter",
-        "description": "Convert between various units of measurement."
+        "title": "Joy Confetti Trigger (Web)",
+        "description": "إطلاق عروض احتفالية برفات على أحداث التفعيل مع مواضيع قابلة للتخصيص."
       },
       "id": {
-        "title": "Pengonversi Satuan",
-        "description": "Ubah antar berbagai satuan ukuran."
+        "title": "Pemicat Konfeti Joy",
+        "description": "Luncurkan animasi konfeti meriah pada acara pemicu dengan tema yang dapat disesuaikan."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-ruler-triangle",
+      "icon": "fa-solid fa-calculator",
       "fields": [
         {
-          "name": "value_input",
+          "name": "amount",
           "type": "number",
-          "label_id": "Nilai",
-          "label_en": "Value",
-          "placeholder": "0"
+          "label_en": "Amount",
+          "label_id": "Jumlah",
+          "placeholder": "100.00"
         },
         {
-          "name": "unit_selection",
+          "name": "source_currency",
           "type": "select",
-          "label_id": "Pilih Satuan",
-          "label_en": "Select Unit",
-          "placeholder": "Pilih"
+          "label_en": "From Currency",
+          "label_id": "Mata Uang Asal",
+          "placeholder": "Select"
+        },
+        {
+          "name": "target_currency",
+          "type": "select",
+          "label_en": "To Currency",
+          "label_id": "Mata Uang Tujuan",
+          "placeholder": "Select"
         }
       ]
     },
     "guide": {
       "en": {
         "steps": [
-          "Fill out input fields",
-          "Click execute to calculate"
+          "Click anywhere to trigger confetti animation or press Ctrl+J keyboard shortcut.",
+          "The full-screen canvas overlay will capture the celebration event instantly.",
+          "Particles spawn with random velocities and gravity for natural fall effects."
         ],
-        "tips": "Runs 100% client-side in browser."
+        "tips": "This tool runs silently in background without blocking your UI. Supports resize events automatically."
       },
       "id": {
         "steps": [
-          "Isi kolom input",
-          "Klik eksekusi untuk menghitung"
+          "Klik di mana saja untuk memicu animasi konfeti atau tekan pintasan Ctrl+J keyboard.",
+          "Overlay canvas full-screen akan menangkap acara perayaan seinstan.",
+          "Partikel muncul dengan kecepatan acak dan gravitasi untuk efek jatuh alami."
         ],
-        "tips": "Berjalan 100% lokal di browser."
+        "tips": "Alat ini berjalan diam-diam tanpa menghalangi UI Anda. Mendukung event resize secara otomatis."
       }
-    }
+    },
+    "htmlUrl": "tools/joy-confetti-trigger-web.html",
+    "icon": "fa-solid fa-calculator"
   }
 ]
