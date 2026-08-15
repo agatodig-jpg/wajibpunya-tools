@@ -1,104 +1,114 @@
 [
   {
-    "id": "glm-53-tokenizer",
-    "category": "Text Manipulation",
-    "scriptUrl": "assets/js/tools/glm-53-tokenizer.js",
+    "id": "file-router-local",
+    "category": "FILE_PROCESSOR",
+    "scriptUrl": "/assets/js/tools/file-router-local.js",
     "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "FileRouter: Local Content Manager",
+        "description": "Process uploaded files locally without server transmission. Supports JSON formatting, CSV parsing, and TXT encoding via base64 cipher."
       },
       "es": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "Archivador de Archivos: Administrador de Contenido Local",
+        "description": "Procese archivos subidos localmente sin transmisión al servidor. Soporta formateo JSON, análisis CSV y codificación TXT mediante cifrado base64."
       },
       "de": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "FileRouter: Lokaler Inhaltmanager",
+        "description": "Verarbeiten Sie hochgeladene Dateien lokal ohne Serverübermittlung. Unterstützt JSON-Formatierung, CSV-Parsing und TXT-Kodierung via Base64-Cipher."
       },
       "fr": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "FileRouter: Gestionnaire de Contenu Local",
+        "description": "Traitez les fichiers téléchargés localement sans transmission au serveur. Prend en charge le formatage JSON, l'analyse CSV et le codage TXT via chiffrement Base64."
       },
       "pt": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "Arquivador de Arquivos: Gerenciador de Conteúdo Local",
+        "description": "Processe arquivos carregados localmente sem transmissão ao servidor. Suporta formatação JSON, análise CSV e codificação TXT via ciframento Base64."
       },
       "ja": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "ファイルルーター：ローカルコンテンツマネージャー",
+        "description": "サーバーへの送信なしでアップロードされたファイルをローカルで処理します。JSON 書式化、CSV 解析、Base64 サイファによる TXT コーディングをサポートします。"
       },
       "ar": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "مستودع الملفات: مدير المحتوى المحلي",
+        "description": "قم بمعالجة الملفات المرفوعة محلياً دون إرسالها إلى الخادم. يدعم تنسيق JSON، وتحليل CSV، وتشفير TXT عبر شفرة base64."
       },
       "id": {
-        "title": "BMI Calculator",
-        "description": "Calculate your Body Mass Index based on weight and height."
+        "title": "FileRouter: Pengelola Konten Lokal",
+        "description": "Pemrosesan file yang diunggah secara lokal tanpa transmisi ke server. Mendukung formatasi JSON, parsing CSV, dan enkoding TXT melalui cipher base64."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-calculator",
+      "icon": "fa-solid fa-house-chimney",
       "fields": [
         {
-          "name": "weight_kg",
+          "name": "loan_amount",
           "type": "number",
           "label": {
-            "en": "Weight (kg)",
-            "es": "Peso (kg)",
-            "de": "Gewicht (kg)",
-            "fr": "Poids (kg)",
-            "pt": "Peso (kg)",
-            "ja": "体重 (kg)",
-            "ar": "الوزن (كجم)",
-            "id": "Berat (kg)"
+            "en": "Loan Amount",
+            "es": "Monto del Préstamo",
+            "de": "Kreditbetrag",
+            "fr": "Montant du Prêt",
+            "pt": "Valor do Empréstimo",
+            "ja": "借入金額",
+            "ar": "مبلغ القرض",
+            "id": "Jumlah Pinjaman"
           },
-          "placeholder": "70"
+          "placeholder": "250000"
         },
         {
-          "name": "height_cm",
+          "name": "interest_rate",
           "type": "number",
           "label": {
-            "en": "Height (cm)",
-            "es": "Altura (cm)",
-            "de": "Größe (cm)",
-            "fr": "Taille (cm)",
-            "pt": "Altura (cm)",
-            "ja": "身長 (cm)",
-            "ar": "الطول (سم)",
-            "id": "Tinggi (cm)"
+            "en": "Annual Interest Rate (%)",
+            "es": "Tasa de Interés Anual (%)",
+            "de": "Jährlicher Zinssatz (%)",
+            "fr": "Taux d'Intérêt Annuel (%)",
+            "pt": "Taxa de Juro Anual (%)",
+            "ja": "年利 (%)",
+            "ar": "معدل الفائدة السنوي (%)",
+            "id": "Tingkat Bunga Tahunan (%)"
           },
-          "placeholder": "175"
+          "placeholder": "3.5"
         },
         {
-          "name": "age_years",
+          "name": "loan_term",
           "type": "number",
           "label": {
-            "en": "Age (years)",
-            "es": "Edad (años)",
-            "de": "Alter (Jahre)",
-            "fr": "Âge (ans)",
-            "pt": "Idade (anos)",
-            "ja": "年齢 (歳)",
-            "ar": "العمر (سنة)",
-            "id": "Usia (tahun)"
+            "en": "Loan Term (Years)",
+            "es": "Plazo del Préstamo (Años)",
+            "de": "Kreditlaufzeit (Jahre)",
+            "fr": "Durée du Prêt (Années)",
+            "pt": "Prazo do Empréstimo (Anos)",
+            "ja": "借入期間（年）",
+            "ar": "مدة القرض (بالسنوات)",
+            "id": "Jangka Waktu Pinjaman (Tahun)"
           },
-          "placeholder": "25"
+          "placeholder": "30"
         }
       ]
     },
     "guide": {
       "en": {
-        "steps": [],
-        "tips": ""
+        "steps": [
+          "1. Upload a file (.json, .csv, or .txt)",
+          "2. Optionally select a process type (auto-detects if not specified)",
+          "3. Click Process button to handle the file locally in browser",
+          "4. View the processed result displayed on screen without server upload"
+        ],
+        "tips": "All processing happens client-side using File API - no data leaves your device. Choose 'json' for formatting, 'csv' for parsing with headers, or 'txt' for base64 encoding."
       },
       "id": {
-        "steps": [],
-        "tips": ""
+        "steps": [
+          "1. Unggah file (.json, .csv, atau .txt)",
+          "2. Opsional pilih tipe pemrosesan (otomatis mendeteksi jika tidak ditentukan)",
+          "3. Klik tombol Proses untuk menangani file secara lokal di browser",
+          "4. Lihat hasil yang sudah diproses ditampilkan di layar tanpa unggah ke server"
+        ],
+        "tips": "Semua pemrosesan terjadi di sisi klien menggunakan File API - tidak ada data yang keluar dari perangkat Anda. Pilih 'json' untuk formatasi, 'csv' untuk parsing dengan header, atau 'txt' untuk enkoding base64."
       }
     },
-    "htmlUrl": "tools/glm-53-tokenizer.html",
-    "icon": "fa-solid fa-calculator"
+    "htmlUrl": "tools/file-router-local.html",
+    "icon": "fa-solid fa-house-chimney"
   }
 ]
