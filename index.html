@@ -19,7 +19,7 @@
   <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
-        <a href="/" class="text-2xl font-black tracking-tight text-white flex items-center gap-1">
+        <a href="./" class="text-2xl font-black tracking-tight text-white flex items-center gap-1">
           WajibPunya<span class="text-indigo-500">.</span>
         </a>
         <span class="hidden sm:inline-block bg-slate-800 text-slate-300 text-[10px] font-bold px-2.5 py-1 rounded-md tracking-widest uppercase border border-slate-700">Live Engine</span>
@@ -27,8 +27,8 @@
       
       <div class="flex items-center space-x-4 rtl:space-x-reverse">
         <nav class="hidden md:flex space-x-6 rtl:space-x-reverse text-sm font-medium text-slate-300">
-          <a href="/" class="hover:text-white transition-colors duration-200" data-i18n="nav_dashboard">Dashboard</a>
-          <a href="/api-status.html" class="text-sm font-medium text-slate-300 hover:text-white transition" data-i18n="nav_api">API</a>
+          <a href="./" class="hover:text-white transition-colors duration-200" data-i18n="nav_dashboard">Dashboard</a>
+          <a href="./api-status.html" class="text-sm font-medium text-slate-300 hover:text-white transition" data-i18n="nav_api">API</a>
         </nav>
 
         <!-- LANGUAGE SWITCHER DROPDOWN (8 GLOBAL LANGUAGES) -->
@@ -128,9 +128,9 @@
         <p>© 2026 WajibPunya Engine. All Rights Reserved.</p>
       </div>
       <div class="flex space-x-6 rtl:space-x-reverse font-medium">
-        <a href="/privacy.html" class="hover:text-slate-900 transition" data-i18n="footer_privacy">Privacy Policy</a>
-        <a href="/terms.html" class="hover:text-slate-900 transition" data-i18n="footer_terms">Terms of Service</a>
-        <a href="/api-status.html" class="hover:text-slate-900 transition" data-i18n="footer_status">API Status</a>
+        <a href="./privacy.html" class="hover:text-slate-900 transition" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="./terms.html" class="hover:text-slate-900 transition" data-i18n="footer_terms">Terms of Service</a>
+        <a href="./api-status.html" class="hover:text-slate-900 transition" data-i18n="footer_status">API Status</a>
       </div>
     </div>
   </footer>
@@ -349,14 +349,15 @@
       document.getElementById('langSelect').value = savedLang;
       switchLanguage(savedLang);
 
-      // PEMBACAAN DARI MANIFEST.JSON (Memisahkan data dan tampilan)
+      // PEMBACAAN RELATIF DARI MANIFEST.JSON
       try {
-        const response = await fetch('/manifest.json');
+        const response = await fetch('./manifest.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         allTools = Array.isArray(data) ? data : (data.tools || []);
         window.filterToolsFn();
       } catch (error) {
-        toolsGrid.innerHTML = `<p class="text-sm text-rose-500 col-span-2">${translations[currentLang].error_load}</p>`;
+        toolsGrid.innerHTML = `<p class="text-sm text-rose-500 col-span-2 py-4 text-center font-medium">${translations[currentLang].error_load}</p>`;
         console.error('Error fetching manifest.json:', error);
       }
 
@@ -370,20 +371,21 @@
         tools.forEach(tool => {
           const card = document.createElement('a');
           
-          // Mengambil target URL dari htmlUrl atau fallback url / id
-          const targetUrl = tool.htmlUrl || tool.url || `tools/${tool.id}.html`;
+          // Mengambil target URL dari htmlUrl atau fallback url / id secara relatif
+          const rawUrl = tool.htmlUrl || tool.url || `tools/${tool.id}.html`;
+          const targetUrl = rawUrl.startsWith('/') ? `.${rawUrl}` : `./${rawUrl.replace(/^\.\//, '')}`;
           card.href = targetUrl;
           
-          // Ekstraksi data i18n berdasarkan bahasa aktif (fallback ke 'en' atau 'id')
-          const langData = tool.i18n && (tool.i18n[currentLang] || tool.i18n['en'] || tool.i18n['id']) 
-            ? (tool.i18n[currentLang] || tool.i18n['en'] || tool.i18n['id'])
-            : {};
+          // Ekstraksi data i18n dengan fallback bertingkat yang terstruktur
+          const langData = tool.i18n && tool.i18n[currentLang] 
+            ? tool.i18n[currentLang] 
+            : (tool.i18n?.en || tool.i18n?.id || {});
 
-          const category = tool.category || 'Utilities';
-          const title = langData.title || tool.title || 'Untitled Tool';
-          const description = langData.description || tool.description || 'No description provided for this micro-software.';
-          const badgeColor = tool.badgeColor || 'bg-indigo-50 text-indigo-700 border-indigo-200';
-          const iconColor = tool.iconColor || 'bg-indigo-50 text-indigo-600';
+          const category = tool.category || 'Developer Tools';
+          const title = langData.title || tool.title || tool.id || 'Untitled Tool';
+          const description = langData.description || tool.description || 'No description provided for this tool.';
+          const badgeColor = 'bg-indigo-50 text-indigo-700 border-indigo-200';
+          const iconColor = 'bg-indigo-50 text-indigo-600';
           const iconClass = tool.icon || 'fa-solid fa-wrench';
 
           card.setAttribute('data-category', category);
@@ -407,17 +409,14 @@
         const query = searchInput.value.toLowerCase().trim();
 
         const filtered = allTools.filter(tool => {
-          const langData = tool.i18n && (tool.i18n[currentLang] || tool.i18n['en'] || tool.i18n['id']) 
-            ? (tool.i18n[currentLang] || tool.i18n['en'] || tool.i18n['id'])
-            : {};
+          const langData = tool.i18n && tool.i18n[currentLang] 
+            ? tool.i18n[currentLang] 
+            : (tool.i18n?.en || tool.i18n?.id || {});
             
           const titleStr = langData.title || tool.title || '';
           const descStr = langData.description || tool.description || '';
 
-          const titleMatches = titleStr.toLowerCase().includes(query);
-          const descMatches = descStr.toLowerCase().includes(query);
-          const matchesQuery = titleMatches || descMatches;
-          
+          const matchesQuery = titleStr.toLowerCase().includes(query) || descStr.toLowerCase().includes(query);
           const toolCategory = (tool.category || '').toLowerCase();
           const matchesCategory = currentCategory === 'all' || toolCategory === currentCategory.toLowerCase();
           
@@ -455,7 +454,7 @@
 
           currentCategory = button.getAttribute('data-filter');
           
-          // Update data-category di body agar ad-banner.js bisa mendeteksi kategori aktif secara real-time
+          // Update data-category di body agar ad-banner.js dapat membaca kategori aktif secara real-time
           document.body.setAttribute('data-category', currentCategory.toLowerCase());
 
           window.filterToolsFn();
@@ -465,7 +464,7 @@
   </script>
 
   <!-- PEMANGGIL GLOBAL AD-BANNER SCRIPT -->
-  <script src="/assets/js/ad-banner.js"></script>
+  <script src="./assets/js/ad-banner.js"></script>
 
 </body>
 </html>
