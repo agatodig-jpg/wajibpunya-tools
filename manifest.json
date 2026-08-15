@@ -1,232 +1,167 @@
 [
   {
-    "id": "architect-project-estimator",
+    "id": "utility-tool-01",
     "category": "Utilities",
-    "scriptUrl": "/assets/js/tools/architect-project-estimator.js",
+    "icon": "fa-solid fa-wrench",
     "externalLibs": [],
+    "jsCode": "// Tool logic placeholder for translation demo\nfunction process() { return true; }",
+    "fields": [
+      {
+        "name": "input_key",
+        "type": "text",
+        "label": {
+          "en": "Input Key",
+          "es": "Clave de Entrada",
+          "de": "Eingabe-Schlüssel",
+          "fr": "Clé d'Entrée",
+          "pt": "Chave de Entrada",
+          "ja": "入力キー",
+          "ar": "مفتاح الإدخال",
+          "id": "Kunci Input"
+        },
+        "placeholder": {
+          "en": "Enter key...",
+          "es": "Ingrese clave...",
+          "de": "Geben Sie Schlüssel ein...",
+          "fr": "Entrez la clé...",
+          "pt": "Digite a chave...",
+          "ja": "キーを入力してください",
+          "ar": "أدخل المفتاح...",
+          "id": "Masukkan kunci..."
+        }
+      },
+      {
+        "name": "output_key",
+        "type": "text",
+        "label": {
+          "en": "Output Key",
+          "es": "Clave de Salida",
+          "de": "Ausgabeschlüssel",
+          "fr": "Clé de Sortie",
+          "pt": "Chave de Saída",
+          "ja": "出力キー",
+          "ar": "مخرج المفتاح",
+          "id": "Kunci Output"
+        },
+        "placeholder": {
+          "en": "Result...",
+          "es": "Resultado...",
+          "de": "Ergebnis...",
+          "fr": "Résultat...",
+          "pt": "Resultado...",
+          "ja": "結果...",
+          "ar": "النتيجة...",
+          "id": "Hasil..."
+        }
+      }
+    ],
     "i18n": {
       "en": {
-        "title": "Project Estimator",
-        "description": "Calculate material costs and construction timelines for architectural projects."
+        "title": "Utility Tool",
+        "description": "A versatile utility tool for processing data."
       },
       "es": {
-        "title": "Estimador de Proyectos",
-        "description": "Calcule los costos de materiales y los cronogramas de construcción para proyectos arquitectónicos."
+        "title": "Herramienta de Utilidad",
+        "description": "Una herramienta versátil para procesar datos."
       },
       "de": {
-        "title": "Projektplaner",
-        "description": "Berechnen Sie Materialkosten und Bauzeiten für Architekturprojekte."
+        "title": "Dienstleistungstool",
+        "description": "Ein vielseitiges Dienstleistungstool zur Datenverarbeitung."
       },
       "fr": {
-        "title": "Estimateur de Projet",
-        "description": "Calculez les coûts des matériaux et les délais de construction pour les projets architecturaux."
+        "title": "Outil Utilitaire",
+        "description": "Un outil utilitaire polyvalent pour traiter les données."
       },
       "pt": {
-        "title": "Estimador de Projeto",
-        "description": "Calcule os custos de materiais e os cronogramas de construção para projetos arquitetónicos."
+        "title": "Ferramenta de Utilidade",
+        "description": "Uma ferramenta versátil para processar dados."
       },
       "ja": {
-        "title": "プロジェクト見積もり",
-        "description": "建築プロジェクトの材料費と工期を計算します。"
+        "title": "ユーティリティツール",
+        "description": "データを処理するための多目的なユーティリティツールです。"
       },
       "ar": {
-        "title": "مقدر المشاريع",
-        "description": "احسب تكاليف المواد والجداول الزمنية للبناء للمشاريع المعمارية."
+        "title": "أداة المرافق",
+        "description": "أداة مرافق متعددة الاستخدامات لمعالجة البيانات."
       },
       "id": {
-        "title": "Estimator Proyek",
-        "description": "Hitung biaya material dan linimasa konstruksi untuk proyek arsitektur."
+        "title": "Alat Utilitas",
+        "description": "Alat utilitas serbaguna untuk memproses data."
       }
-    },
-    "schema": {
-      "icon": "fa-solid fa-drafting-rules",
-      "fields": [
-        {
-          "name": "project_name",
-          "type": "text",
-          "label": {
-            "en": "Project Name",
-            "es": "Nombre del Proyecto",
-            "de": "Projektname",
-            "fr": "Nom du Projet",
-            "pt": "Nome do Projeto",
-            "ja": "プロジェクト名",
-            "ar": "اسم المشروع",
-            "id": "Nama Proyek"
-          },
-          "placeholder": "e.g. Modern Villa"
-        },
-        {
-          "name": "total_area",
-          "type": "number",
-          "label": {
-            "en": "Total Area (m²)",
-            "es": "Área Total (m²)",
-            "de": "Gesamtfläche (m²)",
-            "fr": "Surface Totale (m²)",
-            "pt": "Área Total (m²)",
-            "ja": "総面積 (m²)",
-            "ar": "المساحة الإجمالية (م²)",
-            "id": "Luas Total (m²)"
-          },
-          "placeholder": "1500"
-        },
-        {
-          "name": "material_grade",
-          "type": "select",
-          "label": {
-            "en": "Material Quality",
-            "es": "Calidad del Material",
-            "de": "Materialqualität",
-            "fr": "Qualité du Matériau",
-            "pt": "Qualidade do Material",
-            "ja": "材料の品質",
-            "ar": "جودة المواد",
-            "id": "Kualitas Bahan"
-          },
-          "options": [
-            {
-              "label": {
-                "en": "Standard",
-                "es": "Estándar",
-                "de": "Standard",
-                "fr": "Standard",
-                "pt": "Padrão",
-                "ja": "標準",
-                "ar": "قياسي",
-                "id": "Standar"
-              },
-              "value": "standard"
-            },
-            {
-              "label": {
-                "en": "Premium",
-                "es": "Premium",
-                "de": "Premium",
-                "fr": "Premium",
-                "pt": "Premium",
-                "ja": "プレミアム",
-                "ar": "مميز",
-                "id": "Premium"
-              },
-              "value": "premium"
-            },
-            {
-              "label": {
-                "en": "Luxury",
-                "es": "Lujo",
-                "de": "Luxus",
-                "fr": "Luxe",
-                "pt": "Luxo",
-                "ja": "豪華",
-                "ar": "فاخر",
-                "id": "Mewah"
-              },
-              "value": "luxury"
-            }
-          ]
-        },
-        {
-          "name": "waste_margin",
-          "type": "range",
-          "label": {
-            "en": "Waste Margin (%)",
-            "es": "Margen de Desperdicio (%)",
-            "de": "Abfallmarge (%)",
-            "fr": "Marge de Perte (%)",
-            "pt": "Margem de Desperdício (%)",
-            "ja": "廃棄マージン (%)",
-            "ar": "هامش الهدر (%)",
-            "id": "Margin Pemborosan (%)"
-          },
-          "min": 0,
-          "max": 20,
-          "step": 1
-        },
-        {
-          "name": "estimated_budget",
-          "type": "number",
-          "label": {
-            "en": "Estimated Budget",
-            "es": "Presupuesto Estimado",
-            "de": "Geschätztes Budget",
-            "fr": "Budget Estimé",
-            "pt": "Orçamento Estimado",
-            "ja": "推定予算",
-            "ar": "الميزانية المقدرة",
-            "id": "Anggaran Diperkirakan"
-          },
-          "placeholder": "500000"
-        }
-      ]
     },
     "guide": {
       "en": {
         "steps": [
-          "Enter all required input parameters into the available fields",
-          "Click the Execute button to process the request",
-          "Review the generated output in the result section"
+          "Open the tool interface.",
+          "Enter your input key in the provided field.",
+          "Click the process button to generate output.",
+          "Copy or save the result."
         ],
-        "tips": "Ensure all text inputs follow the specified character limits and data formats."
+        "tips": "Ensure your input key is valid before processing."
       },
       "es": {
         "steps": [
-          "Ingrese todos los parámetros de entrada requeridos en los campos disponibles",
-          "Haga clic en el botón Ejecutar para procesar la solicitud",
-          "Revise el resultado generado en la sección de resultados"
+          "Abra la interfaz de la herramienta.",
+          "Ingrese su clave de entrada en el campo proporcionado.",
+          "Haga clic en el botón de procesamiento para generar la salida.",
+          "Copie o guarde el resultado."
         ],
-        "tips": "Asegúrese de que todas las entradas de texto sigan los límites de caracteres y formatos especificados."
+        "tips": "Asegúrese de que su clave de entrada sea válida antes de procesar."
       },
       "de": {
         "steps": [
-          "Geben Sie alle erforderlichen Eingabeparameter in die verfügbaren Felder ein",
-          "Klicken Sie auf die Schaltfläche Ausführen, um die Anforderung zu verarbeiten",
-          "Überprüfen Sie das generierte Ergebnis im Ergebnissbereich"
+          "Öffnen Sie die Tool-Oberfläche.",
+          "Geben Sie Ihren Eingabeschlüssel im bereitgestellten Feld ein.",
+          "Klicken Sie auf die Prozess-Schaltfläche, um die Ausgabe zu generieren.",
+          "Kopieren oder speichern Sie das Ergebnis."
         ],
-        "tips": "Stellen Sie sicher, dass alle Texteingaben den angegebenen Zeichenlimits und Datenformaten entsprechen."
+        "tips": "Stellen Sie sicher, dass Ihr Eingabeschlüssel gültig ist, bevor Sie verarbeiten."
       },
       "fr": {
         "steps": [
-          "Saisissez tous les paramètres d'entrée requis dans les champs disponibles",
-          "Cliquez sur le bouton Exécuter pour traiter la demande",
-          "Vérifiez le résultat généré dans la section des résultats"
+          "Ouvrez l'interface de l'outil.",
+          "Entrez votre clé d'entrée dans le champ fourni.",
+          "Cliquez sur le bouton de traitement pour générer la sortie.",
+          "Copiez ou enregistrez le résultat."
         ],
-        "tips": "Assurez-vous que toutes les entrées de texte respectent les limites de caractères et formats de données spécifiés."
+        "tips": "Assurez-vous que votre clé d'entrée est valide avant le traitement."
       },
       "pt": {
         "steps": [
-          "Preencha todos os parâmetros de entrada necessários nos campos disponíveis",
-          "Clique no botão Executar para processar a solicitação",
-          "Revise o resultado gerado na seção de resultados"
+          "Abra a interface da ferramenta.",
+          "Digite sua chave de entrada no campo fornecido.",
+          "Clique no botão de processar para gerar a saída.",
+          "Copie ou salve o resultado."
         ],
-        "tips": "Garanta que todas as entradas de texto sigam os limites de caracteres e formatos de dados especificados."
+        "tips": "Certifique-se de que sua chave de entrada é válida antes de processar."
       },
       "ja": {
         "steps": [
-          "利用可能なフィールドにすべての必要な入力パラメータを入力します",
-          "処理を実行するための「実行」ボタンをクリックします",
-          "結果セクションに表示された生成された出力をレビューします"
+          "ツールインターフェースを開きます。",
+          "提供されたフィールドに入力キーを入力します。",
+          "出力を生成するために処理ボタンをクリックします。",
+          "結果をコピーまたは保存します。"
         ],
-        "tips": "すべてのテキスト入力が指定された文字制限とデータ形式に従っていることを確認してください。"
+        "tips": "処理する前に、入力キーが有効であることを確認してください。"
       },
       "ar": {
         "steps": [
-          "أدخل جميع معاملات الإدخال المطلوبة في الحقول المتاحة",
-          "انقر على زر تنفيذ لمعالجة الطلب",
-          "راجع الناتج الذي تم توليده في قسم النتائج"
+          "افتح واجهة الأداة.",
+          "أدخل مفتاح الإدخال في الحقل المقدم.",
+          "انقر على زر المعالجة لتوليد المخرجات.",
+          "انسخ أو احفظ النتيجة."
         ],
-        "tips": "تأكد من أن جميع مدخلات النص تتبع حدود الأحجام وتنسيقات البيانات المحددة."
+        "tips": "تأكد من صحة مفتاح الإدخال قبل المعالجة."
       },
       "id": {
         "steps": [
-          "Masukkan semua parameter input yang diperlukan ke dalam kolom yang tersedia",
-          "Klik tombol Eksekusi untuk memproses permintaan",
-          "Lihat hasil yang dihasilkan di bagian hasil"
+          "Buka antarmuka alat.",
+          "Masukkan kunci input di bidang yang disediakan.",
+          "Klik tombol proses untuk menghasilkan output.",
+          "Salin atau simpan hasil."
         ],
-        "tips": "Pastikan semua input teks mengikuti batas karakter dan format data yang ditentukan."
+        "tips": "Pastikan kunci input Anda valid sebelum memproses."
       }
-    },
-    "htmlUrl": "tools/architect-project-estimator.html",
-    "icon": "fa-solid fa-drafting-rules"
+    }
   }
 ]
