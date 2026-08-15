@@ -271,7 +271,7 @@
         tab_productivity: "🚀 الإنتاجية",
         sec_popular: '<i class="fa-solid fa-bolt text-amber-500"></i> أدوات شائعة',
         sidebar_ai_title: "مطورة بالذكاء الاصطناعي. مراجعة بشرياً.",
-        sidebar_ai_desc: "يعتمد هذا الدليل على وكلاء الذكاء الاصطناعي واختبارها باستمرار للسرعة والدقة والخصوصية.",
+        sidebar_ai_desc: "يعتمد هذا الدليل على وكلاء الذكاء الاصطناعي وااختبارها باستمرار للسرعة والدقة والخصوصية.",
         footer_privacy: "سياسة الخصوصية",
         footer_terms: "شروط الخدمة",
         footer_status: "حالة الواجهة",
@@ -301,6 +301,13 @@
     };
 
     let currentLang = 'en';
+
+    // Helper Sanitasi XSS
+    function escapeHTML(str) {
+      return String(str || '').replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
 
     function switchLanguage(lang) {
       currentLang = lang;
@@ -349,7 +356,6 @@
       document.getElementById('langSelect').value = savedLang;
       switchLanguage(savedLang);
 
-      // PEMBACAAN RELATIF DARI MANIFEST.JSON
       try {
         const response = await fetch('./manifest.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -357,45 +363,41 @@
         allTools = Array.isArray(data) ? data : (data.tools || []);
         window.filterToolsFn();
       } catch (error) {
-        toolsGrid.innerHTML = `<p class="text-sm text-rose-500 col-span-2 py-4 text-center font-medium">${translations[currentLang].error_load}</p>`;
+        toolsGrid.innerHTML = `<p class="text-sm text-rose-500 col-span-2 py-4 text-center font-medium">${escapeHTML(translations[currentLang].error_load)}</p>`;
         console.error('Error fetching manifest.json:', error);
       }
 
       function renderTools(tools) {
         toolsGrid.innerHTML = '';
         if (!tools || tools.length === 0) {
-          toolsGrid.innerHTML = `<p class="text-sm text-slate-400 col-span-2 py-8 text-center">${translations[currentLang].no_tools}</p>`;
+          toolsGrid.innerHTML = `<p class="text-sm text-slate-400 col-span-2 py-8 text-center">${escapeHTML(translations[currentLang].no_tools)}</p>`;
           return;
         }
 
         tools.forEach(tool => {
           const card = document.createElement('a');
           
-          // Mengambil target URL dari htmlUrl atau fallback url / id secara relatif
           const rawUrl = tool.htmlUrl || tool.url || `tools/${tool.id}.html`;
           const targetUrl = rawUrl.startsWith('/') ? `.${rawUrl}` : `./${rawUrl.replace(/^\.\//, '')}`;
           card.href = targetUrl;
           
-          // Ekstraksi data i18n dengan fallback bertingkat yang terstruktur
           const langData = tool.i18n && tool.i18n[currentLang] 
             ? tool.i18n[currentLang] 
             : (tool.i18n?.en || tool.i18n?.id || {});
 
-          const category = tool.category || 'Developer Tools';
-          const title = langData.title || tool.title || tool.id || 'Untitled Tool';
-          const description = langData.description || tool.description || 'No description provided for this tool.';
-          const badgeColor = 'bg-indigo-50 text-indigo-700 border-indigo-200';
-          const iconColor = 'bg-indigo-50 text-indigo-600';
-          const iconClass = tool.icon || 'fa-solid fa-wrench';
+          const category = escapeHTML(tool.category || 'Utilities');
+          const title = escapeHTML(langData.title || tool.title || tool.id || 'Untitled Tool');
+          const description = escapeHTML(langData.description || tool.description || 'No description provided for this tool.');
+          const iconClass = escapeHTML(tool.icon || 'fa-solid fa-wrench');
 
           card.setAttribute('data-category', category);
           card.className = "tool-card group relative bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-100 transition-all duration-300 transform hover:-translate-y-1 block";
 
           card.innerHTML = `
             <div class="absolute top-5 right-5 rtl:right-auto rtl:left-5">
-              <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${badgeColor} rounded-md border">${category}</span>
+              <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-md">${category}</span>
             </div>
-            <div class="w-14 h-14 ${iconColor} rounded-xl flex items-center justify-center text-2xl mb-5 transition-colors duration-300">
+            <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-2xl mb-5 transition-colors duration-300">
               <i class="${iconClass}"></i>
             </div>
             <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">${title}</h3>
@@ -453,8 +455,6 @@
           button.classList.add('bg-slate-900', 'text-white');
 
           currentCategory = button.getAttribute('data-filter');
-          
-          // Update data-category di body agar ad-banner.js dapat membaca kategori aktif secara real-time
           document.body.setAttribute('data-category', currentCategory.toLowerCase());
 
           window.filterToolsFn();
