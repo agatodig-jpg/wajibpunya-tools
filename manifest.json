@@ -1,114 +1,252 @@
 [
   {
-    "id": "file-router-local",
-    "category": "FILE_PROCESSOR",
-    "scriptUrl": "/assets/js/tools/file-router-local.js",
+    "id": "ns1-breathing-trainer",
+    "category": "HEALTH_CALCULATOR",
+    "scriptUrl": "/assets/js/tools/ns1-breathing-trainer.js",
     "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "FileRouter: Local Content Manager",
-        "description": "Process uploaded files locally without server transmission. Supports JSON formatting, CSV parsing, and TXT encoding via base64 cipher."
+        "title": "Architect Project Estimator",
+        "description": "Calculate area, materials, and budget for architectural construction projects."
       },
       "es": {
-        "title": "Archivador de Archivos: Administrador de Contenido Local",
-        "description": "Procese archivos subidos localmente sin transmisión al servidor. Soporta formateo JSON, análisis CSV y codificación TXT mediante cifrado base64."
+        "title": "Estimador de Proyectos de Arquitectura",
+        "description": "Calcule el área, los materiales y el presupuesto para proyectos de construcción arquitectónica."
       },
       "de": {
-        "title": "FileRouter: Lokaler Inhaltmanager",
-        "description": "Verarbeiten Sie hochgeladene Dateien lokal ohne Serverübermittlung. Unterstützt JSON-Formatierung, CSV-Parsing und TXT-Kodierung via Base64-Cipher."
+        "title": "Architekturprojekt-Schätzer",
+        "description": "Berechnen Sie Fläche, Materialien und Budget für Architektur-Bauprojekte."
       },
       "fr": {
-        "title": "FileRouter: Gestionnaire de Contenu Local",
-        "description": "Traitez les fichiers téléchargés localement sans transmission au serveur. Prend en charge le formatage JSON, l'analyse CSV et le codage TXT via chiffrement Base64."
+        "title": "Estimateur de Projet d'Architecture",
+        "description": "Calculez la surface, les matériaux et le budget pour les projets de construction architecturale."
       },
       "pt": {
-        "title": "Arquivador de Arquivos: Gerenciador de Conteúdo Local",
-        "description": "Processe arquivos carregados localmente sem transmissão ao servidor. Suporta formatação JSON, análise CSV e codificação TXT via ciframento Base64."
+        "title": "Estimador de Projetos de Arquitetura",
+        "description": "Calcule a área, os materiais e o orçamento para projetos de construção arquitetônica."
       },
       "ja": {
-        "title": "ファイルルーター：ローカルコンテンツマネージャー",
-        "description": "サーバーへの送信なしでアップロードされたファイルをローカルで処理します。JSON 書式化、CSV 解析、Base64 サイファによる TXT コーディングをサポートします。"
+        "title": "建築プロジェクト見積もり",
+        "description": "建築プロジェクトの面積、資材、予算を計算します。"
       },
       "ar": {
-        "title": "مستودع الملفات: مدير المحتوى المحلي",
-        "description": "قم بمعالجة الملفات المرفوعة محلياً دون إرسالها إلى الخادم. يدعم تنسيق JSON، وتحليل CSV، وتشفير TXT عبر شفرة base64."
+        "title": "مقدر مشاريع الهندسة المعمارية",
+        "description": "احسب المساحة والمواد والميزانية لمشاريع البناء المعماري."
       },
       "id": {
-        "title": "FileRouter: Pengelola Konten Lokal",
-        "description": "Pemrosesan file yang diunggah secara lokal tanpa transmisi ke server. Mendukung formatasi JSON, parsing CSV, dan enkoding TXT melalui cipher base64."
+        "title": "Estimator Proyek Arsitektur",
+        "description": "Hitung luas, bahan, dan anggaran untuk proyek konstruksi arsitektur."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-house-chimney",
+      "icon": "fa-solid fa-drafting-rules",
       "fields": [
         {
-          "name": "loan_amount",
-          "type": "number",
+          "name": "project_name",
+          "type": "text",
           "label": {
-            "en": "Loan Amount",
-            "es": "Monto del Préstamo",
-            "de": "Kreditbetrag",
-            "fr": "Montant du Prêt",
-            "pt": "Valor do Empréstimo",
-            "ja": "借入金額",
-            "ar": "مبلغ القرض",
-            "id": "Jumlah Pinjaman"
+            "en": "Project Name",
+            "es": "Nombre del Proyecto",
+            "de": "Projektname",
+            "fr": "Nom du Projet",
+            "pt": "Nome do Projeto",
+            "ja": "プロジェクト名",
+            "ar": "اسم المشروع",
+            "id": "Nama Proyek"
           },
-          "placeholder": "250000"
+          "placeholder": "e.g. Modern Villa"
         },
         {
-          "name": "interest_rate",
+          "name": "total_area",
           "type": "number",
           "label": {
-            "en": "Annual Interest Rate (%)",
-            "es": "Tasa de Interés Anual (%)",
-            "de": "Jährlicher Zinssatz (%)",
-            "fr": "Taux d'Intérêt Annuel (%)",
-            "pt": "Taxa de Juro Anual (%)",
-            "ja": "年利 (%)",
-            "ar": "معدل الفائدة السنوي (%)",
-            "id": "Tingkat Bunga Tahunan (%)"
+            "en": "Total Area (m²)",
+            "es": "Área Total (m²)",
+            "de": "Gesamtfläche (m²)",
+            "fr": "Surface Totale (m²)",
+            "pt": "Área Total (m²)",
+            "ja": "総面積 (m²)",
+            "ar": "المساحة الإجمالية (م²)",
+            "id": "Luas Total (m²)"
           },
-          "placeholder": "3.5"
+          "placeholder": "150"
         },
         {
-          "name": "loan_term",
-          "type": "number",
+          "name": "construction_type",
+          "type": "select",
           "label": {
-            "en": "Loan Term (Years)",
-            "es": "Plazo del Préstamo (Años)",
-            "de": "Kreditlaufzeit (Jahre)",
-            "fr": "Durée du Prêt (Années)",
-            "pt": "Prazo do Empréstimo (Anos)",
-            "ja": "借入期間（年）",
-            "ar": "مدة القرض (بالسنوات)",
-            "id": "Jangka Waktu Pinjaman (Tahun)"
+            "en": "Construction Type",
+            "es": "Tipo de Construcción",
+            "de": "Baubeschreibung",
+            "fr": "Type de Construction",
+            "pt": "Tipo de Construção",
+            "ja": "建設タイプ",
+            "ar": "نوع البناء",
+            "id": "Tipe Konstruksi"
           },
-          "placeholder": "30"
+          "options": [
+            {
+              "label": {
+                "en": "Residential",
+                "es": "Residencial",
+                "de": "Wohngebäude",
+                "fr": "Résidentiel",
+                "pt": "Residencial",
+                "ja": "住宅",
+                "ar": "سكني",
+                "id": "Residensial"
+              }
+            },
+            {
+              "label": {
+                "en": "Commercial",
+                "es": "Comercial",
+                "de": "Gewerbe",
+                "fr": "Commercial",
+                "pt": "Comercial",
+                "ja": "商業",
+                "ar": "تجاري",
+                "id": "Komersial"
+              }
+            },
+            {
+              "label": {
+                "en": "Industrial",
+                "es": "Industrial",
+                "de": "Industrie",
+                "fr": "Industriel",
+                "pt": "Industrial",
+                "ja": "工業",
+                "ar": "صناعي",
+                "id": "Industri"
+              }
+            }
+          ]
+        },
+        {
+          "name": "budget_range",
+          "type": "range",
+          "label": {
+            "en": "Estimated Budget",
+            "es": "Presupuesto Estimado",
+            "de": "Geschätztes Budget",
+            "fr": "Budget Estimé",
+            "pt": "Orçamento Estimado",
+            "ja": "推定予算",
+            "ar": "الميزانية المقدرة",
+            "id": "Estimasi Anggaran"
+          },
+          "min": 10000,
+          "max": 1000000
+        },
+        {
+          "name": "blueprint_file",
+          "type": "file",
+          "label": {
+            "en": "Upload Blueprint",
+            "es": "Subir Plano",
+            "de": "Bauplan hochladen",
+            "fr": "Télécharger le Plan",
+            "pt": "Enviar Planta",
+            "ja": "設計図をアップロード",
+            "ar": "تحميل المخططات",
+            "id": "Unggah Cetak Biru"
+          },
+          "placeholder": "Select PDF or DWG"
         }
       ]
     },
     "guide": {
       "en": {
         "steps": [
-          "1. Upload a file (.json, .csv, or .txt)",
-          "2. Optionally select a process type (auto-detects if not specified)",
-          "3. Click Process button to handle the file locally in browser",
-          "4. View the processed result displayed on screen without server upload"
+          "Enter your project name in the \"Project Name\" field.",
+          "Input the total area value (m²) in the \"Total Area (m²)\" field.",
+          "Select a construction type from the \"Construction Type\" dropdown menu.",
+          "Adjust the budget range within the 10,000 to 1,000,000 limit using the \"Estimated Budget\" slider.",
+          "Upload the blueprint file to the \"Upload Blueprint\" field (accepts PDF or DWG).",
+          "Review calculated results for area, materials, and budget estimates."
         ],
-        "tips": "All processing happens client-side using File API - no data leaves your device. Choose 'json' for formatting, 'csv' for parsing with headers, or 'txt' for base64 encoding."
+        "tips": "Ensure all input values are accurate for reliable estimates. Always verify uploaded files are in PDF or DWG format."
+      },
+      "es": {
+        "steps": [
+          "Ingrese el nombre del proyecto en el campo \"Nombre del Proyecto\".",
+          "Indique el valor del área total (m²) en el campo \"Área Total (m²)\".",
+          "Seleccione un tipo de construcción desde el menú desplegable \"Tipo de Construcción\".",
+          "Ajuste el rango de presupuesto utilizando el control deslizante \"Presupuesto Estimado\" (límite: 10,000 a 1,000,000).",
+          "Suba el archivo del plano al campo \"Subir Plano\" (acepta PDF o DWG).",
+          "Revise los resultados calculados mostrados para el área, los materiales y la estimación del presupuesto."
+        ],
+        "tips": "Asegúrese de que todos los valores ingresados sean precisos para obtener estimaciones confiables. Verifique siempre que los archivos subidos estén en formato PDF o DWG antes de enviarlos."
+      },
+      "de": {
+        "steps": [
+          "Geben Sie den Projektnamen im Feld \"Projektname\" ein.",
+          "Verfügen Sie die Gesamtfläche (m²) im Feld \"Gesamtfläche (m²)\" ein.",
+          "Wählen Sie den Typ der Konstruktion aus dem Dropdown-Menü \"Baubeschreibung\".",
+          "Stellen Sie den geschätzten Budgetbereich mit dem Slider \"Geschätztes Budget\" innerhalb des Bereichs von 10.000 bis 1.000.000 ein.",
+          "Laden Sie das Bauplan-Datei im Feld \"Bauplan hochladen\" (akzeptiert PDF oder DWG).",
+          "Überprüfen Sie die berechneten Ergebnisse für Fläche, Materialien und Budget."
+        ],
+        "tips": "Stellen Sie sicher, dass alle Eingabedaten präzise sind, um zuverlässige Schätzungen zu erhalten. Überprüfen Sie vor dem Senden, ob die hochgeladenen Dateien im PDF- oder DWG-Format liegen."
+      },
+      "fr": {
+        "steps": [
+          "Entrez le nom du projet dans le champ \"Nom du Projet\".",
+          "Saisissez la surface totale (m²) dans le champ \"Surface Totale (m²)\".",
+          "Sélectionnez un type de construction dans le menu déroulant \"Type de Construction\".",
+          "Ajustez le budget estimé à l'aide du curseur \"Budget Estimé\" (plage : 10 000 à 1 000 000).",
+          "Téléchargez le fichier de plan dans le champ \"Télécharger le Plan\" (accepte PDF ou DWG).",
+          "Examinez les résultats calculés pour la surface, les matériaux et le budget."
+        ],
+        "tips": "Assurez-vous que toutes les données saisies sont précises pour obtenir des estimations fiables. Vérifiez toujours que les fichiers téléchargés sont au format PDF ou DWG avant l'envoi."
+      },
+      "pt": {
+        "steps": [
+          "Insira o nome do projeto no campo \"Nome do Projeto\".",
+          "Digite a área total (m²) no campo \"Área Total (m²)\".",
+          "Selecione um tipo de construção no menu suspenso \"Tipo de Construção\".",
+          "Ajuste o orçamento estimado usando o controle deslizante \"Orçamento Estimado\" (faixa: 10.000 a 1.000.000).",
+          "Faça upload do arquivo da planta no campo \"Enviar Planta\" (aceita PDF ou DWG).",
+          "Revise os resultados calculados para área, materiais e orçamento."
+        ],
+        "tips": "Certifique-se de que todos os dados inseridos sejam precisos para obter estimativas confiáveis. Verifique se os arquivos enviados estão no formato PDF ou DWG antes de prosseguir."
+      },
+      "ja": {
+        "steps": [
+          "プロジェクト名をフィールド \"プロジェクト名\" に記入してください。",
+          "総面積 (m²) をフィールド \"総面積 (m²)\" に入力してください。",
+          "ドロップダウンメニュー \"建設タイプ\" から建設タイプを選択してください。",
+          "スライダー \"推定予算\" を使用して予算範囲を 10,000～1,000,000 の間で調整してください。",
+          "ブループリファイル（PDF または DWG）をフィールド \"設計図をアップロード\" にアップロードしてください。",
+          "面積、資材、予算の見積もり結果を確認してください。"
+        ],
+        "tips": "入力されたデータが正確であることを確認し、信頼性の高い見積もりを取得してください。アップロードしたファイルが PDF または DWG 形式であるか確認してから進んでください。"
+      },
+      "ar": {
+        "steps": [
+          "أدخل اسم المشروع في الحقل المخصص \"اسم المشروع\".",
+          "أدخل قيمة إجمالي المساحة (م²) في حقل \"المساحة الإجمالية (م²)\".",
+          "اختر نوع البناء من القائمة المنسدلة \"نوع البناء\".",
+          "ضبط نطاق الميزانية المقدرة باستخدام شريط التمرير \"الميزانية المقدرة\" ضمن النطاق 10,000 إلى 1,000,000.",
+          "قم بتحميل ملف المخططات إلى حقل \"تحميل المخططات\" (يقبل PDF أو DWG).",
+          "راجع النتائج المحسوبة للمساحة والمواد والميزانية."
+        ],
+        "tips": "تأكد من دقة جميع البيانات المدخلة للحصول على تقديرات موثوقة. تحقق دائمًا من أن الملفات المرفوعة بصيغة PDF أو DWG قبل الإرسال."
       },
       "id": {
         "steps": [
-          "1. Unggah file (.json, .csv, atau .txt)",
-          "2. Opsional pilih tipe pemrosesan (otomatis mendeteksi jika tidak ditentukan)",
-          "3. Klik tombol Proses untuk menangani file secara lokal di browser",
-          "4. Lihat hasil yang sudah diproses ditampilkan di layar tanpa unggah ke server"
+          "Masukkan Nama Proyek di kolom \"Nama Proyek\".",
+          "Isi nilai Luas Total (m²) di kolom \"Luas Total (m²)\".",
+          "Pilih Tipe Konstruksi dari menu dropdown \"Tipe Konstruksi\".",
+          "Sesuaikan Estimasi Anggaran menggunakan slider \"Estimasi Anggaran\" (range: 10.000 - 1.000.000).",
+          "Unggah Cetak Biru ke kolom \"Unggah Cetak Biru\" (format PDF atau DWG).",
+          "Lihat hasil estimasi untuk luas, bahan, dan anggaran."
         ],
-        "tips": "Semua pemrosesan terjadi di sisi klien menggunakan File API - tidak ada data yang keluar dari perangkat Anda. Pilih 'json' untuk formatasi, 'csv' untuk parsing dengan header, atau 'txt' untuk enkoding base64."
+        "tips": "Pastikan semua data yang dimasukkan akurat untuk estimasi yang dapat diandalkan. Periksa file yang diunggah berada dalam format PDF atau DWG sebelum melanjutkan."
       }
     },
-    "htmlUrl": "tools/file-router-local.html",
-    "icon": "fa-solid fa-house-chimney"
+    "htmlUrl": "tools/ns1-breathing-trainer.html",
+    "icon": "fa-solid fa-drafting-rules"
   }
 ]
