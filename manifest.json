@@ -1,89 +1,63 @@
 [
   {
-    "id": "distance-calculator",
-    "category": "Developer Tools",
-    "scriptUrl": "assets/js/tools/distance-calculator.js",
-    "htmlUrl": "tools/distance-calculator.html",
+    "id": "measurement-converter",
+    "category": "Text Manipulation & Diffing",
+    "scriptUrl": "assets/js/tools/measurement-converter.js",
+    "htmlUrl": "tools/measurement-converter.html",
     "icon": "fa-solid fa-ruler-triangle",
     "externalLibs": [
-      "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/build/highlight.min.js"
+      "https://cdn.jsdelivr.net/npm/jsdiff@5.1.0/dist/diff.min.js"
     ],
     "i18n": {
       "en": {
-        "title": "Distance Calculator",
-        "description": "Calculate the distance between two points."
+        "title": "Unit Converter",
+        "description": "Convert between various units of measurement."
       },
       "es": {
-        "title": "Distance Calculator",
-        "description": "Calculate the distance between two points."
+        "title": "Unit Converter",
+        "description": "Convert between various units of measurement."
       },
       "de": {
-        "title": "Distance Calculator",
-        "description": "Calculate the distance between two points."
+        "title": "Unit Converter",
+        "description": "Convert between various units of measurement."
       },
       "fr": {
-        "title": "Distance Calculator",
-        "description": "Calculate the distance between two points."
+        "title": "Unit Converter",
+        "description": "Convert between various units of measurement."
       },
       "pt": {
-        "title": "Distance Calculator",
-        "description": "Calculate the distance between two points."
+        "title": "Unit Converter",
+        "description": "Convert between various units of measurement."
       },
       "ja": {
-        "title": "Distance Calculator",
-        "description": "Calculate the distance between two points."
+        "title": "Unit Converter",
+        "description": "Convert between various units of measurement."
       },
       "ar": {
-        "title": "Distance Calculator",
-        "description": "Calculate the distance between two points."
+        "title": "Unit Converter",
+        "description": "Convert between various units of measurement."
       },
       "id": {
-        "title": "Kalkulator Jarak",
-        "description": "Hitung jarak antara dua titik."
+        "title": "Pengonversi Satuan",
+        "description": "Ubah antar berbagai satuan ukuran."
       }
     },
     "schema": {
       "icon": "fa-solid fa-ruler-triangle",
       "fields": [
         {
-          "name": "start_point",
-          "type": "text",
-          "label_en": "Start Point",
-          "label_id": "Titik Awal",
-          "placeholder": "Enter starting location"
+          "name": "value_input",
+          "type": "number",
+          "label_id": "Nilai",
+          "label_en": "Value",
+          "placeholder": "0"
         },
         {
-          "name": "end_point",
-          "type": "text",
-          "label_en": "End Point",
-          "label_id": "Titik Akhir",
-          "placeholder": "Enter destination"
-        },
-        {
-          "name": "unit_preference",
+          "name": "unit_selection",
           "type": "select",
-          "label_en": "Unit Preference",
-          "label_id": "Preferensi Satuan",
-          "options": [
-            {
-              "value": "km",
-              "label_en": "Kilometers",
-              "label_id": "Kilometer"
-            },
-            {
-              "value": "miles",
-              "label_en": "Miles",
-              "label_id": "Mil"
-            }
-          ]
-        },
-        {
-          "name": "precision",
-          "type": "range",
-          "label_en": "Precision Level",
-          "label_id": "Tingkat Presisi",
-          "min": 0,
-          "max": 100
+          "label_id": "Pilih Satuan",
+          "label_en": "Select Unit",
+          "placeholder": "Pilih"
         }
       ]
     },
