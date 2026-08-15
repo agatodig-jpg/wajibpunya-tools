@@ -1,100 +1,112 @@
 [
   {
-    "id": "suno-local-seq-v2",
-    "category": "Utility Tool (Conflict Detected)",
-    "scriptUrl": "assets/js/tools/suno-local-seq-v2.js",
+    "id": "glm-53-code-sanitizer",
+    "category": "FORM_CONVERTER",
+    "scriptUrl": "assets/js/tools/glm-53-code-sanitizer.js",
     "externalLibs": [],
     "i18n": {
       "en": {
-        "title": "Weight Converter",
-        "description": "Convert weight between different units (kg, lbs, stone)."
+        "title": "Currency Converter",
+        "description": "Convert amounts between different global currencies."
       },
       "es": {
-        "title": "Converter de Peso",
-        "description": "Convierta peso entre unidades diferentes."
+        "title": "Conversor de Moneda",
+        "description": "Convierte cantidades entre diferentes monedas globales."
       },
       "de": {
-        "title": "Gewichtskonverter",
-        "description": "Konvertiere Gewicht zwischen verschiedenen Einheiten."
+        "title": "Währungsumrechner",
+        "description": "Konvertieren Sie Beträge zwischen verschiedenen globalen Währungen."
       },
       "fr": {
-        "title": "Conversionneur de Poids",
-        "description": "Convertissez le poids entre différentes unités."
+        "title": "Convertisseur de devises",
+        "description": "Convertissez des montants entre différentes devises mondiales."
       },
       "pt": {
-        "title": "Conversor de Peso",
-        "description": "Converter peso entre unidades diferentes (kg, lbs, pedra)."
+        "title": "Conversor de Moedas",
+        "description": "Converta valores entre diferentes moedas globais."
       },
       "ja": {
-        "title": "重量変換器",
-        "description": "異なる単位間（kg、lbs、ストーン）の重さを変換します。"
+        "title": "通貨換算機",
+        "description": "異なる世界の通貨間で金額を換算します。"
       },
       "ar": {
-        "title": "محول الوزن",
-        "description": "تحويل الوزن بين وحدات مختلفة (كجم، باوند)."
+        "title": "محول العملات",
+        "description": "تحويل المبالغ بين العملات العالمية المختلفة."
       },
       "id": {
-        "title": "Pengubah Berat",
-        "description": "Konversikan berat antara unit yang berbeda."
+        "title": "Konverter Mata Uang",
+        "description": "Konversikan jumlah antara berbagai mata uang global."
       }
     },
     "schema": {
-      "icon": "fa-solid fa-weight-hanging",
+      "icon": "fa-solid fa-money-bill-1",
       "fields": [
         {
-          "name": "weight_value",
+          "name": "amount",
           "type": "number",
-          "label_en": "Weight Value",
-          "label_id": "Nilai Berat",
-          "placeholder": "100"
+          "label": {
+            "en": "Amount",
+            "es": "Cantidad",
+            "de": "Betrag",
+            "fr": "Montant",
+            "pt": "Valor",
+            "ja": "金額",
+            "ar": "المبلغ",
+            "id": "Jumlah"
+          },
+          "placeholder": "0.00"
         },
         {
-          "name": "unit_type",
+          "name": "from_currency",
           "type": "select",
-          "label_en": "Select Unit",
-          "label_id": "Pilih Satuan",
-          "placeholder": "Select"
+          "label": {
+            "en": "From Currency",
+            "es": "Moneda Origen",
+            "de": "Ausgangswährung",
+            "fr": "Devise Source",
+            "pt": "Moeda de Origem",
+            "ja": "元通貨",
+            "ar": "العملة الأصلية",
+            "id": "Mata Uang Asal"
+          }
         },
         {
-          "name": "user_note",
-          "type": "text",
-          "label_en": "Notes",
-          "label_id": "Catatan",
-          "placeholder": "Enter details..."
-        },
-        {
-          "name": "confidence_level",
-          "type": "range",
-          "label_en": "Confidence Level",
-          "label_id": "Tingkat Keyakinan",
-          "placeholder": "0-100"
-        },
-        {
-          "name": "evidence_file",
-          "type": "file",
-          "label_en": "Upload Proof",
-          "label_id": "Unggah Bukti",
-          "placeholder": "Click to upload"
+          "name": "to_currency",
+          "type": "select",
+          "label": {
+            "en": "To Currency",
+            "es": "Moneda Destino",
+            "de": "Zielwährung",
+            "fr": "Devise Destination",
+            "pt": "Moeda de Destino",
+            "ja": "変換先通貨",
+            "ar": "العملة الهدف",
+            "id": "Mata Uang Tujuan"
+          }
         }
       ]
     },
     "guide": {
       "en": {
         "steps": [
-          "Fill out input fields",
-          "Click execute to calculate"
+          "Enter the numerical value you wish to convert into the 'Amount' field.",
+          "Select your current currency from the dropdown menu labeled 'From Currency'.",
+          "Choose the target currency from the options listed in the 'To Currency' dropdown."
         ],
-        "tips": "Runs 100% client-side in browser."
+        "tips": "Ensure both amount and currency selections are accurate for reliable conversion rates. The result updates automatically upon changing values or currencies."
       },
       "id": {
         "steps": [
-          "Isi kolom input",
-          "Klik eksekusi untuk menghitung"
+          "Masukkan nilai numerik yang ingin Anda konversi ke dalam kolom 'Jumlah'.",
+          "Pilih mata uang saat ini dari menu dropdown berlabel 'Mata Uang Asal'.",
+          "Pilih mata uang tujuan dari opsi yang tercantum di dropdown 'Mata Uang Tujuan'."
         ],
-        "tips": "Berjalan 100% lokal di browser."
+        "tips": "Pastikan jumlah dan pilihan mata uang akurat untuk mendapatkan tingkat konversi yang andal. Hasil akan diperbarui secara otomatis saat nilai atau mata uang diubah."
       }
     },
-    "htmlUrl": "tools/suno-local-seq-v2.html",
-    "icon": "fa-solid fa-weight-hanging"
+    "metaDataMismatchNote": true,
+    "noteReason": "Fields/Schema conflict: Code Sanitizer Logic vs Currency Converter UI Schema",
+    "htmlUrl": "tools/glm-53-code-sanitizer.html",
+    "icon": "fa-solid fa-money-bill-1"
   }
 ]
