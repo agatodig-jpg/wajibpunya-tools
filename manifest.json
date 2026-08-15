@@ -1,166 +1,125 @@
 [
   {
-    "id": "text-case-converter",
+    "id": "json-formatter-tool",
     "category": "Utilities",
-    "icon": "fa-solid fa-font",
+    "icon": "fa-solid fa-wrench",
     "externalLibs": [],
-    "jsCode": "// Tool logic for text case conversion\nfunction convertCase(text, type) {\n  switch(type) {\n    case 'upper': return text.toUpperCase();\n    case 'lower': return text.toLowerCase();\n    case 'title': return text.replace(/\\b\\w/g, c => c.toUpperCase());\n    default: return text;\n  }\n}",
+    "jsCode": "async function executeTool(inputs) {\n  const input = inputs[0].value;\n  try {\n    const parsed = JSON.parse(input);\n    return { success: true, data: JSON.stringify(parsed, null, 2) };\n  } catch (e) {\n    return { success: false, error: e.message };\n  }\n}",
     "fields": [
       {
-        "name": "inputText",
+        "name": "json_input",
         "type": "textarea",
         "label": {
-          "en": "Input Text",
-          "es": "Texto de Entrada",
-          "de": "Eingabetext",
-          "fr": "Texte d'entrée",
-          "pt": "Texto de Entrada",
-          "ja": "入力テキスト",
-          "ar": "النص المدخل",
-          "id": "Teks Input"
+          "en": "JSON Input",
+          "es": "Entrada JSON",
+          "de": "JSON-Eingabe",
+          "fr": "Entrée JSON",
+          "pt": "Entrada JSON",
+          "ja": "JSON 入力",
+          "ar": "مدخل JSON",
+          "id": "Masukan JSON"
         },
-        "placeholder": {
-          "en": "Enter text here...",
-          "es": "Ingrese texto aquí...",
-          "de": "Text hier eingeben...",
-          "fr": "Entrez du texte ici...",
-          "pt": "Digite o texto aqui...",
-          "ja": "ここにテキストを入力...",
-          "ar": "أدخل النص هنا...",
-          "id": "Masukkan teks di sini..."
-        }
-      },
-      {
-        "name": "outputFormat",
-        "type": "select",
-        "label": {
-          "en": "Output Format",
-          "es": "Formato de Salida",
-          "de": "Ausgabeformat",
-          "fr": "Format de sortie",
-          "pt": "Formato de Saída",
-          "ja": "出力形式",
-          "ar": "تنسيق الإخراج",
-          "id": "Format Output"
-        },
-        "placeholder": {
-          "en": "Select case type",
-          "es": "Seleccionar tipo de caso",
-          "de": "Fallsort auswählen",
-          "fr": "Choisir le type de cas",
-          "pt": "Selecione o tipo de caso",
-          "ja": "ケースタイプを選択",
-          "ar": "اختر نوع الحالة",
-          "id": "Pilih jenis kasus"
-        }
+        "placeholder": "{\n  \"key\": \"value\"\n}"
       }
     ],
     "i18n": {
       "en": {
-        "title": "Text Case Converter",
-        "description": "Easily convert text between uppercase, lowercase, title case, and other formats instantly."
+        "title": "JSON Formatter",
+        "description": "Format and validate your JSON data instantly."
       },
       "es": {
-        "title": "Convertidor de Mayúsculas y Minúsculas",
-        "description": "Convierte fácilmente el texto entre mayúsculas, minúsculas, título y otros formatos al instante."
+        "title": "Formatador JSON",
+        "description": "Formatea y valida tus datos JSON al instante."
       },
       "de": {
-        "title": "Text-Fall-Konverter",
-        "description": "Konvertieren Sie Text einfach zwischen Groß-, Klein- und Titelformat sofort."
+        "title": "JSON-Formatter",
+        "description": "Formatieren und Validieren Ihrer JSON-Daten sofort."
       },
       "fr": {
-        "title": "Convertisseur de Cas Texte",
-        "description": "Convertissez facilement le texte entre majuscules, minuscules et autres formats instantanément."
+        "title": "Formateur JSON",
+        "description": "Formatez et validez vos données JSON instantanément."
       },
       "pt": {
-        "title": "Conversor de Maiúsculas e Minúsculas",
-        "description": "Converta facilmente o texto entre maiúsculas, minúsculas, título e outros formatos instantaneamente."
+        "title": "Formatador JSON",
+        "description": "Formate e valide seus dados JSON instantaneamente."
       },
       "ja": {
-        "title": "テキストケース変換ツール",
-        "description": "大文字、小文字、タイトルケースなどの間でテキストを簡単に瞬時に変換できます。"
+        "title": "JSON フォーマッター",
+        "description": "JSON データを即座にフォーマットおよび検証します。"
       },
       "ar": {
-        "title": "محول حالة النص",
-        "description": "قم بتحويل النص بسهولة بين الأحرف الكبيرة والصغيرة وعناوين وأخرى فوراً."
+        "title": "منسق JSON",
+        "description": "قم بتنسيق و التحقق من بيانات JSON الخاصة بك فورًا."
       },
       "id": {
-        "title": "Konverter Kasus Teks",
-        "description": "Mudah mengubah teks antara huruf besar, kecil, judul, dan format lainnya secara instan."
+        "title": "Pembentuk JSON",
+        "description": "Formatasi dan validasi data JSON Anda secara instan."
       }
     },
     "guide": {
       "en": {
         "steps": [
-          "Paste or type your text into the input field.",
-          "Select the desired case format from the dropdown menu.",
-          "Click the 'Convert' button to see the result.",
-          "Copy the converted text using the provided button."
+          "Paste your raw JSON string into the input field.",
+          "Click the 'Run' button to process the data.",
+          "View the formatted and validated output below."
         ],
-        "tips": "Remember to escape special characters if needed before converting."
+        "tips": "Ensure your JSON is valid before formatting. Use quotes for all keys and string values."
       },
       "es": {
         "steps": [
-          "Pega o escribe tu texto en el campo de entrada.",
-          "Selecciona el formato de caso deseado del menú desplegable.",
-          "Haz clic en el botón 'Convertir' para ver el resultado.",
-          "Copia el texto convertido usando el botón proporcionado."
+          "Pega tu cadena de texto JSON crudo en el campo de entrada.",
+          "Haz clic en el botón 'Ejecutar' para procesar los datos.",
+          "Visualiza la salida formateada y validada a continuación."
         ],
-        "tips": "Recuerda escapar caracteres especiales si es necesario antes de convertir."
+        "tips": "Asegúrate de que tu JSON sea válido antes de formatearlo. Usa comillas para todas las claves y valores de cadena."
       },
       "de": {
         "steps": [
-          "Fügen Sie Ihren Text in das Eingabefeld ein.",
-          "Wählen Sie das gewünschte Fallformat aus dem Dropdown-Menü.",
-          "Klicken Sie auf die 'Konvertieren'-Schaltfläche, um das Ergebnis zu sehen.",
-          "Kopieren Sie den konvertierten Text mit der bereitgestellten Schaltfläche."
+          "Fügen Sie Ihren rohen JSON-String in das Eingabefeld ein.",
+          "Klicken Sie auf die 'Ausführen'-Schaltfläche, um die Daten zu verarbeiten.",
+          "Sehen Sie sich den formatierten und validierten Ausgang unten an."
         ],
-        "tips": "Denken Sie daran, Sonderzeichen vor der Konvertierung zu escapen, falls erforderlich."
+        "tips": "Stellen Sie sicher, dass Ihr JSON gültig ist, bevor Sie es formatieren. Verwenden Sie Anführungszeichen für alle Schlüssel und String-Werte."
       },
       "fr": {
         "steps": [
-          "Collez ou tapez votre texte dans le champ d'entrée.",
-          "Sélectionnez le format de cas souhaité dans le menu déroulant.",
-          "Cliquez sur le bouton 'Convertir' pour voir le résultat.",
-          "Copiez le texte converti en utilisant le bouton fourni."
+          "Collez votre chaîne de texte JSON brute dans le champ d'entrée.",
+          "Cliquez sur le bouton 'Exécuter' pour traiter les données.",
+          "Visualisez la sortie formatée et validée ci-dessous."
         ],
-        "tips": "N'oubliez pas d'échapper les caractères spéciaux si nécessaire avant de convertir."
+        "tips": "Assurez-vous que votre JSON est valide avant de le formater. Utilisez des guillemets pour toutes les clés et valeurs de chaîne."
       },
       "pt": {
         "steps": [
-          "Cole ou digite seu texto no campo de entrada.",
-          "Selecione o formato de caso desejado no menu suspenso.",
-          "Clique no botão 'Converter' para ver o resultado.",
-          "Copie o texto convertido usando o botão fornecido."
+          "Cole sua string de texto JSON bruto no campo de entrada.",
+          "Clique no botão 'Executar' para processar os dados.",
+          "Visualize a saída formatada e validada abaixo."
         ],
-        "tips": "Lembre-se de escapar caracteres especiais se necessário antes de converter."
+        "tips": "Certifique-se de que seu JSON é válido antes de formatá-lo. Use aspas para todas as chaves e valores de string."
       },
       "ja": {
         "steps": [
-          "入力フィールドにテキストを貼り付けまたは入力します。",
-          "ドロップダウンメニューから必要なケース形式を選択します。",
-          "'変換'ボタンをクリックして結果を表示します。",
-          "提供されたボタンを使用して変換されたテキストをコピーします。"
+          "生の JSON 文字列を入力フィールドに貼り付けます。",
+          "'実行'ボタンをクリックしてデータを処理します。",
+          "以下にフォーマットおよび検証された出力を表示します。"
         ],
-        "tips": "変換する前に必要に応じて特殊文字をエスケープすることを忘れないでください。"
+        "tips": "フォーマットする前に JSON が有効であることを確認してください。すべてのキーと文字列値にクォートを使用します。"
       },
       "ar": {
         "steps": [
-          "الصق النص أو اكتبه في حقل الإدخال.",
-          "اختر تنسيق الحالة المطلوب من قائمة المنسدلة.",
-          "اضغط على زر 'تحويل' لرؤية النتيجة.",
-          "انسخ النص المحول باستخدام الزر المقدم."
+          "الصق نص JSON الخام الخاص بك في حقل الإدخال.",
+          "انقر على زر 'تشغيل' لمعالجة البيانات.",
+          "عرض المخرج المنسق والمُتحقق منه أدناه."
         ],
-        "tips": "تذكر الهروب من الأحرف الخاصة إذا لزم الأمر قبل التحويل."
+        "tips": "تأكد من صحة JSON الخاص بك قبل تنسيقه. استخدم علامات اقتباس لجميع المفاتيح وقيم السلسلة."
       },
       "id": {
         "steps": [
-          "Tempelkan atau ketik teks Anda ke bidang input.",
-          "Pilih format kasus yang diinginkan dari menu dropdown.",
-          "Klik tombol 'Konversi' untuk melihat hasilnya.",
-          "Salin teks yang dikonversi menggunakan tombol yang disediakan."
+          "Tempelkan string JSON mentah Anda ke bidang input.",
+          "Klik tombol 'Jalankan' untuk memproses data.",
+          "Lihat output yang diformat dan divalidasi di bawah ini."
         ],
-        "tips": "Ingat untuk melarikan diri karakter khusus jika diperlukan sebelum mengkonversi."
+        "tips": "Pastikan JSON Anda valid sebelum diformat. Gunakan tanda kutip untuk semua kunci dan nilai string."
       }
     }
   }
