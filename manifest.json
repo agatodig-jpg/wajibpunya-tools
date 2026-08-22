@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "en": {
+      "title": "Translation Error",
+      "description": "Source data from MASTER_BUILDER1 is not accessible.",
+      "steps": [
+        "Please provide the JSON content directly in the prompt."
+      ],
+      "tips": "I cannot access external variables or DOM elements."
+    },
+    "id": {
+      "title": "Kesalahan Terjemahan",
+      "description": "Data sumber dari MASTER_BUILDER1 tidak dapat diakses.",
+      "steps": [
+        "Silakan berikan konten JSON secara langsung dalam instruksi."
+      ],
+      "tips": "Saya tidak dapat mengakses variabel eksternal atau elemen DOM."
+    },
+    "es": {
+      "title": "Error de Traducción",
+      "description": "Los datos fuente de MASTER_BUILDER1 no son accesibles.",
+      "steps": [
+        "Por favor proporcione el contenido JSON directamente en el prompt."
+      ],
+      "tips": "No puedo acceder a variables externas o elementos DOM."
+    },
+    "de": {
+      "title": "Übersetzungsfehler",
+      "description": "Quelldaten von MASTER_BUILDER1 sind nicht zugänglich.",
+      "steps": [
+        "Bitte stellen Sie den JSON-Inhalt direkt im Prompt bereit."
+      ],
+      "tips": "Ich kann auf externe Variablen oder DOM-Elemente keinen Zugriff haben."
+    },
+    "fr": {
+      "title": "Erreur de traduction",
+      "description": "Les données source de MASTER_BUILDER1 ne sont pas accessibles.",
+      "steps": [
+        "Veuillez fournir le contenu JSON directement dans le prompt."
+      ],
+      "tips": "Je ne peux pas accéder aux variables externes ou aux éléments DOM."
+    },
+    "pt": {
+      "title": "Erro de Tradução",
+      "description": "Os dados fonte de MASTER_BUILDER1 não são acessíveis.",
+      "steps": [
+        "Por favor, forneça o conteúdo JSON diretamente no prompt."
+      ],
+      "tips": "Não consigo acessar variáveis externas ou elementos DOM."
+    },
+    "ja": {
+      "title": "翻訳エラー",
+      "description": "MASTER_BUILDER1 のソースデータにアクセスできません。",
+      "steps": [
+        "プロンプトに直接 JSON コンテンツを提供してください。"
+      ],
+      "tips": "外部変数や DOM 要素にアクセスできません。"
+    },
+    "ar": {
+      "title": "خطأ في الترجمة",
+      "description": "بيانات المصدر من MASTER_BUILDER1 غير متاحة.",
+      "steps": [
+        "يرجى تقديم محتوى JSON مباشرة في التعليمات."
+      ],
+      "tips": "لا يمكنني الوصول إلى المتغيرات الخارجية أو عناصر DOM."
+    }
+  }
+]
