@@ -1,125 +1,142 @@
 [
   {
-    "id": "json-formatter-tool",
+    "id": "json-processor-tool",
     "category": "Utilities",
     "icon": "fa-solid fa-wrench",
     "externalLibs": [],
-    "jsCode": "async function executeTool(inputs) {\n  const input = inputs[0].value;\n  try {\n    const parsed = JSON.parse(input);\n    return { success: true, data: JSON.stringify(parsed, null, 2) };\n  } catch (e) {\n    return { success: false, error: e.message };\n  }\n}",
+    "jsCode": "async function executeTool(inputs) { const result = inputs.data ? JSON.stringify(JSON.parse(inputs.data)) : 'No data provided'; return { success: true, output: result }; }",
     "fields": [
       {
-        "name": "json_input",
-        "type": "textarea",
+        "name": "input_key",
+        "type": "text",
         "label": {
-          "en": "JSON Input",
-          "es": "Entrada JSON",
-          "de": "JSON-Eingabe",
-          "fr": "Entrée JSON",
-          "pt": "Entrada JSON",
-          "ja": "JSON 入力",
-          "ar": "مدخل JSON",
-          "id": "Masukan JSON"
+          "en": "Input Data",
+          "es": "Datos de Entrada",
+          "de": "Eingabedaten",
+          "fr": "Données d'Entrée",
+          "pt": "Dados de Entrada",
+          "ja": "入力データ",
+          "ar": "بيانات الإدخال",
+          "id": "Data Input"
         },
-        "placeholder": "{\n  \"key\": \"value\"\n}"
+        "placeholder": {
+          "en": "Enter JSON data here...",
+          "es": "Ingrese los datos JSON aquí...",
+          "de": "Geben Sie hier JSON-Daten ein...",
+          "fr": "Entrez les données JSON ici...",
+          "pt": "Insira os dados JSON aqui...",
+          "ja": "ここに JSON データを入力してください...",
+          "ar": "أدخل بيانات JSON هنا...",
+          "id": "Masukkan data JSON di sini..."
+        }
       }
     ],
     "i18n": {
       "en": {
-        "title": "JSON Formatter",
-        "description": "Format and validate your JSON data instantly."
+        "title": "JSON Processor",
+        "description": "Process and validate your input data efficiently using this utility tool."
       },
       "es": {
-        "title": "Formatador JSON",
-        "description": "Formatea y valida tus datos JSON al instante."
+        "title": "Procesador JSON",
+        "description": "Procesa y valida tus datos de entrada eficientemente usando esta herramienta de utilidad."
       },
       "de": {
-        "title": "JSON-Formatter",
-        "description": "Formatieren und Validieren Ihrer JSON-Daten sofort."
+        "title": "JSON-Verarbeiter",
+        "description": "Verarbeiten und validieren Sie Ihre Eingabedaten effizient mit diesem Dienstprogramm."
       },
       "fr": {
-        "title": "Formateur JSON",
-        "description": "Formatez et validez vos données JSON instantanément."
+        "title": "Traitement JSON",
+        "description": "Traitez et validez vos données d'entrée efficacement avec cet utilitaire."
       },
       "pt": {
-        "title": "Formatador JSON",
-        "description": "Formate e valide seus dados JSON instantaneamente."
+        "title": "Processador JSON",
+        "description": "Processe e valide seus dados de entrada eficientemente usando esta ferramenta de utilidade."
       },
       "ja": {
-        "title": "JSON フォーマッター",
-        "description": "JSON データを即座にフォーマットおよび検証します。"
+        "title": "JSON プロセッサ",
+        "description": "このユーティリティツールを使用して、入力データを効率的に処理および検証します。"
       },
       "ar": {
-        "title": "منسق JSON",
-        "description": "قم بتنسيق و التحقق من بيانات JSON الخاصة بك فورًا."
+        "title": "معالج JSON",
+        "description": "قم بمعالجة و التحقق من صحة بيانات الإدخال بكفاءة باستخدام هذه الأداة المساعدة."
       },
       "id": {
-        "title": "Pembentuk JSON",
-        "description": "Formatasi dan validasi data JSON Anda secara instan."
+        "title": "Pemroses JSON",
+        "description": "Proses dan validasi data input Anda secara efisien menggunakan alat utilitas ini."
       }
     },
     "guide": {
       "en": {
         "steps": [
-          "Paste your raw JSON string into the input field.",
-          "Click the 'Run' button to process the data.",
-          "View the formatted and validated output below."
+          "Open the tool and locate the input field.",
+          "Paste your JSON data into the provided text box.",
+          "Click the 'Process' button to validate the data.",
+          "Review the output for any errors or success messages."
         ],
-        "tips": "Ensure your JSON is valid before formatting. Use quotes for all keys and string values."
+        "tips": "Ensure your JSON is properly formatted with correct brackets and quotes."
       },
       "es": {
         "steps": [
-          "Pega tu cadena de texto JSON crudo en el campo de entrada.",
-          "Haz clic en el botón 'Ejecutar' para procesar los datos.",
-          "Visualiza la salida formateada y validada a continuación."
+          "Abra la herramienta y localice el campo de entrada.",
+          "Pegue sus datos JSON en el cuadro de texto proporcionado.",
+          "Haga clic en el botón 'Procesar' para validar los datos.",
+          "Revise la salida en busca de errores o mensajes de éxito."
         ],
-        "tips": "Asegúrate de que tu JSON sea válido antes de formatearlo. Usa comillas para todas las claves y valores de cadena."
+        "tips": "Asegúrese de que su JSON esté correctamente formateado con corchetes y comillas correctas."
       },
       "de": {
         "steps": [
-          "Fügen Sie Ihren rohen JSON-String in das Eingabefeld ein.",
-          "Klicken Sie auf die 'Ausführen'-Schaltfläche, um die Daten zu verarbeiten.",
-          "Sehen Sie sich den formatierten und validierten Ausgang unten an."
+          "Öffnen Sie das Tool und suchen Sie nach dem Eingabefeld.",
+          "Fügen Sie Ihre JSON-Daten in das bereitgestellte Textfeld ein.",
+          "Klicken Sie auf die Schaltfläche 'Verarbeiten', um die Daten zu validieren.",
+          "Überprüfen Sie die Ausgabe auf Fehler oder Erfolgsmeldungen."
         ],
-        "tips": "Stellen Sie sicher, dass Ihr JSON gültig ist, bevor Sie es formatieren. Verwenden Sie Anführungszeichen für alle Schlüssel und String-Werte."
+        "tips": "Stellen Sie sicher, dass Ihr JSON korrekt formatiert ist mit richtigen Klammern und Anführungszeichen."
       },
       "fr": {
         "steps": [
-          "Collez votre chaîne de texte JSON brute dans le champ d'entrée.",
-          "Cliquez sur le bouton 'Exécuter' pour traiter les données.",
-          "Visualisez la sortie formatée et validée ci-dessous."
+          "Ouvrez l'outil et localisez le champ d'entrée.",
+          "Collez vos données JSON dans la zone de texte fournie.",
+          "Cliquez sur le bouton 'Traiter' pour valider les données.",
+          "Examinez la sortie pour tout erreur ou message de succès."
         ],
-        "tips": "Assurez-vous que votre JSON est valide avant de le formater. Utilisez des guillemets pour toutes les clés et valeurs de chaîne."
+        "tips": "Assurez-vous que votre JSON est correctement formaté avec des crochets et guillemets corrects."
       },
       "pt": {
         "steps": [
-          "Cole sua string de texto JSON bruto no campo de entrada.",
-          "Clique no botão 'Executar' para processar os dados.",
-          "Visualize a saída formatada e validada abaixo."
+          "Abra a ferramenta e localize o campo de entrada.",
+          "Cole seus dados JSON na caixa de texto fornecida.",
+          "Clique no botão 'Processar' para validar os dados.",
+          "Revise a saída em busca de erros ou mensagens de sucesso."
         ],
-        "tips": "Certifique-se de que seu JSON é válido antes de formatá-lo. Use aspas para todas as chaves e valores de string."
+        "tips": "Certifique-se de que seu JSON esteja corretamente formatado com colchetes e aspas corretas."
       },
       "ja": {
         "steps": [
-          "生の JSON 文字列を入力フィールドに貼り付けます。",
-          "'実行'ボタンをクリックしてデータを処理します。",
-          "以下にフォーマットおよび検証された出力を表示します。"
+          "ツールを開き、入力フィールドを特定します。",
+          "提供されたテキストボックスに JSON データを貼り付けます。",
+          "データを検証するために '処理' ボタンをクリックします。",
+          "エラーまたは成功メッセージがあるか出力を確認します。"
         ],
-        "tips": "フォーマットする前に JSON が有効であることを確認してください。すべてのキーと文字列値にクォートを使用します。"
+        "tips": "JSON が正しい括弧と引用符で適切にフォーマットされていることを確認してください。"
       },
       "ar": {
         "steps": [
-          "الصق نص JSON الخام الخاص بك في حقل الإدخال.",
-          "انقر على زر 'تشغيل' لمعالجة البيانات.",
-          "عرض المخرج المنسق والمُتحقق منه أدناه."
+          "افتح الأداة ووجد حقل الإدخال.",
+          "الصق بيانات JSON الخاصة بك في مربع النص المقدم.",
+          "انقر على زر 'معالجة' لتأكيد صحة البيانات.",
+          "راجع المخرجات بحثًا عن أي أخطاء أو رسائل نجاح."
         ],
-        "tips": "تأكد من صحة JSON الخاص بك قبل تنسيقه. استخدم علامات اقتباس لجميع المفاتيح وقيم السلسلة."
+        "tips": "تأكد من أن JSON الخاص بك منسق بشكل صحيح مع الأقواس والعلامات الصحيحة."
       },
       "id": {
         "steps": [
-          "Tempelkan string JSON mentah Anda ke bidang input.",
-          "Klik tombol 'Jalankan' untuk memproses data.",
-          "Lihat output yang diformat dan divalidasi di bawah ini."
+          "Buka alat dan temukan bidang input.",
+          "Tempel data JSON Anda ke kotak teks yang disediakan.",
+          "Klik tombol 'Proses' untuk memvalidasi data.",
+          "Periksa output untuk kesalahan atau pesan sukses."
         ],
-        "tips": "Pastikan JSON Anda valid sebelum diformat. Gunakan tanda kutip untuk semua kunci dan nilai string."
+        "tips": "Pastikan JSON Anda diformat dengan benar dengan kurung dan tanda kutip yang tepat."
       }
     }
   }
