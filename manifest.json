@@ -1,142 +1,134 @@
 [
   {
-    "id": "json-processor-tool",
+    "id": "i18n-structure-generator",
     "category": "Utilities",
-    "icon": "fa-solid fa-wrench",
+    "icon": "fa-solid fa-language",
     "externalLibs": [],
-    "jsCode": "async function executeTool(inputs) { const result = inputs.data ? JSON.stringify(JSON.parse(inputs.data)) : 'No data provided'; return { success: true, output: result }; }",
+    "jsCode": "async function executeTool(inputs) {\n  const text = inputs[0]?.text || '';\n  return { success: true, message: 'i18n structure generated.' };\n}",
     "fields": [
       {
-        "name": "input_key",
-        "type": "text",
+        "name": "input_text",
+        "type": "textarea",
         "label": {
-          "en": "Input Data",
-          "es": "Datos de Entrada",
-          "de": "Eingabedaten",
-          "fr": "Données d'Entrée",
-          "pt": "Dados de Entrada",
-          "ja": "入力データ",
-          "ar": "بيانات الإدخال",
-          "id": "Data Input"
+          "en": "Input Text",
+          "es": "Texto de Entrada",
+          "de": "Eingabetext",
+          "fr": "Texte d'Entrée",
+          "pt": "Texto de Entrada",
+          "ja": "入力テキスト",
+          "ar": "النص المدخل",
+          "id": "Teks Input"
         },
         "placeholder": {
-          "en": "Enter JSON data here...",
-          "es": "Ingrese los datos JSON aquí...",
-          "de": "Geben Sie hier JSON-Daten ein...",
-          "fr": "Entrez les données JSON ici...",
-          "pt": "Insira os dados JSON aqui...",
-          "ja": "ここに JSON データを入力してください...",
-          "ar": "أدخل بيانات JSON هنا...",
-          "id": "Masukkan data JSON di sini..."
+          "en": "Enter text to translate...",
+          "es": "Ingrese texto para traducir...",
+          "de": "Text zum Übersetzen eingeben...",
+          "fr": "Entrez du texte à traduire...",
+          "pt": "Digite o texto para traduzir...",
+          "ja": "翻訳するテキストを入力...",
+          "ar": "أدخل النص للترجمة...",
+          "id": "Masukkan teks untuk diterjemahkan..."
         }
       }
     ],
     "i18n": {
       "en": {
-        "title": "JSON Processor",
-        "description": "Process and validate your input data efficiently using this utility tool."
+        "title": "i18n Structure Generator",
+        "description": "Generates and completes i18n structures for tools."
       },
       "es": {
-        "title": "Procesador JSON",
-        "description": "Procesa y valida tus datos de entrada eficientemente usando esta herramienta de utilidad."
+        "title": "Generador de Estructura i18n",
+        "description": "Genera y completa estructuras i18n para herramientas."
       },
       "de": {
-        "title": "JSON-Verarbeiter",
-        "description": "Verarbeiten und validieren Sie Ihre Eingabedaten effizient mit diesem Dienstprogramm."
+        "title": "i18n-Struktur-Generator",
+        "description": "Erstellt und vervollständigt i18n-Strukturen für Tools."
       },
       "fr": {
-        "title": "Traitement JSON",
-        "description": "Traitez et validez vos données d'entrée efficacement avec cet utilitaire."
+        "title": "Générateur de Structure i18n",
+        "description": "Génère et complète les structures i18n pour les outils."
       },
       "pt": {
-        "title": "Processador JSON",
-        "description": "Processe e valide seus dados de entrada eficientemente usando esta ferramenta de utilidade."
+        "title": "Gerador de Estrutura i18n",
+        "description": "Gera e completa estruturas i18n para ferramentas."
       },
       "ja": {
-        "title": "JSON プロセッサ",
-        "description": "このユーティリティツールを使用して、入力データを効率的に処理および検証します。"
+        "title": "i18n 構造ジェネレーター",
+        "description": "ツール用の i18n 構造を生成および完了します。"
       },
       "ar": {
-        "title": "معالج JSON",
-        "description": "قم بمعالجة و التحقق من صحة بيانات الإدخال بكفاءة باستخدام هذه الأداة المساعدة."
+        "title": "مولد هيكل i18n",
+        "description": "يولد ويكمل هياكل i18n للأدوات."
       },
       "id": {
-        "title": "Pemroses JSON",
-        "description": "Proses dan validasi data input Anda secara efisien menggunakan alat utilitas ini."
+        "title": "Pembuat Struktur i18n",
+        "description": "Membuat dan melengkapi struktur i18n untuk alat."
       }
     },
     "guide": {
       "en": {
         "steps": [
-          "Open the tool and locate the input field.",
-          "Paste your JSON data into the provided text box.",
-          "Click the 'Process' button to validate the data.",
-          "Review the output for any errors or success messages."
+          "Enter the text you want to translate.",
+          "Select your target languages in the settings.",
+          "Click generate to create the structure."
         ],
-        "tips": "Ensure your JSON is properly formatted with correct brackets and quotes."
+        "tips": "Ensure consistency in terminology across all languages."
       },
       "es": {
         "steps": [
-          "Abra la herramienta y localice el campo de entrada.",
-          "Pegue sus datos JSON en el cuadro de texto proporcionado.",
-          "Haga clic en el botón 'Procesar' para validar los datos.",
-          "Revise la salida en busca de errores o mensajes de éxito."
+          "Ingrese el texto que desea traducir.",
+          "Seleccione sus idiomas objetivo en la configuración.",
+          "Haga clic en generar para crear la estructura."
         ],
-        "tips": "Asegúrese de que su JSON esté correctamente formateado con corchetes y comillas correctas."
+        "tips": "Asegure la consistencia en la terminología en todos los idiomas."
       },
       "de": {
         "steps": [
-          "Öffnen Sie das Tool und suchen Sie nach dem Eingabefeld.",
-          "Fügen Sie Ihre JSON-Daten in das bereitgestellte Textfeld ein.",
-          "Klicken Sie auf die Schaltfläche 'Verarbeiten', um die Daten zu validieren.",
-          "Überprüfen Sie die Ausgabe auf Fehler oder Erfolgsmeldungen."
+          "Geben Sie den Text ein, den Sie übersetzen möchten.",
+          "Wählen Sie Ihre Zielsprachen in den Einstellungen aus.",
+          "Klicken Sie auf Generieren, um die Struktur zu erstellen."
         ],
-        "tips": "Stellen Sie sicher, dass Ihr JSON korrekt formatiert ist mit richtigen Klammern und Anführungszeichen."
+        "tips": "Stellen Sie sicher, dass die Terminologie in allen Sprachen konsistent ist."
       },
       "fr": {
         "steps": [
-          "Ouvrez l'outil et localisez le champ d'entrée.",
-          "Collez vos données JSON dans la zone de texte fournie.",
-          "Cliquez sur le bouton 'Traiter' pour valider les données.",
-          "Examinez la sortie pour tout erreur ou message de succès."
+          "Entrez le texte que vous souhaitez traduire.",
+          "Sélectionnez vos langues cibles dans les paramètres.",
+          "Cliquez sur générer pour créer la structure."
         ],
-        "tips": "Assurez-vous que votre JSON est correctement formaté avec des crochets et guillemets corrects."
+        "tips": "Assurez-vous de la cohérence de la terminologie dans toutes les langues."
       },
       "pt": {
         "steps": [
-          "Abra a ferramenta e localize o campo de entrada.",
-          "Cole seus dados JSON na caixa de texto fornecida.",
-          "Clique no botão 'Processar' para validar os dados.",
-          "Revise a saída em busca de erros ou mensagens de sucesso."
+          "Digite o texto que deseja traduzir.",
+          "Selecione seus idiomas alvo nas configurações.",
+          "Clique em gerar para criar a estrutura."
         ],
-        "tips": "Certifique-se de que seu JSON esteja corretamente formatado com colchetes e aspas corretas."
+        "tips": "Garanta a consistência na terminologia em todos os idiomas."
       },
       "ja": {
         "steps": [
-          "ツールを開き、入力フィールドを特定します。",
-          "提供されたテキストボックスに JSON データを貼り付けます。",
-          "データを検証するために '処理' ボタンをクリックします。",
-          "エラーまたは成功メッセージがあるか出力を確認します。"
+          "翻訳したいテキストを入力します。",
+          "設定でターゲット言語を選択します。",
+          "生成をクリックして構造を作成します。"
         ],
-        "tips": "JSON が正しい括弧と引用符で適切にフォーマットされていることを確認してください。"
+        "tips": "すべての言語で一貫した用語を使用してください。"
       },
       "ar": {
         "steps": [
-          "افتح الأداة ووجد حقل الإدخال.",
-          "الصق بيانات JSON الخاصة بك في مربع النص المقدم.",
-          "انقر على زر 'معالجة' لتأكيد صحة البيانات.",
-          "راجع المخرجات بحثًا عن أي أخطاء أو رسائل نجاح."
+          "أدخل النص الذي تريد ترجمته.",
+          "اختر لغاتك المستهدفة في الإعدادات.",
+          "انقر على إنشاء لإنشاء الهيكل."
         ],
-        "tips": "تأكد من أن JSON الخاص بك منسق بشكل صحيح مع الأقواس والعلامات الصحيحة."
+        "tips": "تأكد من اتساق المصطلحات عبر جميع اللغات."
       },
       "id": {
         "steps": [
-          "Buka alat dan temukan bidang input.",
-          "Tempel data JSON Anda ke kotak teks yang disediakan.",
-          "Klik tombol 'Proses' untuk memvalidasi data.",
-          "Periksa output untuk kesalahan atau pesan sukses."
+          "Masukkan teks yang ingin Anda terjemahkan.",
+          "Pilih bahasa target di pengaturan.",
+          "Klik buat untuk membuat struktur."
         ],
-        "tips": "Pastikan JSON Anda diformat dengan benar dengan kurung dan tanda kutip yang tepat."
+        "tips": "Pastikan konsistensi terminologi di semua bahasa."
       }
     }
   }
