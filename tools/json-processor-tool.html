@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Processor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-6 flex flex-col justify-center items-center">
+    <header class="w-full max-w-2xl flex justify-between items-center mb-4 px-1">
+        <a href="../index.html" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-arrow-left"></i> <span id="navBackText">Back</span>
+        </a>
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-globe text-slate-400 text-xs"></i>
+            <select id="toolLangSelect" onchange="changeToolLanguage(this.value)" class="bg-slate-800 text-xs text-slate-200 border border-slate-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+                <option value="en">🌐 English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="pt">Português</option>
+                <option value="ja">日本語</option>
+                <option value="ar">العربية</option>
+                <option value="id">Bahasa Indonesia</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-700">
+        <div class="mb-6 border-b border-slate-700 pb-4">
+            <h1 id="toolTitle" class="text-2xl font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-wrench"></i> JSON Processor
+            </h1>
+            <p id="toolDesc" class="text-slate-400 text-sm">Process and validate your input data efficiently using this utility tool.</p>
+        </div>
+
+        <form id="toolForm" onsubmit="handleExecute(event)" class="space-y-5">
+            <div id="app" class="space-y-4"></div>
+            <button type="submit" id="btnSubmit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center gap-2 shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-play text-xs"></i>
+                <span id="btnSubmitText">Execute Tool</span>
+            </button>
+        </form>
+
+        <div id="resultBox" class="mt-6 hidden p-4 bg-slate-950 rounded-lg border border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Output Result:</h3>
+                <button onclick="copyResult()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy</span>
+                </button>
+            </div>
+            <pre id="resultOutput" class="text-sm text-green-400 overflow-x-auto whitespace-pre-wrap font-mono bg-slate-900/50 p-3 rounded border border-slate-800"></pre>
+        </div>
+
+        <div id="guideSection" class="mt-8 pt-6 border-t border-slate-700">
+            <h3 class="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                <span id="guideTitleText">User Guide</span>
+            </h3>
+            <ol id="guideSteps" class="list-decimal list-inside space-y-1.5 text-xs text-slate-400 mb-4 leading-relaxed"></ol>
+            <div id="guideTipsBox" class="p-3 bg-indigo-950/40 border border-indigo-800/50 rounded-lg text-xs text-indigo-300 hidden flex items-start gap-2">
+                <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                <div><span class="font-semibold">Tips:</span> <span id="guideTips"></span></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function executeTool(inputs) { const result = inputs.data ? JSON.stringify(JSON.parse(inputs.data)) : 'No data provided'; return { success: true, output: result }; }
+    </script>
+
+    <script>
+        const schemaFields = [{"name":"input_key","type":"text","label":{"en":"Input Data","es":"Datos de Entrada","de":"Eingabedaten","fr":"Données d'Entrée","pt":"Dados de Entrada","ja":"入力データ","ar":"بيانات الإدخال","id":"Data Input"},"placeholder":{"en":"Enter JSON data here...","es":"Ingrese los datos JSON aquí...","de":"Geben Sie hier JSON-Daten ein...","fr":"Entrez les données JSON ici...","pt":"Insira os dados JSON aqui...","ja":"ここに JSON データを入力してください...","ar":"أدخل بيانات JSON هنا...","id":"Masukkan data JSON di sini..."}}];
+        const i18nMap = {"en":{"title":"JSON Processor","description":"Process and validate your input data efficiently using this utility tool."},"es":{"title":"Procesador JSON","description":"Procesa y valida tus datos de entrada eficientemente usando esta herramienta de utilidad."},"de":{"title":"JSON-Verarbeiter","description":"Verarbeiten und validieren Sie Ihre Eingabedaten effizient mit diesem Dienstprogramm."},"fr":{"title":"Traitement JSON","description":"Traitez et validez vos données d'entrée efficacement avec cet utilitaire."},"pt":{"title":"Processador JSON","description":"Processe e valide seus dados de entrada eficientemente usando esta ferramenta de utilidade."},"ja":{"title":"JSON プロセッサ","description":"このユーティリティツールを使用して、入力データを効率的に処理および検証します。"},"ar":{"title":"معالج JSON","description":"قم بمعالجة و التحقق من صحة بيانات الإدخال بكفاءة باستخدام هذه الأداة المساعدة."},"id":{"title":"Pemroses JSON","description":"Proses dan validasi data input Anda secara efisien menggunakan alat utilitas ini."}};
+        const guideMap = {"en":{"steps":["Open the tool and locate the input field.","Paste your JSON data into the provided text box.","Click the 'Process' button to validate the data.","Review the output for any errors or success messages."],"tips":"Ensure your JSON is properly formatted with correct brackets and quotes."},"es":{"steps":["Abra la herramienta y localice el campo de entrada.","Pegue sus datos JSON en el cuadro de texto proporcionado.","Haga clic en el botón 'Procesar' para validar los datos.","Revise la salida en busca de errores o mensajes de éxito."],"tips":"Asegúrese de que su JSON esté correctamente formateado con corchetes y comillas correctas."},"de":{"steps":["Öffnen Sie das Tool und suchen Sie nach dem Eingabefeld.","Fügen Sie Ihre JSON-Daten in das bereitgestellte Textfeld ein.","Klicken Sie auf die Schaltfläche 'Verarbeiten', um die Daten zu validieren.","Überprüfen Sie die Ausgabe auf Fehler oder Erfolgsmeldungen."],"tips":"Stellen Sie sicher, dass Ihr JSON korrekt formatiert ist mit richtigen Klammern und Anführungszeichen."},"fr":{"steps":["Ouvrez l'outil et localisez le champ d'entrée.","Collez vos données JSON dans la zone de texte fournie.","Cliquez sur le bouton 'Traiter' pour valider les données.","Examinez la sortie pour tout erreur ou message de succès."],"tips":"Assurez-vous que votre JSON est correctement formaté avec des crochets et guillemets corrects."},"pt":{"steps":["Abra a ferramenta e localize o campo de entrada.","Cole seus dados JSON na caixa de texto fornecida.","Clique no botão 'Processar' para validar os dados.","Revise a saída em busca de erros ou mensagens de sucesso."],"tips":"Certifique-se de que seu JSON esteja corretamente formatado com colchetes e aspas corretas."},"ja":{"steps":["ツールを開き、入力フィールドを特定します。","提供されたテキストボックスに JSON データを貼り付けます。","データを検証するために '処理' ボタンをクリックします。","エラーまたは成功メッセージがあるか出力を確認します。"],"tips":"JSON が正しい括弧と引用符で適切にフォーマットされていることを確認してください。"},"ar":{"steps":["افتح الأداة ووجد حقل الإدخال.","الصق بيانات JSON الخاصة بك في مربع النص المقدم.","انقر على زر 'معالجة' لتأكيد صحة البيانات.","راجع المخرجات بحثًا عن أي أخطاء أو رسائل نجاح."],"tips":"تأكد من أن JSON الخاص بك منسق بشكل صحيح مع الأقواس والعلامات الصحيحة."},"id":{"steps":["Buka alat dan temukan bidang input.","Tempel data JSON Anda ke kotak teks yang disediakan.","Klik tombol 'Proses' untuk memvalidasi data.","Periksa output untuk kesalahan atau pesan sukses."],"tips":"Pastikan JSON Anda diformat dengan benar dengan kurung dan tanda kutip yang tepat."}};
+        const toolIconClass = "fa-solid fa-wrench";
+
+        function renderFormFields(currentLang) {
+            const appEl = document.getElementById('app');
+            if (!appEl) return;
+            if (!schemaFields || schemaFields.length === 0) {
+                appEl.innerHTML = '<p class="text-xs text-slate-500">No input fields required.</p>';
+                return;
+            }
+            appEl.innerHTML = schemaFields.map(field => {
+                const name = field.name || 'field';
+                const type = field.type || 'text';
+                let label = (typeof field.label === 'object') ? (field.label[currentLang] || field.label.en || field.label.id) : field.label;
+                if (!label) label = name.replace(/_/g, ' ').toUpperCase();
+                const placeholder = field.placeholder || '';
+                return '<div class="space-y-1">' +
+                       '<label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">' + label + '</label>' +
+                       '<input type="' + type + '" name="' + name + '" placeholder="' + placeholder + '" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">' +
+                       '</div>';
+            }).join('');
+        }
+
+        function changeToolLanguage(lang) {
+            localStorage.setItem('user_lang', lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const langData = i18nMap[lang] || i18nMap['en'] || {};
+            const guideData = guideMap[lang] || guideMap['en'] || {};
+            renderFormFields(lang);
+            const titleEl = document.getElementById('toolTitle');
+            const descEl = document.getElementById('toolDesc');
+            if (titleEl && langData.title) titleEl.innerHTML = '<i class="' + toolIconClass + '"></i> ' + langData.title;
+            if (descEl && langData.description) descEl.innerText = langData.description;
+            const stepsEl = document.getElementById('guideSteps');
+            const tipsBox = document.getElementById('guideTipsBox');
+            const tipsEl = document.getElementById('guideTips');
+            if (stepsEl && guideData.steps) {
+                stepsEl.innerHTML = guideData.steps.map(step => '<li>' + step + '</li>').join('');
+            }
+            if (tipsEl && guideData.tips) {
+                tipsEl.innerText = guideData.tips;
+                tipsBox.classList.remove('hidden');
+            }
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+
+        async function handleExecute(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const inputs = Object.fromEntries(formData.entries());
+            const resBox = document.getElementById('resultBox');
+            const resOut = document.getElementById('resultOutput');
+            try {
+                const res = await executeTool(inputs);
+                resBox.classList.remove('hidden');
+                resOut.innerText = (typeof res === 'object') ? JSON.stringify(res, null, 2) : res;
+            } catch (err) {
+                resBox.classList.remove('hidden');
+                resOut.innerText = JSON.stringify({ success: false, error: err.message }, null, 2);
+            }
+        }
+
+        function copyResult() {
+            const resOut = document.getElementById('resultOutput');
+            if (!resOut) return;
+            navigator.clipboard.writeText(resOut.innerText);
+            const copyBtnText = document.getElementById('copyBtnText');
+            if (copyBtnText) {
+                copyBtnText.innerText = 'Copied!';
+                setTimeout(() => { copyBtnText.innerText = 'Copy'; }, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('user_lang') || 'en';
+            const langSelect = document.getElementById('toolLangSelect');
+            if (langSelect) langSelect.value = savedLang;
+            applyLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
